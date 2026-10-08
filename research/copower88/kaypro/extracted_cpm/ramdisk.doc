@@ -1,0 +1,463 @@
+
+
+
+                 RAMDISK SOFTWARE DOCUMENTATION
+                 ------------------------------
+
+     SWP's Ramdisk software is an extremely useful added  feature
+of the CO-POWER-88.  This  package allows  the memory of the 8088
+to be utilized as a high speed simulated  disk drive for CP/M 2.2
+applications.  The ramdisk is not available when running  CP/M-86
+or  MSDOS,  since all the memory in the 8088 is being used by the
+operating systems in these situations.
+
+     To load the ramdisk software, simply type 'RAMDISK' while in
+the  command mode of CP/M.  If you have been running CP/M-86  or
+MSDOS  prior  to  this time,  it may  be necessary to  reset  the
+computer  and re-boot CP/M 2.2 in order to get the CO-POWER-88 to
+reinitialize itself properly.  In any case,  the first thing that
+the ramdisk software does after loading is to  display  a  signon
+message  and then issue a series of prompts for the various user-
+definable parameters of the program.  These are described in  the
+following sections.
+
+USER DEFINABLE PARAMETERS ...
+
+1. Drivename (A thru P) to assign to ramdisk .............
+
+    The  ramdisk  may  be installed with any of the  16  possible
+drive ID's allowed in CP/M, including one already taken by one of
+the 'real' disk drives in your system.  If you assign the ramdisk
+to a currently existing drivename, then that drive and any others
+above  it are simply 'moved up' one place alphabetically and  the
+ramdisk is 'inserted' in the place of the old drive. For example,
+in a system with two floppy disks configured to be drives A:  and
+B:,  if  you assign the ramdisk as B:  then the  floppy  normally
+known as B: will thereafter respond as drive C:.  This process of
+drivename reassignment  is done purely in  software and in no way
+requires  any  of the physical disk drive select hardware  to  be
+changed.
+
+    If you assign the ramdisk to be drive A:  another interesting
+thing  happens  besides  all the drivenames being  moved  up  one
+place. The ramdisk also has a copy of your currently running CP/M
+operating system written on it, so that all future warmboots (the
+thing  the computer does when you type control-C) are  done  from
+the  ramdisk,  instead of from the normal drive A:.  This greatly
+speeds  up normal operation and frees you from always  having  to
+keep a 'sysgened' disk in physical drive A:.
+
+2. Erase contents of ramdisk file directory (Y/N ?) .......
+
+
+
+
+
+
+                                1
+
+
+
+
+
+
+
+
+
+
+
+
+    The  file directory of a CP/M disk must be initialized  to  a
+known  state before the disk can be used.  Floppy disk formatting
+programs usually do this for floppies, and a similar process must
+be performed on the ramdisk.  Answer yes to this prompt  whenever
+you are loading the software for the first time since powering up
+the computer, or  whenever you load the  ramdisk after previously
+running  CP/M-86  or MSDOS.  The directory can  be  left  intact
+however,  if  you  need to reload  the ramdisk  software  without
+losing any of the data in the 8088's memory. This situation could
+arise if you needed to get out of a lock-up situation by pressing
+the computer's reset button,  or if you crashed the system with a
+whiz bang new program that wasn't quite debugged.
+
+3. Ramdisk driver load address or <CR> to use default .....
+
+   This prompt allows you to define where in the Z80's memory the
+ramdisk driver will be loaded.  Use the default option if you  do
+not  know  the location of any free space in high memory for  the
+software to use.   In  this  case  the  ramdisk  driver  will  be
+automatically   relocated  just  below  CP/M's  console   command
+processor,  and  the  size  of  the TPA  (free  memory  for  user
+programs) will be reduced by 3k bytes to make room.
+
+    If  you  cannot tolerate the loss of 3k from the TPA, a place
+for  the  ramdisk driver can usually be created by  generating  a
+smaller  CP/M  system  using the utility  programs  'MOVCPM'  and
+'SYSGEN'.  The precise operation of these programs varies between
+manufacturers,  so please consult your system's documentation  on
+how  to  generate a new CP/M system.  Having done that,  you  can
+specify  the address of a 1k byte block of memory starting on  an
+even 256 byte boundary as the load address of the ramdisk driver.
+This address is specified in hexadecimal notation.
+
+4. CO-POWER-88 port address or <CR> to use default .......
+
+     The CO-POWER-88 board communicates with the Z80 processor in
+your  computer  through a pair of  jumper-selectable  I/O  ports.
+The  ramdisk software for each of the computers supported by  SWP
+has  been  set for the correct address for that machine,  so  you
+will  usually  respond to this last prompt by typing  a  carriage
+return.  If  you  are  using  a CO-POWER-88  in  a  computer  not
+specifically  supported by us,  you will need enter the  starting
+address of the two ports being used.  The input is in hexadecimal
+with valid values ranging from 0 to FE.
+
+    The  I/O port addresses are defined by 4 jumpers on the small
+daughter  board  included in the  CO-POWER-88  board  set.  These
+jumpers  allow us to define the value of the upper 4 bits of  the
+port   address  being  decoded.   The  lower  4  bits  are  fixed
+permanently as 1110 ('E' in hexadecimal).  This gives 16 possible
+sets  of port addresses in the form 0E,  1E, 2E etc. through  FE.
+Some  custom daughter  boards may have hardwired  port  addresses
+with values other than these.
+
+                                2
+
+
+
+
+
+
+
+
+
+
+
+SHORTHAND NOTATION ...
+
+     An  alternate  form of entering the 4  parameters  described
+above  has  been  provided to streamline loading of  the  ramdisk
+software. It is  possible to include the values for  all  of  the
+parameters  on the CP/M command line when running the RAMDISK.COM
+file.  Simply type a space after the word RAMDISK and then  enter
+the parameters separated  by commas.  If the list of values given
+is  shorter than 4,  or if two commas in a row are entered,  then
+the default value is taken for the undefined value(s).
+
+For example, the following CP/M command:
+
+A>RAMDISK A,N
+
+has  the  effect  of installing ramdisk  as  drive  A:  with  the
+directory not erased, using the default load address and I/O port
+setting.
+
+This command;
+
+A>RAMDISK B,,FC00
+
+has  the  effect  of  installing ramdisk as  drive  B:  with  the
+directory erased,  but loading the software in the top 1k of  Z80
+memory starting at FC00 hex.
+
+One final shorthand command form is possible, namely:
+
+A>RAMDISK *
+
+which  has  the  same effect as typing carriage return to  all  4
+prompts.  This  gives  the  default  value  for  drivename  (M:),
+directory treatment (erased),  load address (automatic relocation
+below  the  CCP)  and port address (FE for  most  machines).  The
+default values for all user definable parameters are contained in
+a block at the start of the RAMDISK.COM file. These values may be
+changed  without notice in versions of the  software  distributed
+for special machines or applications.
+
+WHEN THINGS GO WRONG ...
+
+     After  loading,  displaying the signon message  and  getting
+input  from either the command buffer or direct from the  console
+keyboard,  the ramdisk software will take a moment to communicate
+with  the 8088 processor and then exit back to CP/M.  Upon exit a
+summary of the settings assigned for drivename,  directory  fill,
+load address and port number is displayed. If you get to here you
+are  in business,  otherwise some kind of error condition exists.
+Most  of  the time this is due to invalid input  data.  When  the
+program  cannot make sense of what you typed in the direct  input
+mode,  the  prompt  is  simply reissued  and the  input  must  be
+repeated.  If  the data was all included on the command  line  as
+
+                                3
+
+
+
+
+
+
+
+
+
+
+
+described  in  the  previous section,  then  the  program  simply
+displays the following message and terminates:
+
+*** invalid parameter in command line ***
+
+     Here  is  the  current list of errors that will get  you  in
+trouble in this respect.
+
+a) Drivename outside the range A through P.
+b) Response other than Y,N or <CR> to directory fill prompt.
+c) Load address not valid hexadecimal,  that is not composed  of
+   the digits 0 through 9 or A through F.
+d) Load  address  below  BIOS start or  not  on  even  256  byte
+   boundary.
+e) I/O port address not valid hexadecimal.
+f) I/O port address greater than FE hex.
+
+    A  couple  of other conditions may exist that  will  make  it
+impossible to load the ramdisk software.  One possibility is that
+the  I/O  port  address for the CO-POWER-88 board is  not  really
+correct for the actual system being used.  It is also possible to
+get the 8088 stuck in a situation where it will not  respond.  In
+both cases you will get the following error message:
+
+*** cannot load, 8088 does not respond ***
+
+If  you  see this message,  you should check to see that you  are
+using  the right I/O port address for your system,  and that  the
+CO-POWER-88 is correctly connected to the computer.  After  doing
+that,  press the Z80's reset button,  reboot CP/M and try running
+RAMDISK.COM again. Some computers do not have a reset pushbutton,
+in which case it will be necessary to turn the power off and back
+on again to reset everything.  (The TRS80 model 1 and the Osborne
+are two machines that do not have a true hardware reset button.)
+
+    Another  error can occur when using ramdisk as logical  drive
+A:.  In  this case the ramdisk software must locate your copy  of
+CP/M  in  memory  and  transfer  it to the  ramdisk  for  use  by
+subsequent warm boots.  A special mechanism called a CRC check is
+used  by  the  software to insure that a valid copy  of  CP/M  is
+present  in memory.  If this check fails to verify,  you will see
+the following message:
+
+*** not standard CP/M system, cannot load ***
+
+If this happens you will not be able to use the ramdisk as  drive
+A:  unless  you  can find what is causing the CRC  to  fail.  The
+most likely causes are listed below:
+
+a) The operating system is not CP/M version 2.2,  but rather some
+   look alike such as CDOS, TPM, TurboDOS, CP/M+ or MP/M. Consult
+   SWP on the availablity of ramdisk software for these systems.
+
+
+                                4
+
+
+
+
+
+
+
+
+
+
+
+
+b) The operating system is CP/M 2.2 but the code has been altered
+   in some way for use on your machine. Also call SWP for help.
+c) The operating environment of your system has been altered  by
+   an  applications program that was run previously.  Any program
+   that alters the BIOS jump table or the BDOS vector at  location
+   5  should  be loaded after you load the  ramdisk  driver,  not
+   before.  Even  if  you reverse the load sequence there may  be
+   some  such  programs  that will not  work  with  the  ramdisk.
+
+HOW TO USE THE RAMDISK ...
+
+     The  answer to this question is quite simple.  Just use  the
+ramdisk as you would any other disk drive. There is no difference
+except  that  floppies (or even some hard disks) are lots  slower
+than ramdisk.  You may want to use PIP or some similar file  copy
+program  to load the ramdisk up with programs or data files prior
+to  starting  work.  Then these programs will run at  many  times
+their  usual speed (assuming they are heavily dependent  on  disk
+I/O).  At  the  end  of a run,  you will need to do  the  reverse
+process,  that  is,  copy any updated files off the ramdisk  onto
+permanent media.  Remember that the ramdisk data will be lost  if
+the  system loses power or if you switch from running ramdisk  to
+running CP/M-86 or MSDOS!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                5
+
+
+
+
+
+
+
+
+
+
+
+
+                     RAMDISK SETUP TUTORIAL
+
+The SWP RAM disk software is a very powerful tool when used with
+the CP/M 2.2 operating system. The following is a suggestion of
+how you might use the RAM disk in your daily operation.
+
+A>PIP SETUP.SUB=CON:
+RAMDISK D
+PIP D:=PGM.COM
+PIP D:=*.DAT
+D:
+PGM
+A:PIP A:=D:*.DAT
+(type)Control Z(to exit PIP)
+
+     The above example will build you a SUBMIT file that sets up
+the RAM disk as drive D:, copies your program from A: to D:,
+copies your data files to drive D:, transfers control to D: and
+executes your program. The program will now access the data at
+the speed of RAM and speed up your operation. When you exit your
+program, the remainder of the SUBMIT file will save your data
+files to a real disk. To execute the above program, perform the
+following instructions.
+
+A>SUBMIT SETUP
+
+     If you're as lazy at the keyboard as I am, you might try
+renaming SUBMIT.COM to DO.COM. This will allow you to do the
+program by typing:
+
+A>DO SETUP
+
+     The above operation can be performed as any disk drive,
+except  drive 'A'. If you try to setup the RAM disk from your
+SUBMIT file as drive 'A' the SUBMIT program will stop
+functioning. You can over ride this by deleting the 'RAMDISK A'
+portion of the SUBMIT file and performing the following commands:
+
+A>RAMDISK A
+A>DO SETUP
+
+     Do not forget to change all 'A' disk commands to 'B' in your
+SUBMIT file. After 'RAMDISK A' is executed the real disk drives
+will be renamed to 'B' and 'C'.
+
+
+                 Good luck and happy computing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                6
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
