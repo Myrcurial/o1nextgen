@@ -1,0 +1,8 @@
+# Large binaries are tracked in-repo intentionally (research archive),
+# but ignore OS cruft and working outputs.
+.DS_Store
+*.o
+*.elf
+*.uf2
+__pycache__/
+build/
