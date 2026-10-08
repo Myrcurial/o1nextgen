@@ -1,0 +1,75 @@
+# OCC1 hard disk — analysis
+
+Source: research/harddisk/OCC1_HARDDISK.IMD (Osborne 1 SSDD, FM 10x256).
+Extracted to research/harddisk/extracted/ via disk-analyse + cpmtools
+(`osb1sssd`).
+
+## What this is
+
+The Osborne 1 hard disk product from **Australian Computer &
+Telecommunications (ACT), (c) 1982** (string in BOOTHd.COM). This is the
+"winchester style" interface — and, significantly for us, it is one of
+the known **Z80-interposer** designs: the host-side hardware plugged
+into the Osborne's Z80 socket.
+
+## Files
+
+| File | Role |
+|---|---|
+| HARDBIOS.HEX | Intel HEX of a full replacement BIOS, loads at 0xDF00-0xEB00 (17-jump BIOS entry table at 0xDF00) |
+| LOADBIOS.COM | Overlays HARDBIOS.HEX onto the running BIOS ("Your BIOS has been overlayed"; validates 17 JMPs, checksums, warm-boot vector) |
+| BOOTHd.COM | Hard-disk boot ("ERROR DURING BOOTING TO HARD DISK") |
+| MOVCPM10/5/F.COM | MOVCPM variants (10MB / 5MB / full? volume sizing) for relocating CP/M under the new BIOS |
+| DISKEDIT.COM, DISKTEST.COM | Winchester utilities |
+| RESTORE.COM, SAVEFILE.COM | Backup/restore to floppy |
+| AUTOST.COM, SYSGEN.COM, PIP.COM, XDIR.COM | Standard |
+
+## Hardware interface (from HARDBIOS.HEX disassembly)
+
+- Same Osborne bank discipline as Drive C: **OUT (0x00) = bank 2 (IO),
+  OUT (0x01) = bank 1 (RAM)**, DI/EI bracketed (subroutines at 0xEA6A /
+  0xEA75 wrap all IO accesses).
+- Device registers are memory-mapped in bank 2:
+  - **0x2A00** — command/data register (written with a command byte
+    after bank select)
+  - **0x2C01** — status register (read; bit 5 (0x20) = status flag
+    tested after rrca; merged into a saved status byte)
+- Also `OUT (C),A` with port value cached at 0xEF08 — indirect port
+  write, target TBD (possibly NMI control or bank-related).
+- The BIOS preserves a full register environment (pushes IX/IY/HL/DE/
+  BC/AF, switches to a private stack at 0xEFC1) around hard-disk calls
+  — it hooks deep into the 17-entry BIOS jump table as a full BIOS
+  replacement, not just a disk-driver wedge.
+
+## Comparison with Drive C
+
+| | Drive C (RAM disk) | ACT hard disk |
+|---|---|---|
+| Physical interface | IEEE-488 port (6821 PIA bit-bang @ 0x2900-0x2903) | Custom host adapter, regs @ 0x2A00 / 0x2C01 |
+| Host code | Driver wedge (DCL/DFD.SPR) | Full BIOS replacement @ 0xDF00 |
+| Boot | QUICKPAC autoload from floppy | BOOTHd.COM + SYSGEN to winchester |
+
+## Implications for the interposer project
+
+1. **The ACT product validates the whole interposer concept on this
+   exact machine** — a Z80-socket interposer was a shipping commercial
+   Osborne 1 peripheral in 1982.
+2. Its register interface (0x2A00 command/data, 0x2C01 status) is a
+   clean, tiny target: a Pico 2 W could emulate the ACT host adapter
+   purely in bank-2 memory space, no PIA bit-banging needed.
+3. For the mass-storage personality we therefore have two documented
+   paths: emulate the Drive C GPIB RAM-disk protocol (docs/drive-c-
+   protocol.md), or emulate the ACT adapter (this note). The ACT path
+   looks simpler electrically but needs the interface hardware
+   reverse-engineered (photos / unit access); the Drive C path is
+   fully observable from software alone.
+
+## Open questions
+
+1. Which ACT product exactly (model no./capacity)? MOVCPM10 vs
+   MOVCPM5 suggests 10MB and 5MB volume support.
+2. Command set at 0x2A00 (sector read/write/format, geometry
+   reporting) — needs annotated disassembly of the HARDBIOS driver
+   routines around 0xE000-0xEA0A.
+3. The `OUT (C)` target port at 0xEF08.
+4. Whether any ACT hardware photos/schematics survive online.
