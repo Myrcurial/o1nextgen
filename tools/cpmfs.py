@@ -27,6 +27,7 @@ FORMATS = {
     'kp2x':     dict(seclen=512, sectrk=10, boottrk=1, blocksize=2048, maxdir=64),
 }
 FORMATS['kpiv'] = FORMATS['kp2x']
+FORMATS['zorba'] = dict(FORMATS['kp2x'], boottrk=2)
 
 class CPM:
     def __init__(self, path, fmt):
