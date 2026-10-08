@@ -22,10 +22,12 @@ re-encode) — user to describe or retake.
 - Glue visible matches 611-0003: 74LS138 x3 (RAS/CAS + port decode),
   74LS244, 74LS373/375, 74LS645, 74LS257, 74LS175, 74LS153, 74LS32,
   MC74HC374 x2, 74LS161/393/174 etc.
-- **Blue 8-position DIP switch** marked "16-2103 8140" — the port-base
-  select switch from sheet 4 (A1-A7 vs switch, XNOR compare).
-  TODO: read switch positions against board photo close-up to confirm
-  0x7E decode.
+- **Blue DIP-package IC** marked "16-2103 8140" — per user correction this
+  is a **chip, not a DIP switch**. Almost certainly an 8-bit magnitude
+  comparator (74LS688-class) doing the A1-A7 port-base compare from sheet 4.
+  ⇒ The host port base is **fixed by this device / its hardwired reference,
+  not user-switchable**. Consistent with the Kaypro software default 0x7E/0x7F.
+  TODO: confirm the exact part number + how the reference nibble is set.
 - Host ribbon: IDC at board edge (to Z80 socket adapter), plus a
   second 16-pin(?) white Berg-type connector (matches "BERG PINS"
   RDX read-strobe / expansion note on sheet 4).
@@ -41,8 +43,8 @@ re-encode) — user to describe or retake.
     would be marked differently; also 1984 predates common CMOS Z80s)
   - 74HCT-series glue (74HCT04 visible) and pads labelled **A4 A5 A6
     A7** — address lines broken out for the ribbon to the 8088
-    board's port decode (sheet 4 DIP compare needs A1-A7; adapter
-    passes them down)
+    board's port decode (sheet 4 A1-A7 compare feeds the blue comparator
+    IC; adapter passes them down)
   - ribbon cable from adapter to the KAYPRO-88 board.
 - **Level-shifting conclusion for #11**: this machine is NMOS Z80A
   (TTL-ish outputs, high input thresholds) ⇒ use 74HCT/74AHCT toward
@@ -56,7 +58,7 @@ re-encode) — user to describe or retake.
    shots.) Please describe or retake — likely the missing piece for
    the adapter↔mainboard ribbon routing.
 2. Which of the 3 machines is this (OCC1 label? board rev 24187A)?
-3. Close-up of the blue DIP switch positions (readable on/off state)
-   to verify the 0x7E/0x7F decode hypothesis.
+3. Close-up of the blue comparator IC ("16-2103") to read the full part
+   number and confirm the 0x7E/0x7F decode hypothesis.
 4. Photos of the other two machines' Z80 areas for the NMOS/CMOS
    matrix in #29.
