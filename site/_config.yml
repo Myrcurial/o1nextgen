@@ -1,0 +1,9 @@
+title: o1nextgen
+description: >-
+  Rebuilding, upgrading, and eventually recreating the Osborne 1 —
+  research, interposer hardware, and the story of how this project began.
+theme: minima
+permalink: /:year/:month/:day/:title/
+markdown: kramdown
+plugins:
+  - jekyll-feed

@@ -123,10 +123,17 @@ Phase 0 research (#1) has largely landed; see `docs/` and `research/`:
 - `hardware/` — hardware device definitions (see `hardware/README.md`):
   Z80 interposer, front-panel UI pod, USB keyboard adapter, severable
   WiFi modem module, floppy adapter, O1 Next Generation reproduction
-- `firmware/` — (planned) Pico 2 firmware: analyzer, peripheral synth
+- `firmware/` — on-device firmware, one folder per component (see
+  `firmware/README.md`): RP2350 interposer personalities (bus analyzer,
+  RTC, printer, floppy, Drive C/GPIB, ScreenPac video, KVM, CoPower-88
+  shim, web UI), ESP32 Zimodem fork, RP2040 keyboard matrix
+- `software/` — Osborne-side CP/M software (see `software/README.md`):
+  MOUNT.COM, FATCOPY, CoPower-88 driver, updated boot disk; plus the
+  no-new-code deliverables (existing period drivers/configs, docs only)
 - `tools/`   — disk image pipeline: TD0 decompressor + CP/M filesystem
-  extractor (`cpmfs.py`, `edsk2raw.py`, `extract_all.sh`); trace
-  capture/analysis planned
+  extractor (`cpmfs.py`, `edsk2raw.py`, `extract_all.sh`);
+  `tools/trace-analyzer/` (planned) host-side bus trace capture;
+  `tools/research/` for keep-worthy research/one-off code
 
 ## Hardware notes
 
