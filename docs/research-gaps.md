@@ -26,14 +26,18 @@ firmware", "blocks validation".
      the Z80 socket — confirm the O1 Z80 pinout matches standard Z80 DIP40.
    - *Source:* O1 mainboard schematic + ScreenPac install pages (have PDF).
 
-4. **CoPower-88 monitor ROM dump.**
-   - The SWP-8088 2732A on the CoPower board fully specifies the host
-     mailbox protocol. Dumping it removes guesswork from #23/#26.
-   - *Depends on:* ROM reader (#14) or reader hardware; user access to board.
+4. ~~**CoPower-88 monitor ROM dump.**~~ **DEFERRED (user decision, 2026-10-09).**
+   - The SWP-8088 2732A on the CoPower board would fully specify the host
+     mailbox protocol — but the user prefers not to desolder the ROM and is
+     not set up for dumping. We proceed from the Kaypro↔Zorba driver-diff
+     inference (#3/#4/#5), which is sufficient to build the emulation against.
+   - The dump resolves only the residual doorbell/IRQ-semantics question;
+     revisit only if the board is ever desoldered for another reason.
 
-5. **Power budget.** What +5V current can the Z80 socket / a fly-lead
-   supply? Determines whether the Pico 2 W (WiFi bursts ~300 mA+) needs a
-   separate feed. *Source:* O1 PSU spec + measurement.
+5. ~~**Power budget.**~~ **RESOLVED (user decision, 2026-10-09).**
+   - No measurement needed: the interposer board gets its **own dedicated 5VDC
+     feed** from a convenient rail near the Z80 socket. #12's spec should state
+     this as a requirement, sized for Pico 2 W WiFi bursts (~300 mA+).
 
 ## B. Blocks firmware planning (#16–#24)
 
@@ -85,9 +89,15 @@ firmware", "blocks validation".
 
 ## Recommended next actions (before #11 detailed design)
 
-- [ ] **New issue:** extract O1 mainboard memory+I/O map from schematic
-      (unblocks gaps 1, 10, 11, 15).
-- [ ] **#39** (user): photos of other two machines' Z80s + machine IDs
-      (unblocks 2, 12).
-- [ ] Finish device protocol specs: #3/#4/#5, #6, #7, #8 (unblocks 6-9).
-- [ ] Decide whether to dump the SWP-8088 ROM now or defer (gap 4).
+- [x] ~~**New issue:** extract O1 mainboard memory+I/O map~~ **DONE — #40**
+  (unblocked gaps 1, 10, 11, 15; see docs/o1-memory-io-map.md).
+- [ ] **#39** (user, re-scoped): Z80 chip markings on the other two machines +
+  machine IDs (unblocks 2, 12). The DIP-switch item is dead — the port decode is
+  hard-wired at 0x7E/0x7F per user correction.
+- [ ] Finish device protocol specs: #3/#4/#5, #6, #7, #8 (unblocks 6-9). This is
+  the next software-session work stream.
+- [x] ~~Dump the SWP-8088 ROM~~ **DEFERRED** (gap 4) — proceed from driver-diff
+  inference.
+- [x] ~~Power budget~~ **RESOLVED** (gap 5) — interposer gets its own 5VDC feed.
+- [ ] New: char-gen ROM capture (#44) and USB HID keyboard adapter (#45) — both
+  pre-hardware, opportunistic.
