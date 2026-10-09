@@ -1,0 +1,60 @@
+# usb-keyboard-adapter — RP2040 USB-HID → P4 adapter
+
+**A USB port on the Osborne 1 you can jam a normal USB HID keyboard into
+and have it work.** Standalone, always-on upgrade: no interposer, no
+WiFi, no BIOS changes. Also the matrix-injection firmware base for the
+interposer's web-KVM personality (#45).
+
+Tracks: #47 (split out of #45). Target: PCBway build.
+
+## Reference design
+
+- **MCU:** RP2040 running a USB HID host stack (TinyUSB host mode) →
+  8×8 matrix state. Chosen over Pico 2 W deliberately: no radio needed,
+  lowest cost, standard chip for retro USB-HID-host adapters.
+- **I/O:** watch 8 host row-drive lines (inputs), drive 8 column lines
+  open-collector (matching the stock 74LS05 stage) — 16 GPIO.
+- **Level shifting:** O1 keyboard lines are 5 V TTL; RP2040 is 3.3 V.
+  Rows need 5 V-tolerant input handling; columns driven via open-drain
+  buffer (74LVC07-class) so the adapter never fights the host.
+- **Power (variant A — internal):** from **P4 pin 19 = +12V** (wired
+  through jumper J6 + R21 22Ω; bridge J6 — a documented, reversible
+  mod). On-board 12V→5V (or 12V→3.3V) buck; the 22Ω drop is negligible
+  at RP2040 currents (~25–60 mA). Do **not** draw logic power from the
+  column pull-ups.
+- **Power (variant B — no-open-case):** powered from outside the
+  machine so it works for users who don't want to open their Osborne 1
+  at all. The adapter's USB-A port pairs with a **powered USB hub** (or
+  a power-tee / 5 V feed on the adapter's upstream side): the RP2040
+  draws its 5 V from the hub's external supply rather than from P4.
+  J6 stays factory-open; the machine is untouched. The design should
+  expose a power-source jumper (P4-12V vs external 5 V) so one PCB
+  serves both variants. Note: in variant B the column lines are driven
+  against a machine the adapter doesn't share power with — ensure
+  common ground comes through P4 pins 1/20 and the open-drain column
+  drivers tolerate the unpowered-machine / powered-adapter (and vice
+  versa) states.
+
+## Host interface — P4 keyboard connector (O1A)
+
+Later O1A "blue/grey" machines: coiled cable, 24-hole plug, only the
+inner 20 pins mate. Documented pinout (O1 Technical Manual via
+pinouts.ru, 4/4 corroborating reports; corrected by #48):
+
+- 1 = GND; 2–9 = rows A4, A0, A3, A6, A2, A5, A1, A7
+- 10–17 = columns D0–D7; 18 = NC; **19 = +12V (via J6+R21)**; 20 = GND
+
+## Spec validation required BEFORE layout
+
+- [ ] Confirm pinout against `research/osborne1/OCC1_1A2011-00_Schem_RevE.pdf`
+      and continuity-check a real O1A (rows vs columns, GND, pin 19
+      +12V with J6 bridged; J6/R21 present on target board revisions).
+- [ ] Confirm rows are driven low one-hot via open-collector inverters,
+      columns pulled up to +5V via a 3.3K resistor pack.
+- [ ] Scan timing: measure stock scan rate to size the RP2040 polling
+      loop / PIO snoop.
+
+## References
+
+- `research/osborne1/keyboard/` (pinout source + provenance)
+- `docs/research-gaps.md`, issue #45 (KVM personality reuse)
