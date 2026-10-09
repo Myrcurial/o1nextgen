@@ -14,10 +14,19 @@ firmware", "blocks validation".
    - *Source:* O1 technical/service manual mainboard schematic.
    - **New issue needed.**
 
-2. **NMOS vs CMOS Z80 across all three target machines.**
-   - Confirmed NMOS Z80A (8408) on ONE machine (#9). #11 level-shifter
-     choice (AHCT vs LVC) needs the same datum for the other two.
-   - *Depends on:* #39 (user photos of the other two machines' Z80s).
+2. ~~**NMOS vs CMOS Z80 across all three target machines.**~~ **RESOLVED BY HISTORY
+   (user, 2026-10-09).**
+   - The CMOS Z80 (Z84C00) didn't ship until 1985; Osborne 1 production ended in
+     1983 — so **every O1 is NMOS.** There is no CMOS-variant matrix to build.
+   - **Interposer decision:** standardize on **74AHCT (or 74HCT)** for anything
+     touching the Z80 bus. NMOS outputs are TTL-ish (need TTL-compatible inputs);
+     NMOS inputs have ~2.0–2.4 V high thresholds (AHCT/HCT drive them correctly).
+     No per-machine logic-family testing needed. #39's remaining ask reduces to
+     confirming NMOS + date codes for the record.
+   - **Replica note:** the replica uses the *new-production CMOS* Z84C00 (5 V grade)
+     — fully software-compatible, lower power; see #49. The interposer and the
+     replica thus use *different* CPU silicon, deliberately: AHCT interfaces the
+     NMOS original; the replica gets a modern CMOS CPU.
 
 3. **Z80 socket & chargen socket pinout on the O1 mainboard.**
    - ScreenPac taps BOTH the 40-pin Z80 socket and the 24-pin char-gen
