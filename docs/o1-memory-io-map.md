@@ -177,7 +177,13 @@ ScreenPac personality (#24) uses.
 - **P3** — IEEE-488, 26-pin edge (pins 25/26 unused)
 - **P2** — RS-232, DB-25 (DTE)
 - **P1** — Modem
-- **P4** — Keyboard, 20-pin (1=GND, 2–9 rows 4,0,3,6,2,5,1,7, 10–17 cols 0–7, 18/19 NC, 20 GND)
+- **P4** — Keyboard, 20-pin IDC (1=GND, 2–9 rows 4,0,3,6,2,5,1,7, 10–17 cols 0–7, 18 NC, 19=+12V, 20 GND).
+  On the later **O1A ("blue/grey")** machines the coiled-cable plug has **24 holes but only the inner
+  20 mate with pins**. Pin 19 carries **+12V only if jumper J6 is bridged** (a 2-pin link, open from
+  the factory) through **R21 (22Ω)** — the intended way to power an accessory off the keyboard cable.
+  Rows are driven low (open-collector inverters, one-hot); columns are pulled up to +5V via a 3.3K
+  resistor pack and buffered onto the data bus. Reference: O1 Technical Manual; pinout per
+  pinouts.ru (verified against a PCB) — see #47 for the full matrix map.
 - **P8** — Floppy drive, 34-pin
 - **P5** — Video, 10-pin inline
 
