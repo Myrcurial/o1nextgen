@@ -183,7 +183,9 @@ ScreenPac personality (#24) uses.
   the factory) through **R21 (22Ω)** — the intended way to power an accessory off the keyboard cable.
   Rows are driven low (open-collector inverters, one-hot); columns are pulled up to +5V via a 3.3K
   resistor pack and buffered onto the data bus. Reference: O1 Technical Manual; pinout per
-  pinouts.ru (verified against a PCB) — see #47 for the full matrix map.
+  pinouts.ru (verified against a PCB), archived in-repo at
+  `research/osborne1/keyboard/osborne_keyboard_pinout.html` (provenance alongside) —
+  see #47 for the full matrix map.
 - **P8** — Floppy drive, 34-pin
 - **P5** — Video, 10-pin inline
 

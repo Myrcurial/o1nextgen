@@ -20,6 +20,7 @@ alongside the copies.
 |---|---|---|
 | `2F00153-01_Osborne1TechnicalManual_1982.pdf` (19 MB) | Osborne 1 Technical Manual, 1982. No text layer — image-only scan. Theory of operations, banking, I/O, video, disk, keyboard. | [bitsavers](https://bitsavers.trailing-edge.com/pdf/osborne/osborne1/2F00153-01_Osborne1TechnicalManual_1982.pdf) |
 | `OCC1_1A2011-00_Schem_RevE.pdf` (2.1 MB) | Mainboard schematic set, OCC drawing 1A2011-00 Rev E. Sheets 1–3 are the disk analog board (DWG 1A3004), sheet 4+ the main logic board. | [bitsavers](https://bitsavers.org/pdf/osborne/osborne1/OCC1_1A2011-00_Schem_RevE.pdf) (also mirrored as `Osborne_1_Schematics_1A2011-00_Rev_E.pdf` on RetroTechCollection/Internet Archive) |
+| `keyboard/osborne_keyboard_pinout.html` + `keyboard/PROVENANCE.md` | Verbatim capture of the pinouts.ru Osborne 1 keyboard page: P4 pinout (incl. pin 19 = +12V via J6+R21) and the full key matrix map. Used by #45/#47. | [pinouts.ru](https://old.pinouts.ru/InputCables/osborne_keyboard_pinout.shtml), captured 2026-10-08 (provenance in the folder) |
 
 Basis for `docs/o1-memory-io-map.md` (#40). Both scans are image-only;
 extraction is manual (OCR for text pages, visual for schematics).
