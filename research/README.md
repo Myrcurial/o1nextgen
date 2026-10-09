@@ -1,0 +1,81 @@
+# Research archive — sources and safety copies
+
+This directory is the project's **research archive**: the documentation,
+disk images, and photographs that the reverse-engineering and design work
+under `docs/` and the GitHub issues depend on.
+
+**These files are reserved as safety copies of the documentation necessary
+to complete this project.** They are committed in-repo on purpose: upstream
+archives move, go offline, or drop files, and this project cannot finish
+without these specific documents. If an upstream link dies, the in-repo
+copy is authoritative. Please do not "clean up" large PDFs or disk images
+from this tree — their presence here is the point.
+
+Where each item was sourced is recorded below, so provenance is preserved
+alongside the copies.
+
+## osborne1/ — Osborne 1 mainboard documentation
+
+| File | What it is | Sourced from |
+|---|---|---|
+| `2F00153-01_Osborne1TechnicalManual_1982.pdf` (19 MB) | Osborne 1 Technical Manual, 1982. No text layer — image-only scan. Theory of operations, banking, I/O, video, disk, keyboard. | [bitsavers](https://bitsavers.trailing-edge.com/pdf/osborne/osborne1/2F00153-01_Osborne1TechnicalManual_1982.pdf) |
+| `OCC1_1A2011-00_Schem_RevE.pdf` (2.1 MB) | Mainboard schematic set, OCC drawing 1A2011-00 Rev E. Sheets 1–3 are the disk analog board (DWG 1A3004), sheet 4+ the main logic board. | [bitsavers](https://bitsavers.org/pdf/osborne/osborne1/OCC1_1A2011-00_Schem_RevE.pdf) (also mirrored as `Osborne_1_Schematics_1A2011-00_Rev_E.pdf` on RetroTechCollection/Internet Archive) |
+
+Basis for `docs/o1-memory-io-map.md` (#40). Both scans are image-only;
+extraction is manual (OCR for text pages, visual for schematics).
+
+## screenpac/ — OCC ScreenPac (80-column upgrade)
+
+| File | What it is | Sourced from |
+|---|---|---|
+| `2F00040_service_2ndEd_1983.pdf` (12 MB) | Osborne Field Service Manual, 2nd Edition, 1983. Covers the ScreenPac upgrade (Z80 + char-gen socket taps, dual-port video RAM). | [bitsavers](https://bitsavers.trailing-edge.com/pdf/osborne/2F00040-00_Service2ndEdition_1983.pdf) |
+
+The ScreenPac is the mechanical/electrical template for the interposer and
+for the video-output (HDMI) personality (#24, #9 photos).
+
+## copower88/ — SWP CoPower-88 (Z80-coprocessor board being reverse-engineered)
+
+| Path | What it is | Sourced from |
+|---|---|---|
+| `zorba/Co-Power-88guide.pdf`, `zorba/Co-Power-88advert.pdf`, `zorba/611-0003-1..4.pdf` | SWP CoPower-88 user guide, advertisement, and SWP technical document scans (Zorba-flavored set) | [zorba.z80.de](http://zorba.z80.de/files/swp/) — the Zorba Portable Computer archive site |
+| `zorba/*.td0`, `kaypro/*.td0` | TeleDisk images of CoPower-88 CP/M-86 / DOS boot disks (Zorba and Kaypro versions) | zorba.z80.de (exact path not recorded in repo history) |
+| `zorba/extracted/`, `kaypro/extracted_cpm/`, `*/disasm/` | CP/M files extracted from those images by the project pipeline (#2), and disassemblies of the CoPower RAM-disk/DOS drivers | Derived in-project — not external sources |
+
+Basis for #3/#4/#5 (CoPower-88 protocol analysis).
+
+## drive_c/ — Drive C (IEEE-488 ramdisk, #6)
+
+| Path | What it is | Sourced from |
+|---|---|---|
+| `Drive_C_Users_Manual.pdf` | Drive C user manual (IEEE-488 virtual disk drive) | Osborne archival site (exact URL not recorded in repo history) |
+| `DRIVE_C.IMD` | ImageDisk image of the Drive C utility disk | Imaged in-project from physical media |
+| `Drive_C_disk_label.jpg` | Photo of the physical disk label | Project photo (#9 set) |
+| `extracted/` | Files extracted from `DRIVE_C.IMD` by the project pipeline (#2) | Derived in-project |
+
+## rtc/ — RT-60A real-time clock (#7)
+
+| Path | What it is | Sourced from |
+|---|---|---|
+| `RT-60A_Manual.pdf` | RT-60A RTC manual | Osborne archival site (exact URL not recorded in repo history) |
+| `RT-60A.TD0` | TeleDisk image of the RT-60A utility disk | Osborne archival site (exact URL not recorded) |
+
+## harddisk/ — ACT/OCC1 hard disk (#8)
+
+| Path | What it is | Sourced from |
+|---|---|---|
+| `OCC1_HARDDISK.IMD` | ImageDisk image of the OCC1 hard-disk system disk | Imaged in-project from physical media |
+| `extracted/` | Files extracted from the image, incl. `hardbios.hex` | Derived in-project |
+
+## pictures/ — machine photographs
+
+`IMG_4856.jpeg` … `IMG_4871.jpeg` — disassembly/mainboard/upgrade-board
+photos of the project's own machines (mainboard, double-density upgrade,
+ScreenPac, CoPower-88). Taken in-project for #9; these are primary sources,
+not copies. Further photo sets are tracked in #39.
+
+## Provenance gaps
+
+Two items predate the issue-tracked Phase-0 workflow and their exact
+download URLs were not recorded in git history: the Drive C manual and the
+RT-60A manual/TD0. The in-repo copies are the authoritative safety copies;
+if either is re-acquired, update this README with the URL.

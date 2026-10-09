@@ -18,6 +18,7 @@ flowchart TB
         RAM["64KB DRAM<br/>(banked)"]
         VRAM["Video RAM<br/>F000-FFFF window"]
         IO["Onboard I/O<br/>(FDC, PIO, SIO, KBD)"]
+        CG["Char-gen ROM socket<br/>UA15, 24-pin<br/>(font data + scan lines)"]
         ZSKT --- ROM & RAM & VRAM & IO
     end
 
@@ -28,11 +29,21 @@ flowchart TB
         PIO["RP2350 PIO + DMA<br/>bus sniffer / driver"]
         MCU["RP2350 cores<br/>cycle decoder +<br/>peripheral firmware"]
         WIFI["WiFi / USB<br/>stream out"]
+        VID["Video renderer<br/>(shadow VRAM + font)<br/>DVI/HDMI via RP2350 HSTX"]
+        HDMI["HDMI monitor out"]
         Z80 <--> BUF <--> PIO <--> MCU --> WIFI
+        PIO --> VID --> HDMI
     end
 
     ZSKT <-."A/D/MREQ/IORQ/RD/WR<br/>tapped + can be driven".-> BUF
+    CG <-."char-gen socket tap<br/>(ScreenPac-style, #24)".-> VID
 ```
+
+**Second tap point (#24):** like the ScreenPac, the interposer taps the
+Z80 socket **and** the character-generator ROM socket (UA15, 24-pin). The
+Z80 tap gives it every bus cycle (including all video-RAM writes); the
+char-gen tap captures the font. Together they feed the HDMI video-output
+personality described in §5.
 
 **Level shifting note (#11):** the host Z80A is NMOS (confirmed, date
 8408). NMOS outputs are TTL-ish; NMOS inputs have ~2.0–2.4 V high
@@ -106,7 +117,7 @@ leaves free **and** that does not collide with the CoPower-88's
 on the real CoPower board (the "16-2103" IC, see photo-survey) is the
 model for a clean single-port-pair decode.
 
-## 4. The four virtual peripherals (from the roadmap)
+## 4. The virtual peripherals (from the roadmap)
 
 | Virtual peripheral | Bus type | Address/Port | Host interface | Back end |
 |---|---|---|---|---|
@@ -114,11 +125,63 @@ model for a clean single-port-pair decode.
 | **WiFi modem** | I/O ports | base+4..7 (cfg) | 8250-ish UART regs | TCP/Telnet over WiFi |
 | **RTC** | I/O ports | base+8..B (cfg) | RT-60A-compatible regs (see #7) | RP2350 RTC / NTP |
 | **Virtual MX-80 printer** | I/O ports | base+C..F (cfg) | Centronics-style data+strobe | WiFi / USB to host spooler |
+| **Video / HDMI output** (ScreenPac personality, #24) | memory snoop + char-gen tap | VRAM `F000-FFFF` (passive) + UA15 socket | none — transparent to host | DVI/HDMI via RP2350 HSTX (§5) |
 
-Each is an independent decode window; firmware registers a
-`{base, mask, read_fn, write_fn}` entry and the cycle decoder dispatches.
+The four I/O peripherals are each an independent decode window; firmware
+registers a `{base, mask, read_fn, write_fn}` entry and the cycle decoder
+dispatches. The video personality is different: it never answers a bus
+cycle at all — it only *listens* (and taps the char-gen socket), so it
+cannot collide with any onboard or virtual device.
 
-## 5. Coexistence with the real peripherals being reverse-engineered
+## 5. Video output — ScreenPac personality and HDMI out (#24)
+
+The interposer's second personality is video. The OCC ScreenPac is the
+template: it taps **both** the Z80 40-pin socket **and** the character
+generator ROM socket (UA15, 24-pin), and shadows the display through
+dual-port video RAM (6116s + 74HC157 muxes). The interposer reproduces
+that function in firmware and extends it to a modern output:
+
+1. **VRAM snoop.** Video RAM lives at `F000-FFFF` (128×32 cells, 52×24
+   visible). Sitting in the Z80 socket, the interposer already sees every
+   bus cycle; writes into the VRAM window update a shadow copy in RP2350
+   RAM.
+2. **Font capture.** The 2716 character ROM (128 chars × 8×10 pixels) is
+   dumped once at init through the UA15 tap — or a known-good font image
+   is preloaded in firmware — and frames are re-rendered from shadow
+   VRAM + font. Tapping UA15 like the ScreenPac did also tracks machines
+   running replacement/upgrade char ROMs.
+3. **Render + output.** The second RP2350 core renders the shadow frame
+   and drives DVI/HDMI via the RP2350 **HSTX** peripheral (or
+   PicoDVI-style bitbang). O1 timing is gentle: 15.9744 MHz master,
+   8 MHz dot clock, 60 Hz frame — comfortably inside DVI 640×480 margins
+   with integer upscale.
+
+### Prior art — Pico-based bus video cards (candidate boards to study)
+
+- **A2DVI** — `github.com/rallepalaveev/A2DVI`: Apple II digital video
+  card, RP2040-based, HDMI/DVI out. Closest analogue: a Pico-class MCU
+  on a vintage bus rendering HDMI in real time.
+- **V2RetroComputing "analog"** — `github.com/V2RetroComputing/analog`:
+  Pico-based Apple II card outputting DVI video over an HDMI connector.
+- **AppleII-VGA** — `github.com/markadev/AppleII-VGA`: Pico-based VGA
+  card; same snoop-and-render architecture, VGA instead of DVI.
+- **PicoDVI** — `github.com/Wren6991/PicoDVI`: the RP2040 DVI bitbang
+  library; on the RP2350 the HSTX hardware does the heavy lifting
+  instead.
+
+All four prove the pattern this personality needs: a Pico-class MCU
+snooping a vintage bus and emitting stable modern video. Unlike the
+Apple II cards, the interposer sits *in the CPU socket* (ScreenPac-style),
+so it also sees bank-switch writes and can track which bank currently owns
+`F000-FFFF` (video RAM vs the dim-bit attribute bank — see
+`docs/o1-memory-io-map.md`).
+
+> Relationship to the real ScreenPac: the reverse-engineering phase sniffs
+> the real board like the other targets (#9 photos; service manual safety
+> copy in `research/screenpac/`). The HDMI personality is then the
+> "virtual ScreenPac" — plus a display output the original never had.
+
+## 6. Coexistence with the real peripherals being reverse-engineered
 
 ```mermaid
 flowchart LR
