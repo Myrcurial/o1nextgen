@@ -1,0 +1,71 @@
+# o1ng — O1 Next Generation (modern-parts Osborne 1 reproduction)
+
+A new PCB built from currently-available components that runs the actual
+Osborne 1 ROMs and (nearly) all original software — with a Cherry MX
+mechanical keyboard, the interposer's floppy/modem/printer/storage
+personalities onboard, and composite video out (HDMI optional).
+
+Tracks: #49 (feasibility + build), #52 (case + power research),
+#53 (concept render: `docs/design/o1ng-lunchbox-concept.*`).
+
+**Verdict from #49: feasible, medium complexity.** The O1 is almost
+entirely memory-mapped commodity MSI/LSI — no custom silicon. CPUs are a
+non-issue: CMOS **Z84C00 is in current production** (the replica
+deliberately uses modern CMOS silicon where the interposer interfaces
+AHCT to the original NMOS part).
+
+## Machine decomposition (by difficulty)
+
+| Block | Approach | Difficulty |
+|---|---|---|
+| CPU + RAM + ROM | Z84C00 (new), 64 KB SRAM (replaces 16× 4116 DRAM + refresh), 27C128/Flash BIOS | Trivial |
+| Video | Char-gen + CRTC-class logic; composite out, HDMI option (interposer video personality reusable) | Moderate |
+| Floppy | 360K half-height drive + onboard DD data separator (enables PC 360K MFM reads → FATCOPY, #51) | Moderate |
+| I/O (serial/GPIB/RTC) | 6850 ACIA, IEEE-488, RTC — interposer personalities onboard | Moderate |
+| Keyboard | Cherry MX matrix; O1-compatible scan encoding | Low–moderate |
+
+## Shared power architecture (#52)
+
+- **USB-C PD trigger board** as primary input: 15 VDC (or 19–20 V) PD →
+  clean on-board +5V and +12V rails. Replaces the entire original PSU —
+  and gets the RIFA caps out of the mix.
+- **Battery option:** a ~15–19 V input rail suits an 18650 pack (4S).
+
+## Form factors (share the power design)
+
+1. **1:1 mainboard replacement** — drops into an otherwise-stock O1/O1A
+   chassis. **As true to the original as possible**: a faithful
+   reproduction of the stock machine, including a **40-pin DIP socketed
+   Z80** (Z84C00) — deliberately socketed so the **interposer
+   (`../interposer/`) is the upgrade path**: anyone wanting the advanced
+   features (bus analyzer, virtual peripherals, WiFi modem, Gotek
+   switching) installs the interposer onto this board exactly as they
+   would on a 1982 original. **L-shaped board**: skinny arm services
+   left-hand-side ports (front-left screw boss); chunky short side
+   mounts front/rear right bosses. Stock port locations (front ports,
+   power, internal video, floppy connectors) and only **four mounting
+   screws** constrain layout.
+2. **"Lunchbox" (O1 Next Generation)** — Dolch / Compaq Portable III
+   idiom in **O1A blue/grey** industrial design; "keyboard seals the
+   unit" aesthetic retained. Unlike the 1:1 board, this is a **fully
+   integrated single board** — the interposer's capability set (video,
+   storage, modem, keyboard input) is thoroughly grafted in rather than
+   stacked on, following the original design language. One reason:
+   integration keeps the timing margins needed for the **clock-doubled
+   8 MHz "business turbo"** (#55) — limited usefulness, but everyone
+   will be fine with it. ~8 cm thick: mainboard + 8" 4:3 LCD
+   (composite/HDMI in) + 18650 pack, detachable flip-up keyboard.
+   Optional rear "backpack" for a physical 5.25" half-height drive.
+
+## Open questions
+
+- Final video pipeline choice (discrete TTL vs small FPGA helper).
+- LCD panel + input board sourcing for the lunchbox.
+- Chassis fabrication route (sheet metal vs printed) for the lunchbox.
+- Which interposer personalities are *onboard* vs *optional modules*.
+
+## References
+
+- `docs/design/o1ng-lunchbox-concept.pdf` / `.svg` (#53)
+- `docs/o1-memory-io-map.md` (the machine's whole address space)
+- Issues #49 (reproduction), #52 (case/power), #51 (FATCOPY)
