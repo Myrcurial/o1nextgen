@@ -27,6 +27,22 @@ alongside the copies.
 Basis for `docs/o1-memory-io-map.md` (#40). Both scans are image-only;
 extraction is manual (OCR for text pages, visual for schematics).
 
+## inspired-by/ — adjacent projects
+
+`inspired-by/README.md` — other Osborne 1 reinventions (MAME cyberdeck,
+Raspberry Pi brain transplant, Loxley's Gotek mod): what they did, and
+what we take from each. Contrast defines the project: **we keep the
+original machine intact**.
+
+## mx80/ — Epson MX-80 printer references
+
+| File | What it is | Sourced from |
+|---|---|---|
+| `mx80/Epson_MX-80_Operations_Manual.pdf` | Epson MX-80 operation manual; Appendix 4 (PDF p. 97+) has the character-font tables (6×9 matrix) and ESC code reference. | [Internet Archive / manualsbase](https://dn790002.ca.archive.org/0/items/manualsbase-id-381505/381505.pdf), captured 2026-10-09 |
+| `mx80/EPSON_MX-80_Fonts_v1.0.zip` + `mx80/fonts/` | Michael Walden's MX-80 font pack (CC BY-NC-SA 4.0). Convenience cross-check; see the folder README for the double-strike/2×-width caveat. | [mw.rat.bz/MX-80](https://mw.rat.bz/MX-80/), captured 2026-10-09 |
+
+References for the virtual Epson MX-80 printer personality (#19).
+
 ## screenpac/ — OCC ScreenPac (80-column upgrade)
 
 | File | What it is | Sourced from |
