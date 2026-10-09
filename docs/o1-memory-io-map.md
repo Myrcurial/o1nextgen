@@ -23,6 +23,43 @@ WD179x floppy interposer (#20, gap #11), and ScreenPac personality (#24).
 | Bus width | 8-bit data (DATA0–7), 16-bit address (ADR0–15) |
 
 Wait-state generation: RAM accesses insert wait states (≈375 ns for non-M1
+Wait-state generation: RAM accesses insert wait states (≈375 ns for non-M1
+cycles, 188 ns for the first M1); ROM executes without added delay.
+
+### 1a. One crystal, no free lunch — and the 2× "business turbo"
+
+Per Lee Felsenstein's rule of thumb — *"the number of crystals in a machine design
+is equivalent to the number of designers"* — the O1 has **one** oscillator, and the
+whole timing economy (video, ACIA baud, floppy data separator, DRAM refresh,
+software delay loops) is divided down from it. Consequences:
+
+- **Serial quirk already visible:** the J1 600/2400 jumper is ~8.3% fast (650/2600
+  actual) because the video-tap ÷13 ÷(16|64) chain can't land exactly on 600/2400
+  from 15.9744 MHz. The factory's own alternate baud rate shows the seams.
+- **No clean general turbo:** 3× has no integer relationship to the video chain
+  (breaks video), and any CPU speedup drags the ACIA baud rate, the FDC data
+  separator, and software timing loops along with it.
+- **The clean-ish 2×:** doubling the CPU clock to 8 MHz keeps the ÷2 dot-clock tap
+  coherent (15.9744 ÷ 2 = 8 MHz), so **video timing survives**. It is viable *for
+  business apps* if the three side effects are engineered around:
+  1. **Floppy** — the WD1793 data separator is timed for 4 MHz; in turbo mode
+     physical floppies are out. Use the interposer's storage instead (#20/#22:
+     image-library / IEEE-488 storage answers on the bus at whatever speed the
+     host runs), or gate turbo off when the FDC is selected.
+  2. **Timing loops** — accept that games/delays run double-speed; scope the
+     feature to calculation-bound work (SuperCalc recalc, dBASE II, compilers,
+     assemblers). A classic PC-era **"TURBO" switch** selects 4 MHz ↔ 8 MHz.
+  3. **Serial** — no clean fix at the ACIA. Mitigation: build a **baud-rate
+     buffering corrector** into the WiFi modem (#21). The modem's RP2350 talks to
+     the far end at a rock-solid standard rate (2400/9600) and tolerates whatever
+     the O1 ACIA is actually doing: on **send** it buffers until a batch accumulates
+     before transmitting; on **receive** it buffers a frame, then re-clocks it out
+     to the O1 at the rate the O1 expects. The O1-side rate drift becomes the
+     modem's problem, not the link's.
+- **Net:** a 2× business turbo is a *documented, buildable option* (mostly on the
+  replica #49, where SRAM removes the DRAM-refresh constraint); it is not a general
+  speedup and doesn't pretend to be.
+
 cycles, 188 ns for the first M1); ROM executes without added delay.
 
 ## 2. Memory banks
