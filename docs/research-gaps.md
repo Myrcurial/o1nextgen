@@ -57,7 +57,7 @@ Everything else is either done, or is research that can proceed in parallel.
 | 10 | 6850 ACIA location for the WiFi modem | **Solved** | `o1-memory-io-map.md` §3: `2A00`/`2A01`, UC4 — confirmed independently by the ROM source | #21 | — |
 | 11 | Floppy controller, port map, DD changes | **Partially** | Ports `2100–2103` and the full WD179x command set from the ROM source; 1.44 *is* the DD ROM; DD block = 1K; the Nuevo and Osmosis DD boards are documented | #20, #30, #73 | MB8877 vs WD1793 (schematic-level); the DD upgrade's electrical changes |
 | 12 | Which three machines, which board revisions | **Open** | — | #39 | **User action**: machine IDs (one is 24187A) and Z80 markings |
-| 13 | A known-good boot disk per machine | **Solved** | Measured 3×3 matrix in `mame-emulation.md` §4: all three `-blank.imd` system disks boot on all three MAME machines; diagnostics disks also archived | #29, #70 | The *Nuevo system* disk (`OS1NUEVO.IMD`) does not boot — #79 — but the gap as stated is met |
+| 13 | A known-good boot disk per machine | **Solved** | Measured 3×3 matrix in `mame-emulation.md` §4: all three `-blank.imd` system disks boot on all three MAME machines; diagnostics disks also archived | #29, #70 | The *Nuevo system* disk (`OS1NUEVO.IMD`) does not boot — #79, closed as not needed — but the gap as stated is met |
 | 14 | Consolidate into per-device protocol specs | **Partially** | Done: `copower88-protocol.md`, `drive-c-protocol.md`, `rt60a-analysis.md`, `o1-rom-source.md`, `o1-rom-variants.md`, `mame-emulation.md` | #75 | Missing: floppy, hard disk, printer/parallel, keyboard. #75 (the book) is the final consolidation |
 | 15 | Memory-resident vs pure I/O-port for virtual devices | **Solved** | Recommendation stands: pure I/O-port, in the free windows from gap 1 (`o1-memory-io-map.md` §7) | #12, #16 | Same decode-granularity caveat as gap 1 |
 
@@ -95,13 +95,19 @@ catalogued (`o1-rom-variants.md`): `5297c109` (early, paired with BIOS ≤ 1.4) 
 Open sub-question: nobody has rendered the two fonts side by side to confirm they
 actually differ.
 
-### B3. The Nuevo system disk does not boot under MAME — #79
+### B3. The Nuevo system disk does not boot under MAME — #79, **closed**
 
 `OS1NUEVO.IMD` carries the Nuevo 80-column CBIOS 1.5, loads, prints its banner,
 and stops. The pristine upstream copy behaves identically, so it is not a bad
-conversion. This blocks validating the Nuevo video path (#24). Meanwhile the three
-plain DD system disks *do* boot the Nuevo machine, at 80 columns
-(`mame-emulation.md` §2, §4).
+conversion. The three plain DD system disks *do* boot the Nuevo machine, at 80
+columns (`mame-emulation.md` §2, §4).
+
+**Decision: not pursued.** Nothing in the Nuevo design has turned up a feature
+worth the validation cost, so the video personality (#24) is built from the
+**ScreenPac design plus OZROM's soft 52/80/104-column switch**, and the Nuevo
+board stays prior art (#73). The residual question — MAME fidelity gap, or a
+physical-card dependency — is recorded in `mame-emulation.md` §4 and only
+matters if the Nuevo path is ever reopened.
 
 ### B4. OZROM 1E — a third-party ROM usable as tooling — #81
 
@@ -147,7 +153,7 @@ constrains any 2.0 ROM (#83).
 | #73 | Nuevo + Osmosis prior art | Open | The write-up |
 | #74 | Provenance TODOs | Open | User input on two items |
 | #75 | The book | Gated | Everything above |
-| #79 | Nuevo system disk does not boot | Open | Driver fidelity, or a rebuilt disk |
+| #79 | Nuevo system disk does not boot | **Closed** | Not needed — the Nuevo path is not pursued (§B3) |
 | #81 | OZROM as tooling | Partially | The appendices (C-5…C-7) and the column switch |
 | #82 | Contribute OZROM to MAME | Open | A dump with acceptable provenance |
 | #83 | A 2.0 ROM with CP/M resident | Open | Design + build + a no-disk boot test |
