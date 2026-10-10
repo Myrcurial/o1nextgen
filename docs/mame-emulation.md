@@ -212,7 +212,7 @@ in the Nuevo design has yet turned up a feature worth the validation cost.
   `OS1NUEVO.IMD` carries the Nuevo CBIOS 1.5 in its system tracks,
   the `-blank.imd` disks carry `SYSGEN.COM` (and `MOVCPM.COM`) for writing a new
   system, and `research/nuevo/` has the Nuevo DD upgrade manual and the Nuevo
-  BIOS ROM (`NUEVO151.BIN`). A custom build is therefore plausible.
+  BIOS ROM (`monrom-rev1.51-12.ud11`). A custom build is therefore plausible.
 
 ## 5. Running it
 
