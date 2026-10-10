@@ -70,13 +70,15 @@ than in an `osborne1/` directory or an `osborne1.zip`, the wrapper builds a
 temporary rompath containing an `osborne1` symlink rather than making you
 rearrange them.
 
-**The boot image's name picks the driver.** The `52-`/`80-`/`104-` prefix on an
-O1 floppy image is its *video mode*, not a version: a 104-column image needs a
-SCREEN-PAC, an 80-column one a Nuevo Video board, and neither will boot a stock
-machine. So the wrapper looks for a `52-*.imd` first and derives the MAME driver
-from whatever it picks — `osborne1`, `osborne1sp` or `osborne1nv` — warning when
-it selects anything other than the stock machine. Override with `O1_FLOPPY` and
-`O1_MACHINE`.
+**The boot image's name is a label, not a driver.** The `52-`/`80-`/`104-`
+prefix records the video mode an image was prepared for, but it does **not** gate
+what the image can boot: measured against MAME, all three of
+`emulator-setup/floppies/*.imd` boot on `osborne1`, `osborne1sp` **and**
+`osborne1nv`. What gates bootability is the CBIOS on the disk. The wrapper still
+derives the machine from the prefix (52 → `osborne1`, 104 → `osborne1sp`,
+80 → `osborne1nv`) and warns when it selects anything but the stock machine, but
+pass `O1_MACHINE` explicitly when it matters. The measured matrix, and why the
+Nuevo system disk is a separate problem, are in `docs/mame-emulation.md` §4.
 
 It is the counterpart to `check_schematics.py`: that one checks our own boards,
 this one checks our *understanding of the machine* against the machine. It has
@@ -87,20 +89,26 @@ already earned its keep — see `docs/o1-mainboard-schematic.md` §7a.
 The ROM sets and blank boot images the MAME checks need, committed so the
 harness is reproducible without hunting for dumps:
 
-- `emulator-setup/roms/` — the `osborne1` / `osborne1nv` ROM sets
-  (`rev1.40.ud11`, `rev1.43.ud11`, `3a10082-00rev-e.ud11`, `char.ua15`,
-  `7a3007-00.ud15`, `monrom-rev1.51-12.ud11`) plus `osborne1.zip`. These are
-  the same images catalogued in `docs/o1-rom-variants.md`, and the CRCs there
-  are what MAME asserts against.
-- `emulator-setup/floppies/` — blank CP/M-bootable images at the three video
-  modes (`52-blank.imd`, `80-blank.imd`, `104-blank.imd`), generated with
-  [Disk-Utilities](https://github.com/keirf/Disk-Utilities). Use one as the
-  `O1_FLOPPY` boot image when you want the machine to come up to a prompt
-  instead of booting a particular disk.
+- `emulator-setup/roms/` — **one `osborne1.zip` serves all three machines**
+  (`osborne1`, `osborne1sp`, `osborne1nv`): `rev1.40.ud11`, `rev1.43.ud11`,
+  `3a10082-00rev-e.ud11`, `char.ua15`, `7a3007-00.ud15`,
+  `monrom-rev1.51-12.ud11`. `mame osborne1nv -verifyroms` reports *good*;
+  `osborne1` and `osborne1sp` report *best available* because the only missing
+  ROMs are the four BIOS revisions that have never been dumped (A, 1.2, 1.2.1,
+  1.3). Per-machine requirement table: `docs/mame-emulation.md` §3; CRC
+  inventory: `docs/o1-rom-variants.md`.
+- `emulator-setup/floppies/` — `52-blank.imd`, `80-blank.imd`, `104-blank.imd`.
+  Despite the name they are **not blank**: each is a double-density CP/M 2.2
+  system disk (CBIOS 1.4, MBASIC, SYSGEN, PIP, SETUP, XDIR, XREF …), and the
+  three differ by exactly two bytes in the boot area. All three boot on all
+  three machines — see the correction above.
 
 The ROMs duplicate `research/roms/` deliberately: `research/` is the
 provenance-tracked archive, this directory is a working rompath. If the two
 ever disagree, `docs/o1-rom-variants.md` is the tie-breaker.
+
+Full setup, launch, disk-tool and headless-testing instructions:
+**`docs/mame-emulation.md`**.
 
 ## Schematic checking (`check_schematics.py`)
 

@@ -142,6 +142,13 @@ These are the known-good boot images the validation matrix (#29) needs.
 Nuevo shipped **two** products — a DD upgrade and an 80-column board — and
 neither matches Osborne's own implementation of that function; see #73.
 
+`OS1NUEVO.IMD` **is** the Nuevo 80-column system disk: its system area carries
+`CBIOS vers 1.5` and the text *"THIS IS AN EIGHTY (80) COLUMN DISPLAY FOR THE
+OSBORNE ONE"*. It does **not** currently boot under MAME — it prints the CBIOS
+banner and stops (measured over 260 emulated seconds; the pristine upstream copy
+behaves the same), which blocks validating the Nuevo video path in the emulator.
+See #79 and `docs/mame-emulation.md` §4.
+
 ## osmosis/ — Osmosis Computer upgrades (2026-10)
 
 Source: [bitsavers `bits/Osborne/Osborne1/Osmosis_Upgrades/`](https://bitsavers.org/bits/Osborne/Osborne1/Osmosis_Upgrades/) — all seven files byte-for-byte identical.
