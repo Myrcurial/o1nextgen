@@ -82,6 +82,26 @@ It is the counterpart to `check_schematics.py`: that one checks our own boards,
 this one checks our *understanding of the machine* against the machine. It has
 already earned its keep — see `docs/o1-mainboard-schematic.md` §7a.
 
+## Emulator setup (`emulator-setup/`)
+
+The ROM sets and blank boot images the MAME checks need, committed so the
+harness is reproducible without hunting for dumps:
+
+- `emulator-setup/roms/` — the `osborne1` / `osborne1nv` ROM sets
+  (`rev1.40.ud11`, `rev1.43.ud11`, `3a10082-00rev-e.ud11`, `char.ua15`,
+  `7a3007-00.ud15`, `monrom-rev1.51-12.ud11`) plus `osborne1.zip`. These are
+  the same images catalogued in `docs/o1-rom-variants.md`, and the CRCs there
+  are what MAME asserts against.
+- `emulator-setup/floppies/` — blank CP/M-bootable images at the three video
+  modes (`52-blank.imd`, `80-blank.imd`, `104-blank.imd`), generated with
+  [Disk-Utilities](https://github.com/keirf/Disk-Utilities). Use one as the
+  `O1_FLOPPY` boot image when you want the machine to come up to a prompt
+  instead of booting a particular disk.
+
+The ROMs duplicate `research/roms/` deliberately: `research/` is the
+provenance-tracked archive, this directory is a working rompath. If the two
+ever disagree, `docs/o1-rom-variants.md` is the tie-breaker.
+
 ## Schematic checking (`check_schematics.py`)
 
 Regenerates each board's netlist with `kicad-cli` and asserts the electrical
