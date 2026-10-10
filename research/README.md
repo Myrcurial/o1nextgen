@@ -77,8 +77,14 @@ for the video-output (HDMI) personality (#24, #9 photos).
 | `zorba/Co-Power-88guide.pdf`, `zorba/Co-Power-88advert.pdf`, `zorba/611-0003-1..4.pdf` | SWP CoPower-88 user guide, advertisement, and SWP technical document scans (Zorba-flavored set) | [zorba.z80.de](http://zorba.z80.de/files/swp/) — the Zorba Portable Computer archive site |
 | `zorba/*.td0`, `kaypro/*.td0` | TeleDisk images of CoPower-88 CP/M-86 / DOS boot disks (Zorba and Kaypro versions) | zorba.z80.de (exact path not recorded in repo history) |
 | `zorba/extracted/`, `kaypro/extracted_cpm/`, `*/disasm/` | CP/M files extracted from those images by the project pipeline (#2), and disassemblies of the CoPower RAM-disk/DOS drivers | Derived in-project — not external sources |
-| `swp/Copower_User_guide.pdf`, `swp/Swp_ad.jpg` | Fuller CoPower-88 user guide (4.7 MB, not the Zorba set) and an SWP advert scan | **TODO — see #74** |
-| `swp/1600px-73356_8088_card.jpg`, `swp/1600px-73356_mem_card.jpg`, `swp/866px-73356_cpu_card.jpg` | Board photographs of the CoPower-88 8088 card, memory card and CPU card. The `1600px-`/`866px-` prefixes are MediaWiki thumbnail syntax, so these likely came from a wiki | **TODO — see #74** |
+| `swp/Copower_User_guide.pdf`, `swp/Swp_ad.jpg` | Fuller CoPower-88 user guide (4.7 MB, not the Zorba set) and an SWP advert scan | [kayprojournal.com `Swp_copower_88`](https://kayprojournal.com/index.php/Swp_copower_88) — `File:Copower User guide.pdf`, `File:Swp ad.jpg` |
+| `swp/1600px-73356_8088_card.jpg`, `swp/1600px-73356_mem_card.jpg`, `swp/866px-73356_cpu_card.jpg` | Board photographs of the CoPower-88 8088 card, memory card and CPU card — held as MediaWiki thumbnails (1600 px / 866 px) of `File:73356 8088 card.jpg`, `File:73356 mem card.jpg`, `File:73356 cpu card.jpg` | Same page: [kayprojournal.com `Swp_copower_88`](https://kayprojournal.com/index.php/Swp_copower_88) |
+
+The whole `swp/` set is from that one page. Confirmed 2026-10-10 by querying the
+wiki's API (`list=allimages` and `prop=images&titles=Swp copower 88`) and matching
+all five `File:` names exactly — not by reading the rendered page text. The wiki
+also carries `File:Copower sch 1..4.pdf`, a second copy of the SWP schematics we
+hold from zorba.z80.de.
 
 Basis for #3/#4/#5 (CoPower-88 protocol analysis). The board's own 8088 ROM is
 `roms/swp-p88.rom` — see `roms/` below and #70.
@@ -136,8 +142,15 @@ These are the known-good boot images the validation matrix (#29) needs.
 | File | What it is | Sourced from |
 |---|---|---|
 | `Nuevo_Electronics_DD_Upgrade_Manual.pdf` (13 MB) | DD upgrade manual | [bitsavers `bits/Osborne/Osborne1/`](https://bitsavers.org/bits/Osborne/Osborne1/) (13 810 755 B, exact match) |
-| `NUEVO151.BIN` | Nuevo BIOS Rev 1.51 — `COPYRIGHT 1983, OSBORNE COMPUTER CORP. / COPYRIGHT 1984, NUEVO ELECTRONICS CORP.`, CRC32 `298da402` (= MAME `monrom-rev1.51-12.ud11`) | **TODO — see #74** |
 | `OS1NUEVO.IMD` | `Osborne 1 with DD and 80 col mods` boot disk, re-imaged 2026-10-10 with Disk-Utilities | derived in-project |
+
+> **Removed 2026-10-10: `NUEVO151.BIN`.** It was a byte-identical duplicate of
+> `tools/emulator-setup/roms/monrom-rev1.51-12.ud11` — same 4096 bytes, SHA-256
+> `aec8f5be127fdff5d30cae0b7f45ee48d13a8c1d5745a262b944b9ba67778906`, CRC32
+> `298da402` — verified with `cmp` before deletion. It carried no provenance of
+> its own, so the tracked emulator-set copy, which has a recorded source, is the
+> one we keep. The BIOS strings are unchanged by this: `COPYRIGHT 1983, OSBORNE
+> COMPUTER CORP. / COPYRIGHT 1984, NUEVO ELECTRONICS CORP.`
 
 Nuevo shipped **two** products — a DD upgrade and an 80-column board — and
 neither matches Osborne's own implementation of that function; see #73.
@@ -244,10 +257,12 @@ the RT-60A manual/TD0 both come from bitsavers'
 the two diagnostic disks (`_floppy_images/`). Four rows that had been recorded
 as in-project work or as unknown URLs were corrected on 2026-10-10.
 
-Still outstanding (#74):
+**Both remaining TODOs are closed (2026-10-10, #74):**
 
-- `copower88/swp/` — `Copower_User_guide.pdf`, `Swp_ad.jpg`, and the three
-  `*-73356_*` board photographs (the filename prefixes are MediaWiki thumbnail
-  syntax, so the source is probably a wiki).
-- `nuevo/NUEVO151.BIN` — origin not recorded (may have come from MAME's
-  `osborne1` ROM set).
+- `copower88/swp/` — kayprojournal.com's
+  [`Swp copower 88`](https://kayprojournal.com/index.php/Swp_copower_88) page; all
+  five files matched by `File:` name through the wiki API (CoPower-88 table above).
+- `nuevo/NUEVO151.BIN` — removed as a byte-identical duplicate of the tracked
+  `tools/emulator-setup/roms/monrom-rev1.51-12.ud11` (nuevo/ table above).
+
+No provenance TODOs remain.
