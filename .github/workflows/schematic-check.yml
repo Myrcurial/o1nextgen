@@ -1,0 +1,51 @@
+name: schematic check
+
+# A schematic can pass structural ERC and still be electrically wrong.  The
+# interposer generators once placed every symbol pin mirrored (y + py where
+# KiCad needs y - py), and a '595 sat directly on top of a '165, shorting GND
+# to A3.  ERC named neither fault -- the only thing that exposed them was
+# exporting the netlist and reading the node lists pin by pin.
+#
+# tools/check_schematics.py does exactly that: it regenerates each board's
+# netlist with kicad-cli and asserts the datasheet/spec invariants (Z80 DIP-40
+# pinout, floppy adapter switching, connector pin usage, no coincident labels,
+# no overlapping symbol bodies, ERC budget, and that the committed .kicad_sch
+# still matches its generator).
+
+on:
+  push:
+    paths:
+      - 'hardware/**/*.kicad_sch'
+      - 'hardware/**/gen_*_sch.py'
+      - 'tools/check_schematics.py'
+      - '.github/workflows/schematic-check.yml'
+  pull_request:
+    paths:
+      - 'hardware/**/*.kicad_sch'
+      - 'hardware/**/gen_*_sch.py'
+      - 'tools/check_schematics.py'
+      - '.github/workflows/schematic-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  netlist:
+    name: netlist + ERC invariants
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      # kicad-cli is headless; no xvfb or display is needed for sch export /
+      # sch erc.  Bump the PPA major here when a newer KiCad lands.
+      - name: Install KiCad (official stable PPA)
+        run: |
+          sudo add-apt-repository --yes ppa:kicad/kicad-9.0-releases
+          sudo apt-get update
+          sudo apt-get install --yes kicad
+          kicad-cli --version
+
+      - name: Check schematics
+        run: python3 tools/check_schematics.py
