@@ -172,12 +172,19 @@ routine's real-time clock), not an NMI.
 ## 6. Connector / socket pinouts (mechanical tap points)
 
 ### Z80 CPU — DIP-40 (UC11)
-Standard Z80A pinout. Key pins for a ScreenPac-style tap:
+Standard Z80A pinout (Zilog Z80 Microprocessor Family Databook; the O1 fits an
+NEC µPD780C, pin-compatible). **Corrected 2026-10-10** — the previous table
+here was wrong (it claimed pin 11 = GND, which is +5 V). Enforced from now on
+by `tools/check_schematics.py`, which asserts this table against every
+connector that mates with the O1's Z80 socket.
 
 | Pin(s) | Signal |
 |---|---|
+| 1–5 | A11, A12, A13, A14, A15 |
 | 6 | CLK (4 MHz) |
-| 7–10, 12–15 | A4,A3,A5,A6 / A0,A1,A2,A7 |
+| 7–10 | D4, D3, D5, D6 |
+| 11 | +5 V |
+| 12–15 | D2, D7, D0, D1 |
 | 16 | INT |
 | 17 | NMI |
 | 18 | HALT |
@@ -191,9 +198,9 @@ Standard Z80A pinout. Key pins for a ScreenPac-style tap:
 | 26 | RESET |
 | 27 | M1 |
 | 28 | RFSH |
-| 29–33 | A9,A10,A11,A12,A13 |
-| 34–40 | A14,A15,D0,D1,D2,D3,D4 |
-| 1–5,11 | A8,D5,D6,D7,GND |
+| 29 | GND |
+| 30–34 | A0, A1, A2, A3, A4 |
+| 35–40 | A5, A6, A7, A8, A9, A10 |
 
 ### Character generator ROM — 24-pin (UA15)
 2 KB (2716) character ROM at **UA15**, 128 chars × 8×10 in an 8×10 box
