@@ -28,17 +28,22 @@ archived by PR #50. Full design in
   modifications to the machine or its cables.
 - **Second 34-pin connector:** routes the floppy bus out to a Gotek
   (FlashFloppy) mounted in one of the floppy storage pockets.
-- **Switching:** drive-select B (pin 12) is routed on-card either to
-  the OEM-cable pass-through (physical drive B) or to the Gotek
+- **Switching:** drive-select A (pin 10) is routed on-card either to
+  the OEM-cable pass-through (physical drive A) or to the Gotek
   connector. The remote switch lead carries only a low-current logic
   select line to an on-card switch element (relay or 74CBT-class bus
   switch) — the switch itself is a plain panel-mount SPST, trivially
   mounted next to the Gotek in the storage pocket.
 - **Gotek power:** dedicated 5 VDC connection on the Gotek connector,
-  fed via an on-card load switch so the Gotek can be fully depowered
-  in "both physical drives" mode.
-- **Drive A is never switched** — it stays on the pass-through, so the
-  machine always boots from a physical disk if desired.
+  fed via an on-card switch so the Gotek can be fully depowered in
+  "both physical drives" mode. Both +5 V **and** GND are switched —
+  switching one rail alone fails (`docs/floppy-adapter-design.md` §4.2).
+- **Drive B is never switched** — it stays on the pass-through, so the
+  machine always boots from a physical disk if desired. The Gotek takes
+  drive A's place.
+- **DS-A pull-up:** the O1's 150 Ω term pack lives on drive A, so the
+  card adds a pull-up on the Gotek-side DS-A net (1 kΩ default) —
+  `docs/floppy-adapter-design.md` §4.5.
 
 ## Signals carried to the Gotek
 
@@ -48,7 +53,7 @@ bus to be safe.)
 | 34-pin | Signal |
 |---|---|
 | 8 | Index |
-| 12 | Drive select B (**switched**) |
+| 10 | Drive select A (**switched**) |
 | 18 | Direction |
 | 20 | Step |
 | 22 | Write data |
