@@ -58,15 +58,25 @@ where the ROM is and how it mirrors, what the bank-switch ports do, and which
 bank-2 I/O windows answer.
 
 ```
-tools/check_o1_map.sh                    # 11 checks, exits non-zero on failure
-O1_ROMPATH=... O1_FLOPPY=... O1_SECONDS=180 tools/check_o1_map.sh
+tools/check_o1_map.sh                    # 12 checks, exits non-zero on failure
+O1_ROMPATH=... O1_FLOPPY=... O1_MACHINE=... O1_SECONDS=180 tools/check_o1_map.sh
 ```
 
 `tools/o1_mame_probe.lua` holds the assertions and the method (RAM is told from
 ROM by writing back the complement of the byte that was there and restoring it).
-Requires `mame` and a ROM path; if the ROMs sit loose in one directory rather
-than in an `osborne1/` subdirectory, the wrapper builds a temporary rompath with
-an `osborne1` symlink rather than making you rearrange them.
+
+Requires `mame` and a ROM path. If the ROMs sit loose in one directory rather
+than in an `osborne1/` directory or an `osborne1.zip`, the wrapper builds a
+temporary rompath containing an `osborne1` symlink rather than making you
+rearrange them.
+
+**The boot image's name picks the driver.** The `52-`/`80-`/`104-` prefix on an
+O1 floppy image is its *video mode*, not a version: a 104-column image needs a
+SCREEN-PAC, an 80-column one a Nuevo Video board, and neither will boot a stock
+machine. So the wrapper looks for a `52-*.imd` first and derives the MAME driver
+from whatever it picks — `osborne1`, `osborne1sp` or `osborne1nv` — warning when
+it selects anything other than the stock machine. Override with `O1_FLOPPY` and
+`O1_MACHINE`.
 
 It is the counterpart to `check_schematics.py`: that one checks our own boards,
 this one checks our *understanding of the machine* against the machine. It has

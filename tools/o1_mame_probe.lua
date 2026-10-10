@@ -221,6 +221,42 @@ for _, w in ipairs(windows) do
     print(string.format("        %s %-26s 0x%02X", hex(w[1]), w[2], rd(w[1])))
 end
 
+-- D1: the ROM is not just a boot loader - it is live while CP/M runs.  Sample
+-- the Z80's PC over a second at the idle A> prompt and see which regions it is
+-- executing in.  This is how the "ROM is paged in and out during normal
+-- operation" claim was established: at the prompt the machine is parked in a
+-- ROM polling loop waiting for a key, with bank 2 selected.
+local regions = {}
+local saw_rom = false
+for _ = 1, 20 do
+    local ok, pc = pcall(function()
+        return M.devices[":maincpu"].state["PC"].value
+    end)
+    if ok and pc then
+        local where
+        if pc < 0x1000 then
+            where = "ROM 0x0000-0x0FFF"; saw_rom = true
+        elseif pc < 0x2000 then
+            where = "ROM mirror 0x1000-0x1FFF"
+        elseif pc < 0x4000 then
+            where = "bank-2 I/O 0x2000-0x3FFF"
+        else
+            where = string.format("RAM 0x%04X page", pc - pc % 0x1000)
+        end
+        regions[where] = (regions[where] or 0) + 1
+    end
+    emu.wait(0.05)
+end
+print("      Z80 PC sampled 20x at the idle A> prompt:")
+local keys = {}
+for k in pairs(regions) do keys[#keys + 1] = k end
+table.sort(keys)
+for _, k in ipairs(keys) do
+    print(string.format("        %-28s %d", k, regions[k]))
+end
+check(saw_rom, "D1", "the Z80 executes in the ROM while CP/M is running",
+      "no sample landed in the ROM")
+
 -- Page map of both banks: W=RAM  R=ROM or device  .=nothing (reads 0xFF).
 -- Caveat: a device register that reads back what was written looks like W, so
 -- W in the bank-2 I/O range means "answers to a write/readback", not "RAM".
