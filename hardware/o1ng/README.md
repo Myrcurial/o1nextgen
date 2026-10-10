@@ -53,7 +53,11 @@ AHCT to the original NMOS part).
    stacked on, following the original design language. One reason:
    integration keeps the timing margins needed for the **clock-doubled
    8 MHz "business turbo"** (#55) — limited usefulness, but everyone
-   will be fine with it. ~8 cm thick: mainboard + 8" 4:3 LCD
+   will be fine with it. **Onboard library flash** (SPI NOR, per
+   `../interposer/` decision): a built-in diskette library with at
+   least the boot diskette, so the lunchbox boots "factory" images with
+   no SD/USB inserted; removable media remains the bulk store.
+   ~8 cm thick: mainboard + 8" 4:3 LCD
    (composite/HDMI in) + 18650 pack, detachable flip-up keyboard.
    Optional rear "backpack" for a physical 5.25" half-height drive.
 

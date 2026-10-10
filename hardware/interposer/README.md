@@ -52,17 +52,55 @@ Current leaning: **(b)** — one modem firmware codebase across both
 devices, SSH capability, and cleaner real-time behavior. Confirm
 before Rev A schematic (#13).
 
-## Mechanical
+## Onboard storage: built-in diskette library
 
-- Rev A (#13): through-hole, socketed — bring-up board.
-- Rev B (#15): SMD except Z80 socket and socket-safe pins; incorporates
-  Rev A errata. **Rev B ships with a modern CMOS Z80 (Z84C00, e.g. SMT
-  package on the card) preinstalled**, making it a "plug and go"
-  upgrade: pull the original Z80, plug the interposer into the socket,
-  done — no requirement to reuse 40-year-old CPU silicon. (The onboard
-  Z84C00 is a current-production part, matching the o1ng replica CPU
-  choice; the AHCT interface remains for everything else on the NMOS
-  bus.)
+**Decision: include onboard library flash in addition to removable
+media.** SD/USB (via the front-panel pod) is the bulk store, but the
+interposer should carry enough onboard flash to hold a **built-in
+library — at minimum the boot diskette** — so the machine is useful
+with no card or stick inserted (and the o1ng lunchbox can boot
+"factory" images out of the box).
+
+- Option A: SPI NOR flash (W25Q-class, 16–64 MB) — trivially enough for
+  dozens of O1 images (a DD image is ~400 KB); cheap, easy.
+- Option B: eMMC or a second SD — overkill; not needed at O1 image
+  sizes.
+- Leaning: **A** — a handful of SOIC-8 flash chips' worth of library is
+  effectively free. Exact sizing settled with #20's image format.
+
+## Mechanical / revision plan (revised 2026-10-09)
+
+- **Rev 0 "test probe"** — **superseded** (kept in `rev0/` for the
+  decision record, incl. the '165 snapshot front end that Rev A
+  inherits). Parts lead time for a passive probe was within days of an
+  engineering sample of the active board, so the passive step is
+  skipped.
+- **Rev A engineering sample (`reva/`, 2-off, almost all SMD):**
+  active interposer — SMT Z84C00 on board (pull the original CPU, drop
+  the interposer in), /BUSRQ bus mastering, 595/165 shift-register
+  drive+capture fabric, Pico 2 module + castellated ESP32-C3 for WiFi,
+  W25Q library flash. Design goal: **the dev partner controls the
+  hardware** — memory R/W, ROM dumping (incl. the CoPower-88 monitor
+  ROM, resolving research-gaps #4 by direct read), code injection +
+  execute. See `reva/README.md`.
+- Rev A production (#13): incorporates ES errata.
+- **Rev B (#15) — a separate product, not a revision:** Rev A is the
+  mastering/debug instrument; Rev B is the **live-cycle personality
+  engine**. Full RP2350B pin allocation in `revb/README.md`. The
+  enabling decisions:
+  - **Zero direct address pins:** a 74AHCT688 window comparator
+    (595-programmable match) + **/WAIT cycle stretching** — the
+    period-correct slow-peripheral mechanism — replaces 16 direct
+    address lines with 2 (ADDR_HIT, /WAIT drive).
+  - Timing-critical direct set is only: D0–7, /MREQ, /IORQ, /RD, /WR,
+    /M1, CLK, DATA_OE/DIR — 13 pins.
+  - **HSTX is fixed to GP12–19** on RP2350 → HDMI there, either/or
+    with VGA on the same range.
+  - **Status/LED bank moves to the ESP32** (charlieplexed or I²C
+    expander); SD on SPI (4-bit SDIO-via-PIO deferred); I²C pair
+    reserved for front-panel OLED/encoder/expansion.
+  - The Rev A 595/165 fabric carries over wholesale and remains the
+    pressure-relief valve for any slow line.
 - Ribbon-cable header to the front-panel UI pod (`../front-panel-ui/`),
   which also carries the second-keyboard USB-A path (see
   `../front-panel-ui/`).
