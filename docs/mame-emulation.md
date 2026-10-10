@@ -313,9 +313,31 @@ Rev. A 84/09/01) it adds capability we would otherwise have to build:
 - Removes the "Centronics printer not connected" lockout on double-density
   systems (#19).
 
-What it gives up: the IEEE-488 port can no longer be used as a plain parallel
-port (Centronics printers still work) — the one place it touches our #6/#22
-work.
+What it gives up, stated precisely in its own Appendix C (the manual is now OCR'd
+to `research/roms/OZROM-1E/OZROM_1E_Manual.ocr.txt`):
+
+> **IEEE-488 functions.** The OZROM 1E does not support the IEEE-488 functions.
+> Although Centronics printer operation is not affected, some printers … and
+> some data acquisition and analysis devices … require the IEEE-488 routines to
+> operate. In this instance, extra software would be required …
+
+The jump-table appendix is blunt about it: the entries at `013F–0156` *were* the
+IEEE-488 routines and **calling them now produces a controlled system crash**,
+and *"IEEE-488 AS IOBYTE DEVICE 3 NOW NULL DEVICE"* — the status entries return
+`0FFH`, input returns zero, output does nothing. The parallel/Centronics entries
+at `0193`+ survive.
+
+**So OZROM and Drive C are mutually exclusive.** Drive C is an IEEE-488 device
+and OZROM removes the routines it talks through; the manual's "extra software
+would be required" is exactly the driver we have the source for in
+`rom144.asm` — so it is recoverable, but it is not free.
+
+One more difference worth knowing, because it constrains any 2.0 ROM (#83):
+OZROM **shrinks the video window to 3 KB** (`F000–FBFF`) and uses the last 1 KB
+(`FC00–FFFF`) for its redefinable keyboard and function keys. It therefore
+scrolls by moving the 23 lines above rather than by moving the window. The stock
+ROM's 4 KB video RAM map in `docs/o1-memory-io-map.md` §2 does not apply to
+OZROM.
 
 ## 6. Headless testing
 

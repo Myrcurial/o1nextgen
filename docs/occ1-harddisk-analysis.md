@@ -12,6 +12,34 @@ Telecommunications (ACT), (c) 1982** (string in BOOTHd.COM). This is the
 the known **Z80-interposer** designs: the host-side hardware plugged
 into the Osborne's Z80 socket.
 
+## Two products, not one
+
+The archive drop (#71) added a **second, unrelated** Osborne 1 hard-disk product,
+so "the OCC1 hard disk" is a family, not a single thing:
+
+| | ACT (this doc) | Media Distributing / Adaptec |
+|---|---|---|
+| Source | `research/harddisk/OCC1_HARDDISK.IMD` | `research/adaptec/*.img` |
+| Vendor string | `AUSTRALIAN COMPUTER & TELECOMMUNICATIONS  COPYRIGHT (C) 1982` | `Copyright (c) September 1983, Media Distributing` |
+| Versions | `Version 31.05.82`, `Version 9-02-81` | `HARD version 1.93`, `PORTCHNG version 1.92`, `PREP version 1.93` |
+| Controller | its own; prompts `Enter disk controller address (` | Adaptec ACB-4000; prompts `Enter starting port address in hex` / `must be on a 4 port boundary` |
+| BIOS | `HARDBIOS.HEX`, overlaid by `LOADBIOS.COM` | `HARDBIOS.SPR`, `HARDBDOS.SPR`, `HARDCCP.SPR`, `HD00BIOS.SPR`, `HD04BIOS.SPR` |
+| Other utilities | `MOVCPM10/5/F`, `DISKEDIT`, `DISKTEST`, `RESTORE`, `SAVEFILE` | `MD10.COM`, `MD20.COM`, `PREP.COM`, `DRIVETBL.DAT`, `PORTCHNG.COM` |
+
+Both are **port-relocatable** controllers: the ACT disk asks for a "disk
+controller address", the Adaptec disk for a "starting port address … on a 4 port
+boundary", and it ships `PORTCHNG.COM` to change it. That is consistent with the
+rest of the O1, whose I/O decode only looks at the low address lines.
+
+It also means the port claim in "Hardware interface" below should be re-derived
+rather than trusted: `0x2A00` and `0x2C01` are the serial ACIA and the video PIA
+on this machine, so either the ACT adapter is mapped elsewhere or that
+disassembly read the wrong operand.
+
+So there are **three** routes to more storage than 2 × 182 KB — the two hard disks
+here, and Drive C (`docs/drive-c-protocol.md`) — and only Drive C is buildable
+without unobtainable hardware (#84).
+
 ## Files
 
 | File | Role |
@@ -73,3 +101,10 @@ into the Osborne's Z80 socket.
    routines around 0xE000-0xEA0A.
 3. The `OUT (C)` target port at 0xEF08.
 4. Whether any ACT hardware photos/schematics survive online.
+5. **Re-derive the port claim.** `0x2A00`/`0x2C01` are the serial ACIA and the
+   video PIA, and both hard-disk products describe their controller port as
+   *configurable* — so the addresses in "Hardware interface" above need checking
+   against the ACT disk's own prompt and stored value before they are relied on.
+6. **The second product** (Media Distributing / Adaptec ACB-4000): its command
+   set, its default port, and what `DRIVETBL.DAT` contains. See "Two products,
+   not one" above.
