@@ -28,12 +28,19 @@ firmware", "blocks validation".
      replica thus use *different* CPU silicon, deliberately: AHCT interfaces the
      NMOS original; the replica gets a modern CMOS CPU.
 
-3. **Z80 socket & chargen socket pinout on the O1 mainboard.**
-   - ScreenPac taps BOTH the 40-pin Z80 socket and the 24-pin char-gen
-     socket. If we want a ScreenPac-style video personality (#24) we need
-     the O1 chargen socket pinout. For the base interposer we only need
-     the Z80 socket — confirm the O1 Z80 pinout matches standard Z80 DIP40.
-   - *Source:* O1 mainboard schematic + ScreenPac install pages (have PDF).
+3. ~~**Z80 socket & chargen socket pinout on the O1 mainboard.**~~
+   **Z80 side RESOLVED 2026-10-10.** The O1 fits an NEC µPD780C (≡ Z80A) in a
+   DIP-40 socket, so the socket's pin numbering is the chip's — the standard
+   Zilog DIP-40 pinout. Both `docs/o1-memory-io-map.md` §6 (which claimed
+   pin 11 = GND; it is +5 V) and the interposer generators (off by one across
+   all 40 pins) were wrong and are now corrected; `tools/check_schematics.py`
+   asserts the datasheet pinout against every connector that mates with that
+   socket. *Source:* Zilog Z80 Microprocessor Family Databook, cross-checked
+   against z80.info/zinout.htm.
+   - **Still open: the char-gen socket.** ScreenPac taps the 24-pin char-gen
+     socket (UA15) as well, so a ScreenPac-style video personality (#24) still
+     needs that pinout. *Source:* O1 mainboard schematic + ScreenPac install
+     pages (have PDF).
 
 4. ~~**CoPower-88 monitor ROM dump.**~~ **DEFERRED (user decision, 2026-10-09).**
    - The SWP-8088 2732A on the CoPower board would fully specify the host

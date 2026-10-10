@@ -15,8 +15,12 @@ line, and a DPDT switch + 5 V relay soldered onto the Gotek itself.
 This design moves all of that work onto a PCB at the connector end of
 the cable, where it belongs.
 
-Tracks: #50 (archival of prior art), feeds #20 (floppy interposer
-personality) and #30 (G2 multi-format support).
+Tracking: **#62** (design spec + schematic). Feeds #20 (floppy
+interposer personality) and #30 (G2 multi-format support). Prior art
+archived by PR #50. Full design in
+[`docs/floppy-adapter-design.md`](../../docs/floppy-adapter-design.md);
+its seven open questions were **settled 2026-10-10** (§8 there) and the
+**Rev A schematic is captured** (below).
 
 ## Design
 
@@ -26,17 +30,22 @@ personality) and #30 (G2 multi-format support).
   modifications to the machine or its cables.
 - **Second 34-pin connector:** routes the floppy bus out to a Gotek
   (FlashFloppy) mounted in one of the floppy storage pockets.
-- **Switching:** drive-select B (pin 12) is routed on-card either to
-  the OEM-cable pass-through (physical drive B) or to the Gotek
+- **Switching:** drive-select A (pin 10) is routed on-card either to
+  the OEM-cable pass-through (physical drive A) or to the Gotek
   connector. The remote switch lead carries only a low-current logic
   select line to an on-card switch element (relay or 74CBT-class bus
   switch) — the switch itself is a plain panel-mount SPST, trivially
   mounted next to the Gotek in the storage pocket.
 - **Gotek power:** dedicated 5 VDC connection on the Gotek connector,
-  fed via an on-card load switch so the Gotek can be fully depowered
-  in "both physical drives" mode.
-- **Drive A is never switched** — it stays on the pass-through, so the
-  machine always boots from a physical disk if desired.
+  fed via an on-card switch so the Gotek can be fully depowered in
+  "both physical drives" mode. Both +5 V **and** GND are switched —
+  switching one rail alone fails (`docs/floppy-adapter-design.md` §4.2).
+- **Drive B is never switched** — it stays on the pass-through, so the
+  machine always boots from a physical disk if desired. The Gotek takes
+  drive A's place.
+- **DS-A pull-up:** the O1's 150 Ω term pack lives on drive A, so the
+  card adds a pull-up on the Gotek-side DS-A net (1 kΩ default) —
+  `docs/floppy-adapter-design.md` §4.5.
 
 ## Signals carried to the Gotek
 
@@ -46,7 +55,7 @@ bus to be safe.)
 | 34-pin | Signal |
 |---|---|
 | 8 | Index |
-| 12 | Drive select B (**switched**) |
+| 10 | Drive select A (**switched**) |
 | 18 | Direction |
 | 20 | Step |
 | 22 | Write data |
@@ -76,13 +85,40 @@ bus to be safe.)
 - OLED display mods and FlashFloppy display-detect quirks are the
   user's Gotek-side choice, out of scope for the card.
 
-## Open questions
+## KiCad capture (Rev A)
 
-- Mounting: piggyback footprint vs. standoffs over the DD board;
-  confirm keep-outs against the mainboard schematic
+- `floppy-adapter.kicad_sch` (+ `.kicad_pro`) — structural Rev A schematic.
+- `gen_floppy_adapter_sch.py` — generator; edit the net tables and re-run
+  (`python3 gen_floppy_adapter_sch.py`), then open/re-save in KiCad to
+  normalise.
+- **J1** female 2x17 socket (O1 logic-board P8), **J2** pass-through header to
+  the OEM cable, **J3** Gotek signal header, **J4** switched Gotek power,
+  **J5** panel switch, **K1** 4PDT relay, **D1/R1** flyback + coil pull-down,
+  **R3/R4** DS-A pull-up, **R2+D2** optional indicator.
+- Validated with `kicad-cli sch export netlist` (netlist matches the design
+  doc's net table) and `kicad-cli sch erc` (0 errors).
+- Layout follow-ups: the relay pin numbers are **DIP-14 logical placeholders**;
+  assign footprints at layout (KiCad ships no G6A-434P footprint).
+
+## Settled decisions (2026-10-10)
+
+The seven design questions are closed — see
+[`docs/floppy-adapter-design.md`](../../docs/floppy-adapter-design.md) §8 for
+the evidence behind each. Highlights:
+
+- O1 floppy header is **male** (logic-board P8), so **J1 is a female socket**.
+- **Relay** (not solid-state) for Rev A.
+- Switch **DS-A + both power rails** only — Loxley's proven minimum.
+- **1 kΩ** DS-A pull-up default, **150 Ω** alternative footprint.
+- Gotek drive-select jumper: **S1 first, S0 fallback** (bench-verify).
+- Gotek sits in the **right-hand** pocket on a reduced ~12-line pigtail.
+
+## Open items (not blocking capture)
+
+- Mounting: piggyback footprint vs. standoffs over the DD board; confirm
+  keep-outs against the mainboard schematic
   (`research/osborne1/OCC1_1A2011-00_Schem_RevE.pdf`) and host photos
   (`research/pictures/`).
-- Exact mainboard floppy header pinout vs. standard Shugart ordering.
 - Interaction with the interposer's floppy personality (#20): document
   which device owns the bus in each configuration.
 - G2 upgrade (#30): believed BIOS/DPB-only, nothing at the connector —

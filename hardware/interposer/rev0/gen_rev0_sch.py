@@ -29,14 +29,19 @@ class Symbol:
         self.pins.append((num, pname, side, off))
         return self
     def pin_pos(self, num):
-        """symbol-local anchor of pin connection point"""
+        """symbol-local connection point, in KiCad symbol space (Y up).
+
+        `off` counts down from the TOP of the box, so the symbol-space Y is
+        `+hh - off` (top edge = +hh).  The sheet is Y-down, so a placed
+        symbol's pin lands at `(x + px, y - py)` -- see place().
+        """
         for n, p, side, off in self.pins:
             if n == num:
                 hw, hh = self.w/2, self.h/2
-                if side == 'L': return (-hw, -hh + off)
-                if side == 'R': return ( hw, -hh + off)
-                if side == 'T': return (-hw + off, -hh)
-                return (-hw + off, hh)
+                if side == 'L': return (-hw, hh - off)
+                if side == 'R': return ( hw, hh - off)
+                if side == 'T': return (-hw + off, hh)
+                return (-hw + off, -hh)
         raise KeyError(num)
     def lib_sexpr(self):
         s = f'  (symbol "{self.lib_id}" (pin_names (offset 0.508)) (in_bom yes) (on_board yes)\n'
@@ -66,19 +71,35 @@ class Symbol:
         for n, p, side, off in self.pins:
             if n == num:
                 hw, hh = self.w/2, self.h/2
-                if side == 'L': return (-hw - 2.54, -hh + off)
-                if side == 'R': return ( hw + 2.54, -hh + off)
-                if side == 'T': return (-hw + off, -hh - 2.54)
-                return (-hw + off, hh + 2.54)
+                if side == 'L': return (-hw - 2.54, hh - off)
+                if side == 'R': return ( hw + 2.54, hh - off)
+                if side == 'T': return (-hw + off, hh + 2.54)
+                return (-hw + off, -hh - 2.54)
         raise KeyError(num)
+
+# ---------- symbol definitions ----------
+# ---------- Z80 pinout (single source of truth) ----------
+# Standard Zilog Z80 / NEC uPD780C DIP-40: pins 1-20 run down the left side,
+# 40-21 down the right.  Both the symbol geometry and the net names below are
+# derived from this table -- hand-maintaining two copies is exactly how an
+# off-by-one survived here (pin 11 is +5V and pin 29 is GND, not pin 12/30).
+# tools/check_schematics.py now enforces the datasheet pinout.
+Z80_LEFT = [
+    (1,'A11'),(2,'A12'),(3,'A13'),(4,'A14'),(5,'A15'),(6,'CLK'),(7,'D4'),(8,'D3'),
+    (9,'D5'),(10,'D6'),(11,'+5V'),(12,'D2'),(13,'D7'),(14,'D0'),(15,'D1'),(16,'/INT'),
+    (17,'/NMI'),(18,'/HALT'),(19,'/MREQ'),(20,'/IORQ')]
+Z80_RIGHT = [
+    (40,'A10'),(39,'A9'),(38,'A8'),(37,'A7'),(36,'A6'),(35,'A5'),(34,'A4'),(33,'A3'),
+    (32,'A2'),(31,'A1'),(30,'A0'),(29,'GND'),(28,'/RFSH'),(27,'/M1'),(26,'/RESET'),
+    (25,'/BUSRQ'),(24,'/WAIT'),(23,'/BUSAK'),(22,'/WR'),(21,'/RD')]
+Z80NET = dict(Z80_LEFT) | dict(Z80_RIGHT)
+
 
 # ---------- symbol definitions ----------
 def make_z80(name, ref):
     s = Symbol('local', name, ref, 25.4, 106.68)
-    left = [(1,'A10'),(2,'A11'),(3,'A12'),(4,'A13'),(5,'A14'),(6,'A15'),(7,'CLK'),(8,'D4'),(9,'D3'),(10,'D5'),(11,'D6'),(12,'+5V'),(13,'D2'),(14,'D7'),(15,'D0'),(16,'D1'),(17,'/INT'),(18,'/NMI'),(19,'/HALT'),(20,'/MREQ')]
-    right = [(40,'A9'),(39,'A8'),(38,'A7'),(37,'A6'),(36,'A5'),(35,'A4'),(34,'A3'),(33,'A2'),(32,'A1'),(31,'A0'),(30,'GND'),(29,'/RFSH'),(28,'/M1'),(27,'/RESET'),(26,'/BUSRQ'),(25,'/WAIT'),(24,'/BUSAK'),(23,'/WR'),(22,'/RD'),(21,'/IORQ')]
-    for i,(n,p) in enumerate(left):  s.add(n,p,'L', 5.08 + i*5.08)
-    for i,(n,p) in enumerate(right): s.add(n,p,'R', 5.08 + i*5.08)
+    for i,(n,p) in enumerate(Z80_LEFT):  s.add(n,p,'L', 5.08 + i*5.08)
+    for i,(n,p) in enumerate(Z80_RIGHT): s.add(n,p,'R', 5.08 + i*5.08)
     return s
 
 def make_165(name):
@@ -109,9 +130,7 @@ def make_pwr():
     return s
 
 # ---------- net assignment ----------
-Z80NET = {  # z80 pin -> net label
-    1:'A10',2:'A11',3:'A12',4:'A13',5:'A14',6:'A15',7:'CLK',8:'D4',9:'D3',10:'D5',11:'D6',12:'+5V',13:'D2',14:'D7',15:'D0',16:'D1',17:'/INT',18:'/NMI',19:'/HALT',20:'/MREQ',
-    21:'/IORQ',22:'/RD',23:'/WR',24:'/BUSAK',25:'/WAIT',26:'/BUSRQ',27:'/RESET',28:'/M1',29:'/RFSH',30:'GND',31:'A0',32:'A1',33:'A2',34:'A3',35:'A4',36:'A5',37:'A6',38:'A7',39:'A8',40:'A9'}
+# Z80NET comes from Z80_LEFT/Z80_RIGHT at the top of this file.
 # 74AHCT165 PISO chain: 4 chips x 8 inputs = 32 bus lines latched at the
 # cycle strobe, then clocked into the Pico (~210ns for 32 bits via PIO).
 BUF = [
@@ -144,10 +163,14 @@ out.append('  (lib_symbols')
 for s in syms.values(): out.append(s.lib_sexpr().rstrip('\n'))
 out.append('  )')
 
-wires, labels, insts, sinst = [], [], [], []
+wires, labels, ncs, insts, sinst = [], [], [], [], []
 
 def place(symkey, ref, value, x, y, netmap):
     s = syms[symkey]
+    # Snap the origin to the 1.27 mm connection grid.  Every derived pin and
+    # stub endpoint inherits it, so ERC stops raising endpoint_off_grid (the
+    # raw layout numbers below are only nominal).  Netlist is unaffected.
+    x, y = round(round(x / 1.27) * 1.27, 2), round(round(y / 1.27) * 1.27, 2)
     sinst.append((ref, value))
     body = [f'  (symbol (lib_id "{s.lib_id}") (at {x} {y} 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (uuid "{uid()}")',
             f'    (property "Reference" "{ref}" (at {x} {y - s.h/2 - 2.54} 0) (effects (font (size 1.27 1.27))))',
@@ -159,10 +182,17 @@ def place(symkey, ref, value, x, y, netmap):
         net = netmap.get(p) or netmap.get(n)
         if net:
             ax, ay = s.anchor(n)
-            X, Y = x + ax, y + ay
+            # symbol space is Y-up, the sheet is Y-down: subtract ay.  (Adding
+            # it put every stub on the mirror-image pin, so nothing netted.)
+            X, Y = x + ax, y - ay
+            if net == 'NC':
+                # 'NC' is a sentinel, not a net: labelling unused pins with it
+                # ties them all together.  Flag them as no-connect instead.
+                ncs.append((round(X, 2), round(Y, 2)))
+                continue
             dx, dy = {'L':(-5.08,0),'R':(5.08,0),'T':(0,-5.08),'B':(0,5.08)}[side]
             wires.append((X, Y, X + dx, Y + dy))
-            just = 'left' if side == 'L' else 'right'
+            just = 'right' if side == 'L' else 'left'   # text away from the body
             labels.append((net, X + dx, Y + dy, 0, just))
     body.append('  )')
     insts.append('\n'.join(body))
@@ -188,6 +218,8 @@ for (x1,y1,x2,y2) in wires:
     insts.append(f'  (wire (pts (xy {x1} {y1}) (xy {x2} {y2})) (stroke (width 0) (type default)) (uuid "{uid()}"))')
 for (net,x,y,rot,just) in labels:
     insts.append(f'  (label "{net}" (at {round(x,2)} {round(y,2)} {rot}) (effects (font (size 1.27 1.27)) (justify {just} bottom)) (uuid "{uid()}"))')
+for (x,y) in ncs:
+    insts.append(f'  (no_connect (at {x} {y}) (uuid "{uid()}"))')
 
 out.extend(insts)
 out.append('  (sheet_instances (path "/" (page "1")))')
@@ -200,4 +232,5 @@ out.append(')')
 
 with open('rev0.kicad_sch','w') as f:
     f.write('\n'.join(out) + '\n')
-print('wrote rev0.kicad_sch:', len(wires), 'wires,', len(labels), 'labels,', len(sinst), 'symbols')
+print('wrote rev0.kicad_sch:', len(wires), 'wires,', len(labels), 'labels,',
+      len(ncs), 'no-connects,', len(sinst), 'symbols')
