@@ -19,6 +19,25 @@ scratch programs, "figuring it out" notebooks/scripts.
 
 ## Index
 
+- **`imdinfo.py`** — stdlib-only ImageDisk (.imd) reader: reports an image's
+  structure (mode/density, cylinders, heads, sector size, sectors per track) and
+  can reconstruct a raw image. Written while working #70/#71/#79 because we kept
+  needing to answer "what *is* this disk image?" and `disk-analyse` is an
+  external dependency. Its reconstructed raw output is **byte-identical** to
+  `disk-analyse`'s on the same image, which is how the parser was validated.
+  Finding worth keeping: the `-blank.imd` boot disks are 250 kbps MFM, 40 tracks
+  × 5 × 1024-byte sectors, single-sided — and all three differ by exactly two
+  bytes. See `docs/mame-emulation.md` §4. (Note for anyone writing their own:
+  IMD has **no** "sector type map" — the type byte belongs to each sector's data
+  record, and the optional cylinder/head maps are flagged in bits 7/6 of the
+  *head* byte.)
+- **`mame-boot-probe.lua` + `mame-boot-probe.sh`** — headless MAME boot probe:
+  boots a floppy image on any of the three `osborne1` machines, reports whether
+  it reached `A>`, dumps the screen from video RAM, reports the screen geometry
+  and optionally saves a PNG. Written for #79, where it produced the measured
+  52/80/104-column result and the screenshots in `docs/mame-screens/`. It is the
+  self-contained counterpart to `o1prsnt`'s `o1harness.lua` (which adds keyboard
+  typing and `wait_for` helpers — use that one for real scripted tests).
 - **`mame-lua-probe.lua`** — what MAME's Lua API exposes inside a *running*
   machine, and how the O1's bank latch actually behaves (it does not persist).
   Written for #64 while working out how to check `docs/o1-memory-io-map.md`

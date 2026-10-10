@@ -36,11 +36,27 @@ CoPower-88 sets).
 MAME models three Osborne 1 variants. Two are clones of the stock machine; one
 has its own ROMs:
 
-| MAME machine | Description | Year | Parent | Relationship |
-|---|---|---|---|---|
-| `osborne1` | Osborne-1 | 1981 | — | the stock machine |
-| `osborne1sp` | Osborne-1 with SCREEN-PAC | 1983 | `osborne1` | clone — **no ROM differences at all** |
-| `osborne1nv` | Osborne-1 (Nuevo Video) | 1984 | `osborne1` | own BIOS **and** own character generator |
+| MAME machine | Description | Year | Parent | Relationship | Display (measured) |
+|---|---|---|---|---|---|
+| `osborne1` | Osborne-1 | 1981 | — | the stock machine | 416×240 = **52 columns** |
+| `osborne1sp` | Osborne-1 with SCREEN-PAC | 1983 | `osborne1` | clone — **no ROM differences at all** | 832×240 = **104 columns** |
+| `osborne1nv` | Osborne-1 (Nuevo Video) | 1984 | `osborne1` | own BIOS **and** own character generator | 640×240 = **80 columns** |
+
+**Yes, the Nuevo machine really is 80 columns.** The display width is a property
+of the emulated *machine*, not of the disk, and it was measured by booting the
+same utility disk on each of the three and reading the screen device's
+dimensions (`tools/research/mame-boot-probe.sh`). Screenshots, all booted from
+`tools/emulator-setup/floppies/`:
+
+| Screenshot | Machine | Pixels | Columns |
+|---|---|---|---|
+| `docs/mame-screens/osborne1-52col.png` | `osborne1` | 416×240 | 52 |
+| `docs/mame-screens/osborne1nv-80col.png` | `osborne1nv` | 640×240 | 80 |
+| `docs/mame-screens/osborne1sp-104col.png` | `osborne1sp` | 832×240 | 104 |
+
+That is also why the disk prefix does not matter for booting (§4): the same
+image displays 52 columns on stock hardware and 80 on Nuevo, because the video
+window is the machine's, while the *text layout* is the CBIOS's.
 
 The distinction matters: the SCREEN-PAC is modelled as *hardware only* (the
 80/104-column logic lives on the board, not in a ROM), whereas Nuevo shipped a
@@ -243,6 +259,64 @@ disk-analyse in.imd out.hfe
 disk-analyse in.hfe out.imd
 ```
 
+### Running with a third-party ROM (OZROM 1E)
+
+MAME cannot be told about a BIOS that is not in its ROM definitions, but it
+*will* load a file whose bytes do not match the expected hash — it warns and
+carries on. So a third-party monitor ROM is run by presenting it under one of
+the stock BIOS filenames:
+
+```bash
+mkdir -p /tmp/ozromset/osborne1
+cp tools/emulator-setup/roms/*.ud11 tools/emulator-setup/roms/*.ud15 \
+   tools/emulator-setup/roms/*.ua15 /tmp/ozromset/osborne1/
+cp research/roms/OZROM-1E/OZROM_1E.BIN /tmp/ozromset/osborne1/3a10082-00rev-e.ud11
+
+O1_ROMPATH=/tmp/ozromset tools/research/mame-boot-probe.sh \
+    osborne1 tools/emulator-setup/floppies/52-blank.imd 120 /tmp/ozrom.png
+```
+
+**OZROM 1E boots and runs.** Measured:
+
+```
+SCREEN: 416x240  (52 columns, 24 rows)
+r05|                   OZROM 1E #00187
+r07|              (c) 1984 Micro Management
+r12|        Slip disk in drive and press RETURN.
+...
+PROMPT: true          <- boots CP/M off the utility disk to A>
+```
+
+Screenshot: `docs/mame-screens/ozrom-1e-52col.png`. MAME prints *"the machine
+might not run correctly"* because the ROM hash is not the one it expects — that
+warning is the point, not a problem.
+
+**Why this matters to us.** OZROM 1E is not a ROM swap with a nicer font; per its
+manual (`research/roms/OZROM-1E/OZROM_1E_Manual.pdf`, Micro Management, Manual
+Rev. A 84/09/01) it adds capability we would otherwise have to build:
+
+- **User-selectable 52 / 80 / 104-column display from the keyboard** — a
+  documented *software* video-mode switch. Directly relevant to the video
+  personalities (#24) and to how the Nuevo and ScreenPac paths are driven. On a
+  machine with no 80-column upgrade it can also toggle between the left and
+  right 52 columns of an 80-column display.
+- **A system memory tester** that reports which chip to replace — a validation
+  tool for #29.
+- **A software-redefinable keyboard** — individual keys at any time, plus eight
+  locally-redefinable function keys of up to 63 characters each — relevant to
+  #45/#47.
+- **Time-of-day clock support** (`TIME`, `ALARM`, `TIMER`, and a way to set the
+  clock) — relevant to #7/#18.
+- **Documented interfaces**: an interrupt hook for programmers, the ROM jump
+  table, the OZROM memory map and keytable, plus notes on 1793/1797 floppy
+  controller operation (#20) and truer Televideo 912/920 emulation.
+- Removes the "Centronics printer not connected" lockout on double-density
+  systems (#19).
+
+What it gives up: the IEEE-488 port can no longer be used as a plain parallel
+port (Centronics printers still work) — the one place it touches our #6/#22
+work.
+
 ## 6. Headless testing
 
 The technique, from `o1prsnt`'s `utilities/headless-testing-harness/` — which is
@@ -272,7 +346,19 @@ SDL_VIDEODRIVER=dummy mame MACHINE -flop1 IMAGE -video none -sound none \
 | Harness | Where | Purpose |
 |---|---|---|
 | `tools/o1_mame_probe.lua` + `tools/check_o1_map.sh` | this repo | asserts `docs/o1-memory-io-map.md` (12 checks) against the running machine |
+| `tools/research/mame-boot-probe.{lua,sh}` | this repo | boot one image on one machine: `A>` or not, screen dump, **screen geometry**, optional PNG |
 | `o1harness.lua` + `run-test.sh` | `o1prsnt` | keyboard injection (`H.boot_cpm()`, `H.type_line()`) and screen assertions (`H.wait_for()`, `H.find()`, `H.dump()`) |
+
+The boot probe is the one that produced the geometry table in §2 and the
+screenshots in `docs/mame-screens/`. It is deliberately dependency-free; for
+scripted tests that need to *type* at the machine, use `o1prsnt`'s harness.
+
+**Screenshots.** MAME's Lua screen device has `screen:snapshot(path)`, which
+works headless (`-video none`) and needs no display:
+
+```lua
+manager.machine.screens[":screen"]:snapshot("/tmp/shot.png")
+```
 
 The §4 boot matrix was produced with the second one plus a ten-line script:
 
@@ -310,6 +396,10 @@ SDL_VIDEODRIVER=dummy mame osborne1nv -flop1 IMAGE -video none -sound none \
    A small disassembly job against the CBIOS in the system tracks.
 4. **ROM 1.3 is undumped** and we hold its source disk — see
    `docs/o1-rom-variants.md`.
+5. **OZROM 1E as a tool (#81).** It boots (§5) and offers a software
+   52/80/104-column switch, a chip-level memory tester, a redefinable keyboard
+   and a documented ROM jump table — all of which bear on #24, #29, #45 and #20.
+   Tracked separately so it does not get lost in the emulation guide.
 
 ## 8. Sources
 
