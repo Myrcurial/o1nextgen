@@ -15,8 +15,10 @@ line, and a DPDT switch + 5 V relay soldered onto the Gotek itself.
 This design moves all of that work onto a PCB at the connector end of
 the cable, where it belongs.
 
-Tracks: #50 (archival of prior art), feeds #20 (floppy interposer
-personality) and #30 (G2 multi-format support).
+Tracking: **#62** (design spec + schematic). Feeds #20 (floppy
+interposer personality) and #30 (G2 multi-format support). Prior art
+archived by PR #50. Full design in
+[`docs/floppy-adapter-design.md`](../../docs/floppy-adapter-design.md).
 
 ## Design
 
