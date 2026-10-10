@@ -156,6 +156,24 @@ acknowledge and the front-panel RESET reselect the ROM bank automatically.
 > data is ignored, *any* `OUT (0),A` / `OUT (1),A` toggles banks. The
 > interposer must **never** drive I/O addresses `0x00–0x03`.
 
+**Measured on the running machine** (`tools/check_o1_map.sh`, #64). All four
+writes behave exactly as tabulated — the *port number* selects, the data byte is
+ignored, and ports `0x04`–`0x07` alias `0x00`–`0x03` (MAME's I/O space reports
+`mask=0x0003`, i.e. only A0/A1 reach the decode). The M1/IRQACK qualification
+above is not a footnote: write `0x01` and the RAM bank is selected *immediately*,
+but 10 ms of emulated time later the machine is back in the ROM bank, because
+the bank is re-derived on every instruction fetch and the video PIA interrupts at
+60 Hz.
+
+Consequences for an interposer:
+
+- The bank state **cannot be latched and assumed** — it has to be sampled per
+  bus cycle, and a bank-2 I/O access is only meaningful while the CPU is
+  actually running with bank 2 selected.
+- At the idle `A>` prompt the machine is parked in a ROM polling loop with
+  **bank 2 live**, which is why a peek at `0x0000` during CP/M returns ROM
+  bytes, not CP/M's page zero.
+
 ## 5. Interrupts
 
 Three IRQ sources into the Z80:

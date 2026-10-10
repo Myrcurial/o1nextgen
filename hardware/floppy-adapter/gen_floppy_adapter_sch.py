@@ -30,9 +30,20 @@ TODAY = str(datetime.date.today())
 #   * O1 Field Service Manual 2F00040 - "The A drive has an 8 pin 150 OHM
 #     Terminator resistor pack. B DRIVE DOES NOT."; logic-board 34-pin connector
 #     P8 is a MALE header ("be careful not to bend any pins").
-#   * O1 disk-electronics schematic (DWG 1A3004) - pins 2/4/6 are GND.
+#   * O1 mainboard schematic 1A2011-00 Rev E, sheet 9 (DISC CONTROLLER), the
+#     34-pin header P8: GND = 1,2,3,5,9,19,27,29,31,33; +12V = 11,13,15,17;
+#     +5V = 21,23,25; pin 4 = TG43 and pin 6 = EARLY (both FDC-driven through
+#     7406 open-collector buffers); pins 7 and 14 are not drawn on P8 at all.
+#   * O1 disk-electronics schematic DWG 1A3004 sheet 1, connector P2 (the drive
+#     end of the same cable): GND = 1,3,5,7,9,19,27,29,31,33, CASE = 32.
+#     P2 and P8 disagree about pin 2 vs pin 7.  Neither is a driven signal on
+#     the O1, so both are tied to GND here - correct whichever drawing is right.
+#
+# Pins 4 and 6 are NOT ground.  TG43 is the FDC's track>43 output, which on a
+# 96 tpi drive is the write-current-reduce input: grounding it would assert
+# reduced write current permanently.  Both pass straight through to J2.
 O1 = {
-    1: 'GND',   2: 'GND',   3: 'GND',   4: 'GND',   5: 'GND',   6: 'GND',
+    1: 'GND',   2: 'GND',   3: 'GND',   4: 'FLP_TG43', 5: 'GND', 6: 'FLP_EARLY',
     7: 'GND',   8: 'FLP_INDEX', 9: 'GND', 10: 'FLP_DS_A', 11: '+12V',
     12: 'FLP_DS_B', 13: '+12V', 14: 'NC', 15: '+12V', 16: 'FLP_4MHZ', 17: '+12V',
     18: 'FLP_DIR', 19: 'GND', 20: 'FLP_STEP', 21: '+5V', 22: 'FLP_WDATA',
@@ -41,7 +52,7 @@ O1 = {
     33: 'GND', 34: 'FLP_LATE',
 }
 O1_SHORT = {  # cosmetic pin names drawn inside the connector box
-    1: 'GND', 2: 'GND', 3: 'GND', 4: 'GND', 5: 'GND', 6: 'GND', 7: 'GND',
+    1: 'GND', 2: 'GND', 3: 'GND', 4: 'TG43', 5: 'GND', 6: 'EARLY', 7: 'GND',
     8: 'INDEX', 9: 'GND', 10: 'DS_A', 11: '+12V', 12: 'DS_B', 13: '+12V',
     14: 'NC', 15: '+12V', 16: '4MHZ', 17: '+12V', 18: 'DIR', 19: 'GND',
     20: 'STEP', 21: '+5V', 22: 'WDATA', 23: '+5V', 24: 'WGATE', 25: '+5V',

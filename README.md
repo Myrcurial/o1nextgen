@@ -73,6 +73,17 @@ Phase 0 research (#1) has largely landed; see `docs/` and `research/`:
 
 - **O1 mainboard memory + I/O map extracted** from the Rev E schematic
   (#40/#41) — `docs/o1-memory-io-map.md`.
+- **Rev E schematic set indexed and extracted** (#64): the 12-page scan is
+  actually *two* drawings — disk electronics (DWG 1A3004) plus the mainboard
+  (DWG 1A2011-00 Rev E, sheets 1–9). The Z80 socket and the P8 floppy connector
+  are now read from the primary source, and a native-resolution region renderer
+  makes the rest readable — `docs/o1-mainboard-schematic.md`.
+- **The O1 runs headless as an oracle** (#64): MAME's `osborne1` driver plus a
+  small Lua harness boots CP/M and reads the screen straight out of video RAM,
+  and `tools/check_o1_map.sh` goes further — it interrogates the running machine
+  over its own bus and asserts the documented memory and I/O map. That is how we
+  found that the bank latch does not persist across instruction fetches —
+  `docs/o1-mainboard-schematic.md` §6–7a.
 - **MODEM (P1) port documented** (#57): it is **TTL, not RS-232** —
   DE-9P feeding the 6850 ACIA directly, with an asymmetric *bipolar*
   RXD input — the clean attach point for the WiFi modem module.

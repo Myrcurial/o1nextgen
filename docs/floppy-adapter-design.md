@@ -32,32 +32,41 @@ Prior art, deliberately **not** copied:
 
 The O1 uses a Shugart-like 34-pin interface, but with **+5 V and +12 V routed to
 the drives over otherwise-unused cable pins** — there are no separate drive power
-connectors. Pin functions below are transcribed from the archived Wayne Visser
-adapter (`research/osborne1/floppy-adapter/FloppyAdapter.sch`); they agree with
-Loxley's signal audit and the standard Shugart ordering for the shared signals.
-**Verified 2026-10-10** against the O1 Field Service Manual (2F00040) and the O1
-disk-electronics schematic (DWG 1A3004) — see §8.2. Pins 2, 4 and 6 are also GND
-(DWG 1A3004 draws them tied to the ground net), which the earlier transcription
-omitted.
+connectors. The pin functions below were first transcribed from the archived
+Wayne Visser adapter (`research/osborne1/floppy-adapter/FloppyAdapter.sch`); they
+agree with Loxley's signal audit and the standard Shugart ordering for the shared
+signals. **Re-read from the O1 mainboard schematic itself, 2026-10-10** — DWG
+1A2011-00 Rev E, sheet 9 of 9 (DISC CONTROLLER), the P8 symbol — see §8.2. That
+reading corrected two pins and the GND row.
 
 | Pin(s) | Signal | Notes |
 |---|---|---|
-| 1,2,3,4,5,6,7,9,19,27,29,31,33 | GND | 2/4/6 also GND (DWG 1A3004) |
-| 11,13,15,17 | +12 V | power-over-cable (physical drives) |
-| 21,23,25 | +5 V | power-over-cable (physical drives; tapped for Gotek) |
+| 1,2,3,5,9,19,27,29,31,33 | GND | pin 7 is GND on the drive-end drawing instead; neither 2 nor 7 is a driven signal, so both are tied to GND here |
+| **4** | **TG43** | **not GND** (corrected 2026-10-10) — FDC-driven; the drive's write-current-reduce input on 96 tpi drives |
+| **6** | **EARLY** | **not GND** (corrected 2026-10-10) — FDC-driven |
+| 7 | GND (drive-end drawing) | see note on pin 1 row |
 | 8 | INDEX | |
 | 10 | DS-A (drive select A) | **the switched line** — Gotek replaces drive A |
+| 11,13,15,17 | +12 V | power-over-cable (physical drives) |
 | 12 | DS-B (drive select B) | not switched — drive B stays present |
-| 14 | NC | |
+| 14 | *(not drawn on P8)* | |
 | 16 | 4 MHz | O1-specific clock; not used by Gotek |
 | 18 | DIRECTION | |
 | 20 | STEP | |
+| 21,23,25 | +5 V | power-over-cable (physical drives; tapped for Gotek) |
 | 22 | WRITE DATA | |
 | 24 | WRITE GATE | |
 | 26 | TRACK 0 | |
 | 28 | WRITE PROTECT | |
 | 30 | READ DATA | |
 | 32 | SIDE SELECT | |
+| 34 | LATE | |
+
+Pins 4 and 6 carry live FDC outputs, so the card **passes them straight through
+J1 → J2** rather than grounding them. The earlier transcription (from the Visser
+adapter) tied 2, 4, 6 and 7 to GND; that is harmless for a Gotek-only adapter,
+but this card switches the OEM cable through to the physical drives, and
+clamping TG43 low would assert reduced write current permanently.
 | 34 | LATE | O1-specific |
 
 The Gotek needs only the static/step/data lines plus its drive-select (Loxley's
@@ -270,7 +279,7 @@ that remain bench-verifiable are flagged as such.
    **female IDC socket** and is **not keyed** — "the RED stripe on the harness
    must be to the RIGHT" fixes pin 1. Therefore **J1 = female 2x17 socket**
    (card bottom) and **J2 = male 2x17 header** (OEM cable). Pin order is
-   confirmed in §2, including pins 2/4/6 = GND.
+   confirmed in §2.
 
 3. **Switch element — DECIDED: electromechanical relay (Rev A).** A single 4PDT
    relay does all three switches with no 5 V-level silicon and no signal-path
@@ -315,9 +324,17 @@ that remain bench-verifiable are flagged as such.
 - **O1 Field Service Manual 2F00040** (`research/osborne1/`): 150 Ω terminator is
   on drive A only; logic-board connector P8 is male; harness not keyed, red
   stripe = pin 1; drive A strapped DS1.
-- **O1 disk-electronics schematic, DWG 1A3004 sheets 1–3**
-  (`research/osborne1/OCC1_1A2011-00_Schem_RevE.pdf`): P1/P2 drive connectors;
-  pins 2/4/6 tied to GND; DS-A/DS-B on 10/12.
+- **O1 mainboard schematic, DWG 1A2011-00 Rev E sheet 9 of 9 (DISC CONTROLLER)**
+  (`research/osborne1/OCC1_1A2011-00_Schem_RevE.pdf`, PDF page 12): the P8
+  34-pin header — GND = `1,2,3,5,9,19,27,29,31,33`; +12 V = 11,13,15,17;
+  +5 V = 21,23,25; **pin 4 = TG43 and pin 6 = EARLY, neither is GND**; pins 7
+  and 14 are not drawn at all; DS-A/DS-B on 10/12. Read at 600–1200 dpi; see
+  `docs/o1-mainboard-schematic.md` §5 (#62).
+- **O1 disk-electronics schematic, DWG 1A3004-00/01 Rev C sheets 1–3** (PDF
+  pages 1–3 of the same file — a *different* drawing, the drive's own board):
+  head/drive connectors P1/P2; P2 lists GND = `1,3,5,7,9,19,27,29,31,33` and
+  CASE = 32. It disagrees with P8 on pin 2 versus pin 7, which is harmless —
+  neither is a driven signal on the O1, so the card ties both to GND.
 - **Gotek SFR1M44-U100K user manual**: jumper table `S0 = Drive Select 0`,
   `S1 = Drive Select 1`, `MO = Motor On`, `JA = READY on 34-pin interface`.
 - **FlashFloppy wiki — Initial Setup / Gotek Models**: Shugart hosts expect

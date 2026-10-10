@@ -26,13 +26,18 @@ needed.
 | File | What it is | Sourced from |
 |---|---|---|
 | `2F00153-01_Osborne1TechnicalManual_1982.pdf` (19 MB) | Osborne 1 Technical Manual, 1982. No text layer — image-only scan. Theory of operations, banking, I/O, video, disk, keyboard. | [bitsavers](https://bitsavers.trailing-edge.com/pdf/osborne/osborne1/2F00153-01_Osborne1TechnicalManual_1982.pdf) |
-| `OCC1_1A2011-00_Schem_RevE.pdf` (2.1 MB) | Mainboard schematic set, OCC drawing 1A2011-00 Rev E. Sheets 1–3 are the disk analog board (DWG 1A3004), sheet 4+ the main logic board. | [bitsavers](https://bitsavers.org/pdf/osborne/osborne1/OCC1_1A2011-00_Schem_RevE.pdf) (also mirrored as `Osborne_1_Schematics_1A2011-00_Rev_E.pdf` on RetroTechCollection/Internet Archive) |
+| `OCC1_1A2011-00_Schem_RevE.pdf` (1.2 MB) | **Two drawing sets in one 12-page scan.** Pages 1–3: DISK ELECTRONICS, DWG 1A3004-00/01 Rev C (sheets 1–3 of 3 — the *drive's* own board). Pages 4–12: MAIN PC BOARD, DWG 1A2011-00 Rev E (sheets 1–9 of 9). 600 dpi bilevel; the embedded text layer is a useless early-90s OCR pass. Indexed, and the Z80 socket and P8 floppy pinouts extracted, in `docs/o1-mainboard-schematic.md` (#62). | [bitsavers](https://bitsavers.org/pdf/osborne/osborne1/OCC1_1A2011-00_Schem_RevE.pdf) (also mirrored as `Osborne_1_Schematics_1A2011-00_Rev_E.pdf` on RetroTechCollection/Internet Archive) |
+| `OCC1_1A2011-00_Schem_RevE.ocr.txt` | OCR text layer for the above (per the convention below), generated 2026-10-10 at 400 dpi. Good enough to grep for component references; **not** reliable for pin-level detail — read sheets visually with `tools/schematic_render.sh`. | — |
 | `keyboard/osborne_keyboard_pinout.html` + `keyboard/PROVENANCE.md` | Verbatim capture of the pinouts.ru Osborne 1 keyboard page: P4 pinout (incl. pin 19 = +12V via J6+R21) and the full key matrix map. Used by #45/#47. | [pinouts.ru](https://old.pinouts.ru/InputCables/osborne_keyboard_pinout.shtml), captured 2026-10-08 (provenance in the folder) |
 | `floppy-adapter/` (README, LICENSE, `.sch`, `.kicad_pcb`, PROVENANCE.md) | Snapshot of WayneVisser's Osborne1FloppyAdapter KiCad project — passive Gotek adapter documenting the O1's "Shugart-like" floppy interface (power over the cable's unused pins). Used by #20/#49. | [github.com/WayneVisser/Osborne1FloppyAdapter](https://github.com/WayneVisser/Osborne1FloppyAdapter), captured 2026-10-09 (provenance in the folder) |
 | `modem/o1techman-interface-extract.pdf` (1 MB, 10 pp) | Chapter 4 "Osborne 1 Interface Design" extract of the O1 Technical Manual: §4.1 IEEE-488 (P3), §4.2 RS-232 (P2), **§4.3 MODEM (P1)**. Authoritative source for the MODEM DE-9P pinout — **TTL levels, not RS-232** — incl. pin 4 MSB, pin 5 CTS, pin 8 MCB, pin 9 RI, pin 7 +12V via 22Ω. Used by #56 (and #21/#12). | [kev.pulo.com.au/osborne1](https://www.kev.pulo.com.au/osborne1/documents/o1techman.pdf), captured 2026-10-09 |
 
-Basis for `docs/o1-memory-io-map.md` (#40). Both scans are image-only;
-extraction is manual (OCR for text pages, visual for schematics).
+Basis for `docs/o1-memory-io-map.md` (#40) and
+`docs/o1-mainboard-schematic.md` (#62). Both scans are image-only; extraction
+is manual — OCR for text pages, and for schematics a native-resolution region
+render (`tools/schematic_render.sh`) read by eye. The mainboard map is
+independently cross-checked against the running machine in MAME; see
+`docs/o1-mainboard-schematic.md` §7 (#64).
 
 ## inspired-by/ — adjacent projects
 

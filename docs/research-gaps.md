@@ -29,14 +29,19 @@ firmware", "blocks validation".
      NMOS original; the replica gets a modern CMOS CPU.
 
 3. ~~**Z80 socket & chargen socket pinout on the O1 mainboard.**~~
-   **Z80 side RESOLVED 2026-10-10.** The O1 fits an NEC µPD780C (≡ Z80A) in a
-   DIP-40 socket, so the socket's pin numbering is the chip's — the standard
-   Zilog DIP-40 pinout. Both `docs/o1-memory-io-map.md` §6 (which claimed
-   pin 11 = GND; it is +5 V) and the interposer generators (off by one across
-   all 40 pins) were wrong and are now corrected; `tools/check_schematics.py`
-   asserts the datasheet pinout against every connector that mates with that
-   socket. *Source:* Zilog Z80 Microprocessor Family Databook, cross-checked
-   against z80.info/zinout.htm.
+   **Z80 side RESOLVED 2026-10-10 — and now confirmed from the primary source.**
+   The O1 fits an NEC µPD780C (≡ Z80A) in a DIP-40 socket, so the socket's pin
+   numbering is the chip's — the standard Zilog DIP-40 pinout. Both
+   `docs/o1-memory-io-map.md` §6 (which claimed pin 11 = GND; it is +5 V) and
+   the interposer generators (off by one across all 40 pins) were wrong and are
+   now corrected; `tools/check_schematics.py` asserts the datasheet pinout
+   against every connector that mates with that socket. *Sources:* Zilog Z80
+   Microprocessor Family Databook, cross-checked against z80.info/zinout.htm —
+   **and the O1 mainboard schematic itself**: 1A2011-00 Rev E sheet 3 of 9 draws
+   UC11 = Z80-A with +5 V = 11, GND = 29, A0 = 30, D0 = 14, D1 = 15, D2 = 12,
+   D3 = 8, MREQ = 19, IORQ = 20, RD = 21, WR = 22, BUSRQ = 25, M1 = 27,
+   RFSH = 28, NMI = 17, A1 = 31 … A10 = 40 — exactly the datasheet pinout. See
+   `docs/o1-mainboard-schematic.md` §4 (#62).
    - **Still open: the char-gen socket.** ScreenPac taps the 24-pin char-gen
      socket (UA15) as well, so a ScreenPac-style video personality (#24) still
      needs that pinout. *Source:* O1 mainboard schematic + ScreenPac install
@@ -80,6 +85,14 @@ firmware", "blocks validation".
 11. **Floppy controller (#20, #30).** O1 uses a WD179x; need the exact
     variant + port map + the double-density upgrade's changes (photos in
     research/) before the floppy interposer personality.
+    - *Partly resolved:* the mainboard sheet draws **UB7 = MB8877** (Fujitsu's
+      WD1793 equivalent), and MAME's driver independently carries the same
+      uncertainty ("Schematics specify a WD1793 floppy controller, but we're
+      using the Fujitsu equivalent MB8877 here") — the symbol is
+      WD1793-compatible, the fitted part may be either. Ports 2100–2103 per
+      `docs/o1-memory-io-map.md` §3, confirmed against the running machine's
+      decode masks. Double-density upgrade changes still open. See
+      `docs/o1-mainboard-schematic.md` §5, §7 (#62).
 
 ## C. Blocks validation (#29)
 
