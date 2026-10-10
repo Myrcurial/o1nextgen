@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""Generate the Rev 0 'test probe' KiCad 7 schematic.
+"""Generate the interposer Rev A (engineering sample) KiCad 7 schematic.
 
-Structural schematic for routing: Z80 pass-through (plug + socket),
-4x 74AHCT165 PISO snapshot front end, Pico 2 W module, 5 V input, decoupling.
+Structural schematic for routing: Z80 pass-through (plug J1 + on-board SMT
+Z84C00 U1), 74AHCT595/245 bus drive, 74AHCT165 capture chain, 74AHCT244/125
+control drive, Pico 2 W + ESP32-C3 + SPI flash, 3V3 LDO.
 Buses are connected by net labels (standard practice), so re-mapping
 GPIO assignments later is a label edit, not a re-route.
 
-Regenerate: python3 gen_rev0_sch.py  (writes rev0.kicad_sch)
+Regenerate: python3 gen_reva_sch.py  (writes reva.kicad_sch)
 KiCad is not required to generate; open/re-save in KiCad 7+ to normalize.
 """
 import uuid, datetime
@@ -29,14 +30,19 @@ class Symbol:
         self.pins.append((num, pname, side, off))
         return self
     def pin_pos(self, num):
-        """symbol-local anchor of pin connection point"""
+        """symbol-local connection point, in KiCad symbol space (Y up).
+
+        `off` counts down from the TOP of the box, so the symbol-space Y is
+        `+hh - off` (top edge = +hh).  The sheet is Y-down, so a placed
+        symbol's pin lands at `(x + px, y - py)` -- see place().
+        """
         for n, p, side, off in self.pins:
             if n == num:
                 hw, hh = self.w/2, self.h/2
-                if side == 'L': return (-hw, -hh + off)
-                if side == 'R': return ( hw, -hh + off)
-                if side == 'T': return (-hw + off, -hh)
-                return (-hw + off, hh)
+                if side == 'L': return (-hw, hh - off)
+                if side == 'R': return ( hw, hh - off)
+                if side == 'T': return (-hw + off, hh)
+                return (-hw + off, -hh)
         raise KeyError(num)
     def lib_sexpr(self):
         s = f'  (symbol "{self.lib_id}" (pin_names (offset 0.508)) (in_bom yes) (on_board yes)\n'
@@ -66,10 +72,10 @@ class Symbol:
         for n, p, side, off in self.pins:
             if n == num:
                 hw, hh = self.w/2, self.h/2
-                if side == 'L': return (-hw - 2.54, -hh + off)
-                if side == 'R': return ( hw + 2.54, -hh + off)
-                if side == 'T': return (-hw + off, -hh - 2.54)
-                return (-hw + off, hh + 2.54)
+                if side == 'L': return (-hw - 2.54, hh - off)
+                if side == 'R': return ( hw + 2.54, hh - off)
+                if side == 'T': return (-hw + off, hh + 2.54)
+                return (-hw + off, -hh - 2.54)
         raise KeyError(num)
 
 # ---------- symbol definitions ----------
@@ -190,7 +196,7 @@ def make_z84():
     # PLCC/QFP-44 SMT Z84C00. PIN NUMBERS ARE PLACEHOLDERS (DIP-logical order,
     # 41-44 = NC): assign the correct QFP-44 PEG footprint mapping in KiCad
     # before routing. See README 'known placeholder'.
-    s = Symbol('local', 'Z84C00_SMT44', 'U', 25.4, 112.0)
+    s = Symbol('local', 'Z84C00_SMT44', 'U', 25.4, 111.76)   # h/2 = 55.88 = 44 x 1.27
     z = [(1,'A10'),(2,'A11'),(3,'A12'),(4,'A13'),(5,'A14'),(6,'A15'),(7,'CLK'),(8,'D4'),(9,'D3'),(10,'D5'),(11,'D6'),(12,'+5V'),(13,'D2'),(14,'D7'),(15,'D0'),(16,'D1'),(17,'/INT'),(18,'/NMI'),(19,'/HALT'),(20,'/MREQ'),(21,'/IORQ'),(22,'/RD')]
     r = [(44,'NC'),(43,'NC'),(42,'NC'),(41,'NC'),(40,'A9'),(39,'A8'),(38,'A7'),(37,'A6'),(36,'A5'),(35,'A4'),(34,'A3'),(33,'A2'),(32,'A1'),(31,'A0'),(30,'GND'),(29,'/RFSH'),(28,'/M1'),(27,'/RESET'),(26,'/BUSRQ'),(25,'/WAIT'),(24,'/BUSAK'),(23,'/WR')]
     for i,(n,p) in enumerate(z): s.add(n,p,'L', 5.08 + i*5.08)
@@ -236,6 +242,10 @@ wires, labels, insts, sinst = [], [], [], []
 
 def place(symkey, ref, value, x, y, netmap):
     s = syms[symkey]
+    # Snap the origin to the 1.27 mm connection grid.  Every derived pin and
+    # stub endpoint inherits it, so ERC stops raising endpoint_off_grid (the
+    # raw layout numbers below are only nominal).  Netlist is unaffected.
+    x, y = round(round(x / 1.27) * 1.27, 2), round(round(y / 1.27) * 1.27, 2)
     sinst.append((ref, value))
     body = [f'  (symbol (lib_id "{s.lib_id}") (at {x} {y} 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (uuid "{uid()}")',
             f'    (property "Reference" "{ref}" (at {x} {y - s.h/2 - 2.54} 0) (effects (font (size 1.27 1.27))))',
@@ -247,10 +257,12 @@ def place(symkey, ref, value, x, y, netmap):
         net = netmap.get(p) or netmap.get(n)
         if net:
             ax, ay = s.anchor(n)
-            X, Y = x + ax, y + ay
+            # symbol space is Y-up, the sheet is Y-down: subtract ay.  (Adding
+            # it put every stub on the mirror-image pin, so nothing netted.)
+            X, Y = x + ax, y - ay
             dx, dy = {'L':(-5.08,0),'R':(5.08,0),'T':(0,-5.08),'B':(0,5.08)}[side]
             wires.append((X, Y, X + dx, Y + dy))
-            just = 'left' if side == 'L' else 'right'
+            just = 'right' if side == 'L' else 'left'   # text away from the body
             labels.append((net, X + dx, Y + dy, 0, just))
     body.append('  )')
     insts.append('\n'.join(body))
@@ -270,12 +282,15 @@ for i,(ref, nets) in enumerate(SR_OUT):
     place('595', ref, '74AHCT595', 175, 40 + i*55, nm)
 
 # 165 capture chain: U6.SER<-GND; QH->next SER; U8.QH->SR_MISO
+# NB: the 595 chain is FOUR devices (U3/U4/U5/U15 -- see SR_OUT), so the
+# capture chain starts one slot lower.  At y=205 the first '165 sat exactly on
+# top of U15 and shorted SR_RCK/GND, /OE_ADDR/A0, +5V/A1, +5V/A2 and GND/A3.
 ser165 = ['GND','QH_U6','QH_U7']
 for i,(ref, nets) in enumerate(SR_IN):
     nm = {abcd: nets[k] for k, abcd in enumerate(['A','B','C','D','E','F','G','H'])}
     nm.update({'SH//LD':'SR_LOAD','CLK':'SR_SCK','CLK_INH':'GND','GND':'GND','VCC':'+5V',
                'SER':ser165[i],'QH': ser165[i+1] if i < 2 else 'SR_MISO'})
-    place('165', ref, '74AHCT165', 175, 205 + i*55, nm)
+    place('165', ref, '74AHCT165', 175, 260 + i*55, nm)
 
 # U9: data drive 245, A side = Pico GP8-15, B side = bus D0-7
 nm245 = {'DIR':'GND','/OE':'/OE_DATA','GND':'GND','VCC':'+5V'}

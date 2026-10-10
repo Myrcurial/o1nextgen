@@ -29,14 +29,19 @@ class Symbol:
         self.pins.append((num, pname, side, off))
         return self
     def pin_pos(self, num):
-        """symbol-local anchor of pin connection point"""
+        """symbol-local connection point, in KiCad symbol space (Y up).
+
+        `off` counts down from the TOP of the box, so the symbol-space Y is
+        `+hh - off` (top edge = +hh).  The sheet is Y-down, so a placed
+        symbol's pin lands at `(x + px, y - py)` -- see place().
+        """
         for n, p, side, off in self.pins:
             if n == num:
                 hw, hh = self.w/2, self.h/2
-                if side == 'L': return (-hw, -hh + off)
-                if side == 'R': return ( hw, -hh + off)
-                if side == 'T': return (-hw + off, -hh)
-                return (-hw + off, hh)
+                if side == 'L': return (-hw, hh - off)
+                if side == 'R': return ( hw, hh - off)
+                if side == 'T': return (-hw + off, hh)
+                return (-hw + off, -hh)
         raise KeyError(num)
     def lib_sexpr(self):
         s = f'  (symbol "{self.lib_id}" (pin_names (offset 0.508)) (in_bom yes) (on_board yes)\n'
@@ -66,10 +71,10 @@ class Symbol:
         for n, p, side, off in self.pins:
             if n == num:
                 hw, hh = self.w/2, self.h/2
-                if side == 'L': return (-hw - 2.54, -hh + off)
-                if side == 'R': return ( hw + 2.54, -hh + off)
-                if side == 'T': return (-hw + off, -hh - 2.54)
-                return (-hw + off, hh + 2.54)
+                if side == 'L': return (-hw - 2.54, hh - off)
+                if side == 'R': return ( hw + 2.54, hh - off)
+                if side == 'T': return (-hw + off, hh + 2.54)
+                return (-hw + off, -hh - 2.54)
         raise KeyError(num)
 
 # ---------- symbol definitions ----------
@@ -148,6 +153,10 @@ wires, labels, insts, sinst = [], [], [], []
 
 def place(symkey, ref, value, x, y, netmap):
     s = syms[symkey]
+    # Snap the origin to the 1.27 mm connection grid.  Every derived pin and
+    # stub endpoint inherits it, so ERC stops raising endpoint_off_grid (the
+    # raw layout numbers below are only nominal).  Netlist is unaffected.
+    x, y = round(round(x / 1.27) * 1.27, 2), round(round(y / 1.27) * 1.27, 2)
     sinst.append((ref, value))
     body = [f'  (symbol (lib_id "{s.lib_id}") (at {x} {y} 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (uuid "{uid()}")',
             f'    (property "Reference" "{ref}" (at {x} {y - s.h/2 - 2.54} 0) (effects (font (size 1.27 1.27))))',
@@ -159,10 +168,12 @@ def place(symkey, ref, value, x, y, netmap):
         net = netmap.get(p) or netmap.get(n)
         if net:
             ax, ay = s.anchor(n)
-            X, Y = x + ax, y + ay
+            # symbol space is Y-up, the sheet is Y-down: subtract ay.  (Adding
+            # it put every stub on the mirror-image pin, so nothing netted.)
+            X, Y = x + ax, y - ay
             dx, dy = {'L':(-5.08,0),'R':(5.08,0),'T':(0,-5.08),'B':(0,5.08)}[side]
             wires.append((X, Y, X + dx, Y + dy))
-            just = 'left' if side == 'L' else 'right'
+            just = 'right' if side == 'L' else 'left'   # text away from the body
             labels.append((net, X + dx, Y + dy, 0, just))
     body.append('  )')
     insts.append('\n'.join(body))
