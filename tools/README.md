@@ -21,22 +21,56 @@ Run everything: `tools/extract_all.sh [path-to-samdisk]`
   40x10x256B FM, boottrk 3, 2K blocks), `kp2x`/`kpiv` (Kaypro DSDD:
   80 logical trk side-per-track x 10 x 512B, boottrk 1, 2K blocks).
 
-## Reading scanned schematics (`schematic_render.sh`)
+## Reading scanned schematics (`schematic_render.sh`, `schematic_atlas.sh`)
 
 Renders sheets — or a zoomed region of one sheet — from a scanned schematic
 PDF. The archive schematics are 600 dpi bilevel scans; scaled to a screen the
 pin numbers are unreadable, and the PDF's own text layer is a 1990s OCR pass
-full of garbage, so they have to be read one region at a time.
+full of garbage, so they have to be read one region at a time at native
+resolution.
 
 ```
+tools/schematic_atlas.sh PDF [OUTDIR]                     # overview + tile grid, all sheets
+tools/schematic_atlas.sh PDF build/atlas --sheet 5 --cols 3 --rows 3
 tools/schematic_render.sh PDF --info                      # sheet size in px, page count
 tools/schematic_render.sh PDF OUTDIR --sheet 12 --dpi 600 # one sheet, native res
 tools/schematic_render.sh PDF OUTDIR --sheet 12 --dpi 600 --crop X Y W H
 ```
 
-Requires poppler (`pdftoppm`, `pdfinfo`) — already needed by `ocr_pdf.sh`.
-Output is `OUTDIR/sheet-NN.png`. The sheet index, and the regions read this
-way, are in `docs/o1-mainboard-schematic.md`.
+`schematic_atlas.sh` writes `OUTDIR/index.md` mapping every tile to the pixel
+box it covers, plus `OUTDIR/sheet-NN/overview.png` and `rRcC.png` tiles. It
+defaults to `build/atlas/` — gitignored, because the tiles are regenerable and
+the *coordinates* are the durable part, so a region found by eye once can be
+re-rendered exactly with `schematic_render.sh --crop`. Both tools require
+poppler (`pdftoppm`, `pdfinfo`) — already needed by `ocr_pdf.sh`.
+
+**Part numbers must be read at native resolution.** At 300 dpi `LS00`/`LS08`
+and `LS138`/`LS139` are indistinguishable; an overview pass over the O1
+mainboard got both wrong. The sheet index, the regions read this way, and what
+that caution means for the device lists are in
+`docs/o1-mainboard-schematic.md`.
+
+## Machine checks (`check_o1_map.sh`)
+
+Boots an Osborne 1 headlessly under MAME and interrogates it over its own bus,
+then asserts what `docs/o1-memory-io-map.md` claims — which pages are RAM,
+where the ROM is and how it mirrors, what the bank-switch ports do, and which
+bank-2 I/O windows answer.
+
+```
+tools/check_o1_map.sh                    # 11 checks, exits non-zero on failure
+O1_ROMPATH=... O1_FLOPPY=... O1_SECONDS=180 tools/check_o1_map.sh
+```
+
+`tools/o1_mame_probe.lua` holds the assertions and the method (RAM is told from
+ROM by writing back the complement of the byte that was there and restoring it).
+Requires `mame` and a ROM path; if the ROMs sit loose in one directory rather
+than in an `osborne1/` subdirectory, the wrapper builds a temporary rompath with
+an `osborne1` symlink rather than making you rearrange them.
+
+It is the counterpart to `check_schematics.py`: that one checks our own boards,
+this one checks our *understanding of the machine* against the machine. It has
+already earned its keep — see `docs/o1-mainboard-schematic.md` §7a.
 
 ## Schematic checking (`check_schematics.py`)
 

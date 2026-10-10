@@ -57,21 +57,53 @@ has no block title; its function is read off the circuit).
 Sheets 4–12 are numbered 1–9 of 9 in their title blocks; the mainboard set is
 complete in this scan.
 
+> **Read the device lists at native resolution before citing them.** The
+> *functions* in the last column are reliable; the part numbers came from a
+> whole-sheet pass and at least two are known wrong (§3). `UC11` in particular
+> appears twice — as the Z80 (sheet 3/9, verified at 600 dpi) and as a 74LS161
+> (sheet 1/9, overview pass); only one can be right.
+
 ## 3. How to read a sheet
 
 Whole-sheet views are useless — scale a 6582 px sheet onto a screen and the pin
-numbers vanish. Read it one region at a time at native resolution:
+numbers vanish. Read it one region at a time at native resolution. Two tools:
 
 ```
-tools/schematic_render.sh research/osborne1/OCC1_1A2011-00_Schem_RevE.pdf --info
-tools/schematic_render.sh research/osborne1/OCC1_1A2011-00_Schem_RevE.pdf /tmp/s --sheet 12 --dpi 600
-tools/schematic_render.sh research/osborne1/OCC1_1A2011-00_Schem_RevE.pdf /tmp/s --sheet 12 --dpi 600 --crop 5200 3120 700 900
+# browse: an overview plus a grid of native-resolution tiles for every sheet
+tools/schematic_atlas.sh research/osborne1/OCC1_1A2011-00_Schem_RevE.pdf
+#   -> build/atlas/index.md          tile map: page -> tile -> pixel box
+#   -> build/atlas/sheet-05/r1c0.png native-res tiles you can just open
+
+# then re-render any region exactly, once the index says where it is
+tools/schematic_render.sh research/osborne1/OCC1_1A2011-00_Schem_RevE.pdf /tmp/s \
+    --sheet 5 --dpi 600 --crop 2600 1250 1450 1050
 ```
 
-`--info` prints the sheet size in pixels at a given dpi so crop coordinates can
-be worked out; `--crop` then pulls out exactly the region in question. The tool
-needs poppler (`brew install poppler`), which `tools/ocr_pdf.sh` already
-depends on.
+`tools/schematic_atlas.sh` writes into `build/atlas/` — gitignored, because the
+atlas is regenerable and the *coordinates* are the durable part. Its index maps
+every tile to the pixel box it covers, so a region found by eye once can be
+re-rendered exactly later. `--info` on the render tool prints the sheet size in
+pixels at a given dpi. Both need poppler (`brew install poppler`), which
+`tools/ocr_pdf.sh` already depends on.
+
+**Read part numbers at native resolution, never from an overview.** At 300 dpi
+`LS00` and `LS08` are indistinguishable, and so are `LS138` and `LS139`. The
+first pass over this scan was done from whole-sheet views and got both of those
+wrong on sheet 2: at 600 dpi it plainly reads **`UC1 LS00`** (quad NAND) and
+**`UB1 LS139`** (dual 2-to-4 decoder — its pin numbers 15/14/13 for
+enable/A/B and 12/11/10/9 for Y0–Y3 are exactly the second half of a '139).
+The §2 device lists came from that first pass: treat the *functions* as
+reliable and the part numbers as needing a native-resolution check before
+anything is built on them. One conflict is already visible in them — `UC11`
+is listed as both the Z80 (sheet 3/9, read at 600 dpi, and it matches a
+standard DIP-40) and a 74LS161 (sheet 1/9, overview pass). The Z80 is the
+verified one.
+
+`research/osborne1/OCC1_1A2011-00_Schem_RevE.ocr.txt` is a fresh OCR pass (per
+the `research/README.md` OCR convention) so the scan is greppable for component
+references. It is useful for *finding* things — "which sheet has the MB8877?" —
+and not trustworthy for pin-level detail. Everything in §4 and §5 was read by
+eye at 600–1200 dpi instead.
 
 `research/osborne1/OCC1_1A2011-00_Schem_RevE.ocr.txt` is a fresh OCR pass (per
 the `research/README.md` OCR convention) so the scan is greppable for component
@@ -259,17 +291,121 @@ agrees with `docs/o1-memory-io-map.md`:
   `3a10082-00rev-e.ud11` (BIOS 1.44), the Rev E monitor ROM — so the emulator,
   the archived ROM and this schematic are the same board revision.
 
-## 8. What is not extracted yet
+### 7a. Asking the machine directly — `tools/check_o1_map.sh`
+
+Reading the driver is still reading someone else's model of the hardware.
+`tools/check_o1_map.sh` boots the machine headlessly and interrogates it over
+its own bus, then asserts what `docs/o1-memory-io-map.md` claims. RAM is told
+from ROM by writing back the complement of the byte that was there and restoring
+it — a RAM cell follows, a ROM cell does not. Eleven checks, all passing:
+
+```
+$ tools/check_o1_map.sh
+program space: mask=0xFFFF width=8   io space: mask=0x0003 width=8
+booted to A> after 9.0 emulated seconds
+PASS  B1    CP/M reaches the A> prompt in the emulated machine
+PASS  C1    0xF000 behaves as RAM (video RAM is in the RAM bank)
+PASS  C2    0x4000-0xEFFF is RAM (176/176 pages)
+PASS  C3    I/O write to port 0x00 selects the ROM bank
+PASS  C4    I/O write to port 0x01 selects the RAM bank
+PASS  C5    the data byte on a bank-switch write is ignored
+PASS  C6    I/O ports 0x04/0x05 alias 0x00/0x01 (only A0/A1 decoded)
+PASS  C10   the selected bank is re-derived on instruction fetch, not latched
+PASS  C7    I/O port 0x02 maps the 1-bit bank-3 plane over 0xF000
+PASS  C8    ROM at 0x0000-0x0FFF mirrors 0x1000-0x1FFF
+PASS  C9    nominally-dead bank-2 addresses alias real devices (sloppy decode)
+== 11 passed, 0 failed ==
+```
+
+The page maps it prints are §2 of the map doc in machine form: in bank 2,
+ROM across `0000-1FFF`, devices across `2000-3FFF`, RAM from `4000` up; in
+bank 1, RAM across all 64K. Four things it established that the documents do
+not currently say:
+
+- **The bank latch is real but does not persist.** `OUT (1),A` puts the machine
+  in the RAM bank immediately, and 10 ms of emulated time later it is back in
+  the ROM bank — the bank is re-derived on every instruction fetch from the
+  M1/IRQACK flip-flops, and the video PIA interrupts at 60 Hz. The map doc §4
+  says the selection is "qualified by M1 and IRQ-acknowledge conditions"; this
+  is what that means in practice, and it is why a naive peek at `0x0000` while
+  CP/M runs returns ROM bytes. Interposer logic that assumes a static bank state
+  is wrong.
+- **The I/O space decodes two address bits** (`io space: mask=0x0003`), so all
+  256 Z80 I/O ports are `0x00-0x03` repeated 64 times — the map doc's "only the
+  two low address bits are decoded", measured.
+- **The ROM is live while CP/M runs.** Sampling the Z80's PC during a working
+  `DIR` finds it inside the ROM (`0x0377-0x0387`, `0x0EF7-0x0EFC`) as well as in
+  RAM, so the ROM is paged in and out during normal operation; "the ROM is only
+  used at boot" is not true.
+- **Bank-2 aliasing is measurable, not theoretical.** `0x2500` reads the floppy
+  register that `0x2100` reads, `0x2601` the keyboard row that `0x2201` reads,
+  `0x2c04` the video PIA port that `0x2c00` reads. Addresses that decode to two
+  devices at once return the AND of both — `0x2301` is keyboard *and* floppy,
+  `0x2f00` is video PIA *and* serial ACIA.
+
+## 8. Can the schematic be turned into something runnable?
+
+**Automatically, no — and that is a property of the file, not of effort.** Every
+page is a single 1-bit JBIG2 raster at 600 dpi:
+
+```
+$ pdfimages -list research/osborne1/OCC1_1A2011-00_Schem_RevE.pdf
+page   num  type   width height color comp bpc  enc  x-ppi y-ppi size
+   5     0 image    6582  5137  gray    1   1  jbig2  600   600 69.1K
+   6     0 image    6592  5150  gray    1   1  jbig2  600   600 86.2K
+   ...
+```
+
+No vector data at all — no lines, no symbols, no netlist, nothing to walk. The
+only text object is a `HiddenHorzOCR` layer from an early-1990s pass that
+renders a sheet title as `J'U~ I 'IIS IO/OO-tOOnl`. Whatever "extraction" means
+here, it starts from pixels.
+
+**Re-OCRing the labels does not work either.** Tesseract on native-resolution
+tiles mangles exactly the tokens that matter — `UC1 LS139` came back as
+`uct LSiss`, `LS32` as `L$3e2`, `LS00` as `tS0e` — and a 1200 dpi pass returned
+nothing usable at all. A harvested label index would mislead more than it
+helped, so the reading stays manual and §3 is about making that fast and
+accurate.
+
+**The honest route to a netlist is manual capture**, and the only part worth
+capturing is the discrete glue. Most of these sheets are Z80, DRAM, FDCs and
+PIAs whose behaviour is already known; the unknowns are the small-scale logic —
+above all the **wait-state generator on sheet 2/9** (`UC1`, `UC2`, `UD1`–`UD3`,
+`UD9`, `UD12`, `UB1`, `UB7`, `UB12`, `UE1`–`UE3`, `UA4`, `UA5`, Q1/Q2), which is
+what MAME does *not* model and what issue #29 needs. Capturing that one sheet
+into KiCad gets ERC and netlist checking from the tooling `hardware/` already
+has; capturing it into Verilog additionally lets it be *run*.
+
+**What "run it as a machine" can mean, in order of fidelity:**
+
+| Approach | Status | What it validates |
+|---|---|---|
+| MAME, booting CP/M headless | works (§6) | the machine, behaviourally |
+| `tools/check_o1_map.sh` asserting the documented map | works (§7a) | our *reading* of the map, against the machine |
+| Hand-captured glue logic as Verilog, simulated | not started | the schematic itself — the wait states MAME omits |
+| The above, driven by bus traces logged from MAME | not started | the same, against real Z80 traffic |
+| Whole-board gate-level simulation | not sensible | MAME already is the machine |
+
+The last two rows are a design, not a wish: MAME's Lua can log every read and
+write through an address space, so a captured decode/wait model can be driven
+with real traffic and its chip-select and `WAIT` outputs compared against what
+the machine actually did. A disagreement is then either a misreading of the
+schematic or a MAME shortcut, and both are worth knowing. It is a multi-hour
+careful job, and doing it badly would produce a wrong document — the failure
+mode this whole exercise exists to avoid.
+
+## 9. What is not extracted yet
 
 - **Char-gen socket (UA15)** — the other half of gap #3; read sheet 5.
 - **Sheet 4 (1A2011 1/9) parts list.** That sheet carries the board's
-  REF/DESCRIPTION table (UC11 = 74LS161, UD11 = 50H, …). It is partly legible in
-  the scan and is the fastest route to a full IC inventory.
+  REF/DESCRIPTION table. It is partly legible in the scan and is the fastest
+  route to a full IC inventory.
 - **Per-sheet component inventories** for sheets 4, 5, 7 and 8, which §2 lists
-  only from a first pass.
-- **A net-level extraction.** Not achievable from this scan without manual
-  capture; see §6. If a netlist is ever needed, capturing the sheets that
-  matter into KiCad (as `hardware/` already does for our own boards) is the
-  route, and §4/§5 show the level of care that takes.
+  only from a first pass — see the part-number caution in §3.
+- **The wait-state generator (sheet 2/9)** as a captured, simulatable model
+  (§8).
+- **A net-level extraction** of the whole board — not achievable from this scan
+  without manual capture.
 
 
