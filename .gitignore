@@ -6,3 +6,4 @@
 *.uf2
 __pycache__/
 build/
+*.kicad_prl
