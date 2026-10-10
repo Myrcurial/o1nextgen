@@ -63,6 +63,12 @@ the comment *"this is CHRROM from v1.4 BIOS MB"*, and the late image for slots
 "early font / late font" distinction that #44 asks about — **both variants are
 now captured in this repo.**
 
+The socket itself (UA15, on mainboard sheet 4 of 9 — see
+`o1-mainboard-schematic.md` §4a) is wired **2732-style**: pin 21 is strapped to
++5 V, and `/CE` (18) and `/OE` (20) are grounded. Both variants are 2 KiB 2716s,
+so either drops straight in with no strapping change, and whichever is fitted
+is what a socket tap reads.
+
 ### Finding: one late image, five names
 
 The bytes `6c1eab0d` appear under five different names across three sources:

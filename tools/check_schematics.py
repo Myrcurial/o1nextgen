@@ -315,6 +315,27 @@ Z80_DIP40 = {
     38: "A8", 39: "A9", 40: "A10",
 }
 
+# Osborne 1 character-generator ROM socket (UA15) -- the second half of gap #3.
+# Read at 1200 dpi off sheet 4 of 9 of the OCC1 1A2011-00 Rev E schematic (PDF
+# page 7, title block "RAM") on 2026-10-10; the extraction note is
+# docs/o1-mainboard-schematic.md sec.4a.  It is a plain Intel 2716 -- the table
+# that stood in docs/o1-memory-io-map.md sec.6 before that (A8-A10 on 13-21,
+# /OE on 22, /CE on 23) was wrong, which is why the check below exists.
+#
+# Two entries are board wiring, not chip pins, and they matter to any tap:
+#   * /CE (18) and /OE (20) are bussed with GND (12) and grounded, so the ROM
+#     is permanently selected and always driving O0-O7.  Substituting font data
+#     means intercepting 18 and 20 between socket and ROM -- the ScreenPac
+#     personality (#24) only ever *reads* them.
+#   * pin 21 is strapped to +5V (it is A11 on a 2732, so the socket is wired
+#     for a 4 KiB part even though a 2 KiB 2716 is fitted).
+CHARGEN_2716 = {
+    1: "A7", 2: "A6", 3: "A5", 4: "A4", 5: "A3", 6: "A2", 7: "A1", 8: "A0",
+    9: "O0", 10: "O1", 11: "O2", 12: "GND", 13: "O3", 14: "O4", 15: "O5",
+    16: "O6", 17: "O7", 18: "/CE", 19: "A10", 20: "/OE", 21: "+5V", 22: "A9",
+    23: "A8", 24: "VCC",
+}
+
 # Osborne 1 floppy interface, 34-pin Shugart-like.  Transcribed in
 # docs/floppy-adapter-design.md sec.2 and verified 2026-10-10 against FSM
 # 2F00040 and DWG 1A3004 (pins 2/4/6 are GND).  Pin 10 is the switched line,
@@ -574,6 +595,35 @@ REV0 = Board(
 BOARDS = [FLOPPY, REVA, REV0]
 
 
+def check_reference_tables() -> list:
+    """Check the hand-transcribed pinouts above against their sources.
+
+    A typo in one of these silently weakens every board that uses it, and a
+    board check cannot catch it -- the board would be *consistently* wrong, the
+    same way the generators were consistently off by one on the Z80.  So the
+    tables get their own assertions, and the two sockets gap #3 is about get
+    the pin values spelled out.
+    """
+    failures = []
+    for name, table, size in (("Z80_DIP40", Z80_DIP40, 40),
+                              ("CHARGEN_2716", CHARGEN_2716, 24)):
+        if sorted(table) != list(range(1, size + 1)):
+            failures.append(f"{name}: pins are not 1..{size}: {sorted(table)}")
+    # Z80 DIP-40, the pins the generators got wrong (docs/o1-mainboard-schematic
+    # sec.4): +5V is 11, GND is 29, A0 is 30.
+    for pin, sig in ((11, "+5V"), (29, "GND"), (30, "A0"), (40, "A10")):
+        if Z80_DIP40.get(pin) != sig:
+            failures.append(f"Z80_DIP40.{pin} is {Z80_DIP40.get(pin)!r}, "
+                            f"expected {sig!r}")
+    # UA15: grounded enables and the 2732-style pin-21 strap, per sec.4a.
+    for pin, sig in ((12, "GND"), (18, "/CE"), (20, "/OE"), (21, "+5V"),
+                     (24, "VCC")):
+        if CHARGEN_2716.get(pin) != sig:
+            failures.append(f"CHARGEN_2716.{pin} is {CHARGEN_2716.get(pin)!r}, "
+                            f"expected {sig!r}")
+    return failures
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(
         description="Netlist regression checks for the o1nextgen schematics.")
@@ -582,6 +632,15 @@ def main() -> int:
     ap.add_argument("--kicad-cli", metavar="PATH", help="path to kicad-cli")
     ap.add_argument("-v", "--verbose", action="store_true")
     args = ap.parse_args()
+
+    # The reference tables are checked before KiCad is even looked for: a typo
+    # in one of them is the failure mode this tool exists to catch, and it
+    # should not need a working kicad-cli to surface.
+    ref_failures = check_reference_tables()
+    print(f"{'FAIL' if ref_failures else 'PASS'}  reference pinout tables"
+          f"  (Z80 DIP-40, UA15 2716)")
+    for f in ref_failures:
+        print(f"    {f}")
 
     cli = find_kicad_cli(args.kicad_cli)
     print(f"kicad-cli: {run([cli, '--version']).stdout.strip() or cli}")
@@ -605,6 +664,7 @@ def main() -> int:
     print()
     if failed:
         print(f"{failed} of {len(wanted)} board(s) FAILED")
+    if failed or ref_failures:
         return 1
     print(f"all {len(wanted)} board(s) passed")
     return 0

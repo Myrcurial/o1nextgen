@@ -221,19 +221,30 @@ connector that mates with the O1's Z80 socket.
 | 35–40 | A5, A6, A7, A8, A9, A10 |
 
 ### Character generator ROM — 24-pin (UA15)
-2 KB (2716) character ROM at **UA15**, 128 chars × 8×10 in an 8×10 box
-(7×9 visible). **Not on the CPU bus** — addressed by (char code + scan line),
-output to the video shift register (UA14). This is the second tap point the
-ScreenPac personality (#24) uses.
+2 KB (2716) character ROM at **UA15** — on **sheet 4 of 9** (PDF page 7, the
+RAM sheet), *not* the video sheet; see `o1-mainboard-schematic.md` §4a for the
+extraction. 128 chars × 8×10 in an 8×10 box (7×9 visible), addressed by
+(char code + scan line), output to the video shift register (UA14, 74166).
+This is the second tap point the ScreenPac personality (#24) uses.
 
 | Pin | Signal |
 |---|---|
-| 1–8 | A7–A0 (from video latch/scan) |
-| 12 | GND |
-| 13–21 | O3–O7, A8–A10 |
-| 22 | OE |
-| 23 | CE |
+| 1–8 | A7–A0 (`A0–A6` = char code from UA18; `A7` = `SCAN0`) |
+| 9, 10, 11, 13–17 | O0–O7 |
+| 12 | GND — **bussed with 18 and 20 to ground** |
+| 18 | `/CE` — **grounded** |
+| 19 | A10 (`SCAN3`) |
+| 20 | `/OE` — **grounded** |
+| 21 | strapped **+5 V** (A11 on a 2732) |
+| 22 | A9 (`SCAN2`) |
+| 23 | A8 (`SCAN1`) |
 | 24 | VCC (+5) |
+
+> The earlier version of this table grouped pins `13–21` as "O3–O7, A8–A10" and
+> put `OE`/`CE` on 22/23. That was wrong — exactly the "never cross-checked"
+> error gap #3 flagged. The socket is the plain Intel 2716 pinout, and because
+> `/CE` and `/OE` are grounded the ROM **always drives** `O0–O7`; a tap cannot
+> tristate it without intercepting those two pins.
 
 ### Other onboard connectors (for reference)
 - **P3** — IEEE-488, 26-pin edge (pins 25/26 unused)

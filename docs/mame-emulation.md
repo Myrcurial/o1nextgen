@@ -191,16 +191,25 @@ That is not a bad copy: the pristine upstream file from Dave Dunfield's
 `osborne1.zip` behaves identically, and our copy differs from it only in the
 IMD comment block. So either MAME's `osborne1nv` does not reproduce whatever the
 Nuevo CBIOS waits on, or the disk needs the physical Nuevo card to get past
-initialisation. **Unresolved — see #79.**
+initialisation. **Closed as not-needed — see #79.**
+
+### Decision: the Nuevo path is not pursued
+
+The video personality (#24) does **not** depend on answering the above. The
+decision taken is to build it from the **ScreenPac design plus OZROM's soft
+52/80/104-column switch**, and to treat the Nuevo board as prior art (#73)
+rather than as a target. So the Nuevo CBIOS hang is no longer on the critical
+path, and #79 is closed with the question recorded rather than chased — nothing
+in the Nuevo design has yet turned up a feature worth the validation cost.
 
 ### Practical answer for Nuevo work
 
 - To get a **prompt** on `osborne1nv`, use any of the three `-blank.imd` disks.
 - To exercise the **Nuevo 80-column video path**, `OS1NUEVO.IMD` is the right
-  disk but it currently cannot get past CBIOS initialisation, so the Nuevo video
-  personality (#24) cannot be validated in MAME as things stand.
-- Material for *building* a working Nuevo system disk, if that turns out to be
-  the answer: `OS1NUEVO.IMD` carries the Nuevo CBIOS 1.5 in its system tracks,
+  disk but it cannot get past CBIOS initialisation; per the decision above this
+  is no longer a blocker for #24.
+- Material for *building* a working Nuevo system disk, if anyone ever wants it:
+  `OS1NUEVO.IMD` carries the Nuevo CBIOS 1.5 in its system tracks,
   the `-blank.imd` disks carry `SYSGEN.COM` (and `MOVCPM.COM`) for writing a new
   system, and `research/nuevo/` has the Nuevo DD upgrade manual and the Nuevo
   BIOS ROM (`NUEVO151.BIN`). A custom build is therefore plausible.
