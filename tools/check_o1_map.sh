@@ -24,9 +24,12 @@
 #                 52-*.imd  -> osborne1     stock, 52 columns
 #                 104-*.imd -> osborne1sp   SCREEN-PAC, 52/104 columns
 #                 80-*.imd  -> osborne1nv   Nuevo Video, 80 columns
-#               An 80/104-column image cannot boot a stock machine, and the
-#               checks below are written for the stock one - expect the video
-#               checks to need adjusting for sp/nv.
+#               The prefix is a *label* for the video mode the image was
+#               prepared for, not a statement about what it can boot: the three
+#               images in tools/emulator-setup/floppies all boot on all three
+#               drivers.  What gates bootability is the CBIOS on the disk.  The
+#               checks below are written for the stock machine - expect the
+#               video checks to need adjusting for sp/nv.
 #   O1_SECONDS  emulated-second budget (default 90).
 #
 # Requires mame (brew install mame).  Exits non-zero if any check fails.
@@ -38,9 +41,10 @@ FLOPPIES="$(dirname "${O1_FLOPPY:-$HOME/Documents/Osborne1/floppies/x}")"
 BUDGET="${O1_SECONDS:-90}"
 
 # Pick a boot image: the stock-resolution one if there is one, else whatever
-# is there.  The 52-/80-/104- prefix is the image's video mode - a 104-column
-# image needs a SCREEN-PAC and an 80-column one needs a Nuevo Video board, so
-# this is not just a filename.
+# is there.  The 52-/80-/104- prefix is the video mode the image was prepared
+# for; it is used here only as a hint for which driver to run, because (measured
+# against MAME) all three of the committed images boot on all three drivers.
+# See docs/mame-emulation.md section 4.
 IMAGE="${O1_FLOPPY:-}"
 if [ -z "$IMAGE" ]; then
     for f in "$FLOPPIES"/52-*.imd "$FLOPPIES"/*.imd; do
