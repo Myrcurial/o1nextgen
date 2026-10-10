@@ -14,6 +14,13 @@ from this tree — their presence here is the point.
 Where each item was sourced is recorded below, so provenance is preserved
 alongside the copies.
 
+**OCR convention:** most of the scans here have no text layer. When a
+document is OCR'd for research, the text is committed **adjacent to the
+PDF** as `<filename>.ocr.txt` (e.g.
+`drive_c/Drive_C_Users_Manual.ocr.txt`) so it never has to be
+regenerated. Regenerate with `tools/ocr_pdf.sh` if a better pass is
+needed.
+
 ## osborne1/ — Osborne 1 mainboard documentation
 
 | File | What it is | Sourced from |
@@ -41,13 +48,19 @@ original machine intact**.
 | `mx80/Epson_MX-80_Operations_Manual.pdf` | Epson MX-80 operation manual; Appendix 4 (PDF p. 97+) has the character-font tables (6×9 matrix) and ESC code reference. | [Internet Archive / manualsbase](https://dn790002.ca.archive.org/0/items/manualsbase-id-381505/381505.pdf), captured 2026-10-09 |
 | `mx80/EPSON_MX-80_Fonts_v1.0.zip` + `mx80/fonts/` | Michael Walden's MX-80 font pack (CC BY-NC-SA 4.0). Convenience cross-check; see the folder README for the double-strike/2×-width caveat. | [mw.rat.bz/MX-80](https://mw.rat.bz/MX-80/), captured 2026-10-09 |
 
+Also: `drive_c/Drive_C_Users_Manual.ocr.txt` — OCR text layer for the
+image-only Drive C manual scan (generated 2026-10-09 per the OCR
+convention above; source of the TurboPac details used by
+`firmware/drive-c-gpib/`).
+
 References for the virtual Epson MX-80 printer personality (#19).
 
 ## screenpac/ — OCC ScreenPac (80-column upgrade)
 
 | File | What it is | Sourced from |
 |---|---|---|
-| `2F00040_service_2ndEd_1983.pdf` (12 MB) | Osborne Field Service Manual, 2nd Edition, 1983. Covers the ScreenPac upgrade (Z80 + char-gen socket taps, dual-port video RAM). | [bitsavers](https://bitsavers.trailing-edge.com/pdf/osborne/2F00040-00_Service2ndEdition_1983.pdf) |
+| `2F00040_service_2ndEd_1983.pdf` (12 MB) | Osborne Field Service Manual, 2nd Edition, 1983. Covers the ScreenPac upgrade (Z80 + char-gen socket taps, dual-port video RAM). §6.12 documents the ScreenPac IC-harness fly-lead solder connections (used by `firmware/screenpac-video/`). | [bitsavers](https://bitsavers.trailing-edge.com/pdf/osborne/2F00040-00_Service2ndEdition_1983.pdf) |
+| `2F00040_service_2ndEd_1983.ocr.txt` | OCR text layer (per the convention above), generated 2026-10-09 | — |
 
 The ScreenPac is the mechanical/electrical template for the interposer and
 for the video-output (HDMI) personality (#24, #9 photos).

@@ -1,0 +1,6413 @@
+Drive C
+
+User's Manual
+Drive C USER'S MANUAL
+for Osborne 1 Computers
+
+Drive C: 1690 65th Street Emeryvilte, CA 94608
+(415) 652-3222 Telex: 75632QDRIVEC UD) _Easylink: 62533500
+SECOND EDITION, June 1984
+
+This User's Manual and the software programs it describes are:
+Copyright (C) 1984
+
+Drive C:, a joint venture
+All Rights Reserved.
+
+The following trademarks used in this manual are the property of these companies:
+
+Drive C Drive C:
+TurboPac Drive C:
+
+QuickPac Drive C:
+
+BackPac Drive C:
+
+Trantor Trantor Systems Limited
+Osborne 1 Osborne Computer Corp.
+Executive Osborne Computer Corp.
+cP/M Digital Research Inc.
+WordStar MicroPro International Corp.
+SuperCalc Sorcim, Inc.
+
+dBASE IL Ashton-Tate, Inc.
+
+ai
+Thank You!
+
+We thank you for becoming a Drive C owner.
+We've made every effort to make your Drive C simple to learn and easy to use.
+
+This manual is designed to help you learn how to use the many features of your
+Drive C as well as how to derive the maximum benefits from your Osborne 1.
+
+Most new computer owners have difficulty working with the apparent complexity of
+their computer. It's simple if you take it one step at a time.
+
+The Drive C User's Manual provides step-by-step instructions for installing and
+using Drive C. Each step includes an actual practice exercise with your Drive C.
+
+While it may appear that there are a lot of exercises, they take just a few minutes
+to do. Just follow the step-by-step instructions and you'll have your Drive C up
+and running very quickly.
+
+You'll soon agree the easiest way to learn to use Drive C is simply by using it.
+
+#h*R SPECIAL THANKS ****
+
+This manual and the new Drive C software package were based largely on advice given
+us by Drive C owners. We're very proud of all our Drive C products and we hope you
+will continue to give us advice and feedback. Thanks to all of you who helped.
+
+aii
+2-1
+2-2
+2-3
+2-4
+2-5
+2-6
+2-7
+2-8
+2-9
+2-10
+2-11
+2-12
+2-13
+
+SECTION 3
+
+SECTION 5
+
+Table of Contents
+
+HOW TO USE THIS MANUAL PAGE
+
+What's inside and where to find it......+,
+Symbols and conventions used in this manual
+Drive C featuresS.-+sereeeeecerececreereres
+
+GETTING STARTED
+
+Mechanical installation of Drive C....
+Removing the Drive C unit.
+Using display screens with Drive C.
+Making your copy of the Drive C software.
+For Users of Rev 1.2 Ols
+Testing your Drive C installation
+Trouble~shooting the Drive C installation.......
+Installing Drive C with your printer
+Trouble-shooting the parallel printer installation.
+Putting your CP/M onto your DC USER Disk.
+Testing your printer operation..
+Trouble-shooting your printer, Part 2......+
+Quick checklist of Drive C installation...
+
+FITTING Drive C TO YOUR NEEDS
+
+The automatic approach.....ss.e0+
+The manual approach........
+Using it both ways..
+
+40
+
+CP/M TUTORIAL
+
+Operating systems. .secececsccccccccccscccccencecessreneees
+Formatting disks+..sseesseseres Corre
+Putting CP/M on disks using SYSGEN.....
+Files and DIR.
+XDIR.
+Renaming files
+Copying files with PIP.
+Erasing files......+
+cP/M Error messages.
+
+LEARNING Drive C SKILLS
+
+USING THE RAM DISK
+
+5-1
+5-2
+5-3
+5-4
+3-35
+5-6
+5-7
+5-8
+5-9
+
+Getting ready. 100 63
+Installing the RAM-disk 00 66
+Copying files onto the RAM-disk. 67
+Saving files from the RAM-disk to floppy. 68
+Installing the RAM-disk as drive A:..... +70
+
+Installing Drive C with different drive names 1
+Drive C and the RESET button....+sseesee
+Renaming the RAM-disk after installation.
+Running WS on Drive C - doing it manually...
+
+iv
+Table of Contents
+
+USING THE PRINT BUFFER
+
+5-10
+5-11
+5-12
+5-13
+5-14
+
+Print Buffer operation....
+Installing the Print Buffer.
+The Fixed Print Buffer.
+The Dynamic Print Buffer.
+Using the Dynamic Print Buffer....
+
+USING THE Drive C UTILITY PROGRAM
+
+5-15
+5-16
+5-17
+5-18
+5-19
+5-20
+
+SECTION 6
+
+DCU - the Drive ¢ Utility Program.
+Using DCU S - the SPACE option..
+Using DCU 0 - the OPTIMIZE option.
+Using DCU to control the Print Buffer.
+Using DCU without the menu..
+
+DCU E - erasing the RAM-disk.........+
+
+USING YOUR NEW Drive C SKILLS
+
+USING QUICKPAC
+
+6-1
+6-2
+6-3
+
+SAVING
+6-4
+6-5
+6-6
+6-7
+6-8
+6-9
+6-10
+6-11
+6-12
+6-13
+
+MAKING
+6-14
+6-15
+6-16
+
+SECTION 7
+
+INDEX
+
+iow!
+7-2
+7-3
+7-4
+7-5
+7-6
+7-7
+7-8
+
++100
+102
+105
+
+Making Drive C automatic.....+++s-
+DCQINS - installing the QuickPac options.
+Using QUICkPaC..sesssecsseseeeeeeenseenee
+
+Drive C FILES
+
+Gathing Leady, ssn dasoseesersseeyevetaces 109
+Programs which copy files.....+- oa 111
+UsdngsPIP acdaces ans dadaeascese vers 112
+Archives iixasas cagesec ule ea, 113
+Archive - choosing which files to store.. 114
+Archive - storing files on floppy disk 116
+
+118
+119
+120
+123
+
+The Archive diskette.......+
+Using an Archive diskette set
+Archive - saving all of Drive C.
+RELTLCVes see eeeeeeerersereeecces
+
+IT EVEN MORE AUTOMATIC
+Using your function keys.....
+The Remote Retrieve command..
+
+ween e el 28
+we eeee el 29
+
+Remote Retrieve with QuickPac +130
+APPENDICES
+Using drive C with Ol System Utilities......... +131
+Drive C hardware specifications. t gabeenhts +133
+Drive C software specifications. Beene +134
+Disk and RAM space usage with Drive C....... +135
+Centronics parallel printer cable specifications. +136
+Patching WordStar for improved printing. +137
+Modifying QuickPac data files..... 2139
+Using ZCPR with Drive C..+.....6. +141
+142
+7m)
+
+How To Use This Manual
+
+1-1 WHAT'S INSIDE AND WHERE TO FIND IT
+1-2 SYMBOLS AND CONVENTIONS USED IN THIS MANUAL
+1-3. Drive C FEATURES
+
+1-1 WHAT'S INSIDE AND WHERE TO FIND IT
+
+This manual is divided into several sections to make learning to use your Drive C
+efficient and easy.
+
+Each section is organized as a learn-as-you-go guide. Please don't try to start in
+the middle of a section unless you're completely confident you already understand
+all about Drive C.
+
+Definitely read Section 1-2 next. There we explain all the symbols and
+abbreviations used throughout this manual.
+
+Section 1-3 gives you an overview of all Drive C features.
+
+Please read Section 2 regardless of your level of skill with your Osborne. If you
+follow our simple step-by-step installation procedure, you'll find installation
+straightforward and pleasantly painless. There is a checklist/summary of the
+installation procedure at the end of Section 2.
+
+In Section 3 we explain how to make Drive C fit the way you use your computer. This
+section was largely compiled from advice given us by Drive C users. You'll probably ©
+want to re-read this section after you've learned how to use Drive C to “lock in”
+what you've learned.
+
+If you are a beginner with your computer or if you do not use CP/M commands and
+utilities often, you'll probably want to read Section 4, the CP/M tutorial. If you
+already use PIP, XDIR and other CP/M utilities feel free to skip this section.
+
+In Section 5 we explain how to use each of the basic features of Drive C,
+the RAM-disk, the Print Buffer and its Utility program.
+
+Section 6 shows how to use QuickPac and our Archive/Retrieve program for fast-
+loading and backing up of Drive C.
+
+Section 7 contains several useful appendices. Everyone should read the first
+appendix on using COPY, SYSGEN and SETUP with Drive C. Some of the other appendices
+are more technical.
+A
+LN How To Use This Manual
+
+1-2 SYMBOLS AND CONVENTIONS USED IN THIS MANUAL
+
+Below are examples and explanations of the different symbols and conventions used in
+this manual. Please acquaint yourself with these since they are used throughout
+
+the manual.
+
+When we refer to your Drive C unit we will use the term - Drive C
+
+When we mean a logical drive name we will use the term - drive C:
+
+THE RETURN KEY
+<CR>, <RETURN>
+
+EXPLANATION: Press the RETURN key.
+
+CONTROL C
+“¢c
+
+EXPLANATION: Hold down the 'CTRL' key and press the 'C' key.
+
+LOGICAL DRIVE INDICATOR
+
+ES The 141 prope
+
+EXPLANATION: The drive prompt that appears on your screen. The letter indicates
+which logical drive is being used.
+
+SINGLE LINE COMMANDS
+
+DOCK CO RN «Install prive ¢ as c:
+
+EXPLANATION: YOUR INPUT is always shown with a WHITE background. The SCREEN
+DISPLAY for individual command lines is always shown with a GRAY
+background.
+
+In the above example, the A> is initially on the screen. You would
+then type DCL followed by pressing the RETURN key.
+
+Your input is always shown literally. If a space is shown in the
+command, it must be included when you type the command.
+
+To the right of each input is a brief explanation of the command. For
+example, the command DCL<CR> installs the Drive C unit as the third
+logical drive, drive C:.
+How To Use This Manual
+
+FULL SCREEN INPUTS
+
+EXPLANATION: When a series of inputs are required as part of a program, the entire
+sequence of inputs is shown.
+
+Your inputs are shown with a WHITE background. The program display is
+shown with a GRAY background.
+SYSTEM STATUS ILLUSTRATION
+
+cP/M SYS DISK A: B: WordStar Disk
+
+EXPLANATION: Each System Status Illustration displays information-at-a-glance about
+your Osborne, Drive C and floppy disk drives.
+
+The logical drive NAMES for the Drive C unit and the floppy disk
+drives are displayed above the floppy drives and below the Drive C
+unit.
+
+The diskette TITLES are shown next to the appropriate floppy disk drive.
+
+The arrows on the diskettes indicate whether you should INSERT or
+REMOVE a diskette for the next step in the manual.
+
+In the above example, the CP/M Systems and Utilities diskette should
+be inserted in your left-hand floppy drive named drive A:. The
+WordStar diskette should be removed from drive B:. The Drive C unit
+is installed and is named drive C:.
+
+The message ‘Drive C: NOT INSTALLED’ is displayed whenever Drive C is
+NOT installed as a third drive. It is NOT necessary to physically
+remove Drive C when you see this message.
+
+ee
+A) How To Use This Manual
+
+DC USER DISK WordStar Disk
+AUTOST —-COM AUTOST —. COM
+DCA CoM INSTALL .COM
+DcL. -coM MERGPRIN .OVR
+peq -coM SAMPLE «TXT
+peg DAT ws -COM
+
+WSMSGS -OVR
+WSOVLY1 .OVR
+
+DCQAUT —.COM
+DCQINS — . COM
+
+DCU +COM XDIR -COM
+DFD -SPR
+PIP -COM A
+PRN -TST
+XDIR + COM AUTOST -COM SAMPLE «TXT
+DCN COM ws +COM
+DCU +COM WSMSGS -OVR
+Drive C: «SYS WSOVL1 -OVR
+INSTALL .COM =- XDIR -COM
+
+MERGPRIN .OVR
+EXPLANATION: The System Status Illustration also lists the files on both Drive C
+and the floppy diskettes.
+When a specific file or program is being emphasized, the System Status
+Illustration may show only that file rather than a complete listing.
+TYPING YOUR INPUTS
+
+ALL user inputs in the manual are shown CAPITALIZED. It is NOT necessary for you
+to capitalize your inputs. Drive C software will accept both upper- and lower-case
+inputs.
+\_ ae
+How To Use This Manual A
+
+1-3 Drive C FEATURES
+
+Drive C is an integrated hardware and software enhancement designed specifically for
+your Osborne 1. Drive C not only dramatically improves performance and adds new
+capabilities...it actually improves the way you use your Osborne 1.
+
+RAN-disk
+Your Osborne 1 has two floppy disk drives. The Drive C RAM-disk acts as a third
+logical drive, drive C:. It is called a logical drive because, to your Osborne,
+Drive C looks just like your floppy disk drives. Therefore, you can use Drive C
+EXACTLY as you use floppy drives A: and B:.
+
+While floppy disk drives are slow, noisy and prone to mechanical failure, Drive C is
+fully electronic, silent and has no moving parts.
+
+It can find information stored on it up to 20 times faster than a floppy disk drive.
+As a result, you will experience a dramatic improvement in program performance.
+
+= My ; we
+
+/)
+
+The Drive C RAM-disk is the third logical drive.
+It accesses information and communicates with your Osborne much faster
+than your floppy disk drives.
+
+This increase in disk speed dramatically affects the way many programs respond.
+WordStar frequently stops and starts as the floppy disk drives slowly access files.
+With Drive C, WordStar works smoothly without lengthy disk interruptions and a
+writer can, for the first time, write in a very natural way.
+
+Drive C also adds additional on-line storage capacity. More programs and data can
+be stored on your Osborne. This feature eliminates constantly changing diskettes.
+
+For example, you can easily have WordStar, SuperCalc, text and data files on Drive C
+and still have additional programs on your floppy diskettes. Large, complex
+programs like dBase II requiring many different files that work together, can now be
+resident on your Osborne at the same time.
+
+ae
+A How To Use This Manual
+
+Many different programs that
+
+Programs should work together
+TOoErnEe cannot be on-line at the
+= Ein pale
+Your Osborne | has limited rien Checkes Files
+
+disk capacity. The diskettes must
+
+constantly be changed.
+
+avec: mecnncemm ja) vee
+cA Paint
+Drive C's additional PROGRAMS
+capacity lets many MS. ‘came
+different programs Pn areas
+be on-line at the z TF woraster
+same time, working | pve G Text Files
+together. ‘aunercale
+Data Files
+
+The Drive C RAM-disk acts as one big logical disk drive. As a result, ite full
+capacity can be used for one large file.
+
+Programs, documents and databases can be built on the 384K Drive C that are twice as
+
+big as those created on double-density floppy disks and four times the size of those
+on single-density disks.
+
+ARAYA. I =mm mse
+AU
+
+Very big programs, documents and data bases can be created on your Drive C.
+
+Files this large are not possible on your floppy disks.
+
+While Drive C acts like a floppy disk drive, it does not use actual diskettes.
+Files must be moved to and from Drive C using file copying programs like PIP, Sweep
+or WordStar. Once files are copied onto Drive Cs, they will remain there until you
+turn the power off, EVEN IF YOU PRESS THE RESET BUTTON.
+
+The names of your floppy disk drives can be changed even though 'A’ and 'B' are
+embossed on the Osborne front panel. Drive C software allows you to rename both
+Drive C and the floppy disk drives. The Drive C RAM-disk, for instance, should be
+renamed to drive A: in order to run WordStar.
+
+i.
+How To Use This Manual
+
+The red drive indicator light on the front of Drive C works just like the red LEDs
+on your floppy disk drives to let you know when the Drive Cé unit is active.
+
+drive C: drive B:
+= =F
+wr
+
+Copy files
+onto Drive C:
+(renamed drive A‘)
+using PIP.
+
+ARCHIVE AND RETRIEVE
+
+Copy files
+onto Drive C:
+(renamed drive A:)
+using PIP.
+
+Drive C
+
+drive A:
+
+When your Osborne is turned off, Drive C will no longer be powered and files in
+Drive C will be lost. Files on Drive C should be saved (backed up) on floppy disk
+before turning your Osborne off. This can be done using PIP or file copying options
+in programs like WordStar.
+
+ARCHIVE (DCA.COM) automatically stores any or all of the files from Drive C onto
+floppy diskettes. Files on Drive C that are larger than a single floppy diskette
+can be stored on a set of diskettes. ARCHIVE algo labels and organizes each backup
+set.
+
+RETRIEVE automatically reloads and reconstructs the original Drive C files from your
+Archival backup set.
+
+BackPac, the optional Drive C power supply/battery backup system, fits in your
+keyboard. BackPac maintains the contents of Drive C even if the Osborne is turned
+off. Adding BackPac gives Drive C permanent storage capability, in essence letting
+Drive C act as an ultra-fast hard disk.
+
+No electrical or mechanical modifications of your Osborne are necessary with
+BackPac.
+SSS
+LN How To Use This Manual
+
+Backup (copy) individual Backup files as large
+Drive C files onto as 376K onto a
+floppy diskettes set of “Gh
+using PIP. Ds] using Archive,
+
+Tae, maximum sce Cl and reconstruct
+
+ive or pores eee Dre the original contents
+capacity of your ies y Retrieve
+floppy diskette 2 ‘
+
+BackPac supplies coupmyous _ ‘Files are retained
+continuous power even when your
+
+to Drive C PoweR —- Osborne is turned off.
+BackPac
+PRINT BUFFER
+
+The Drive C Print Buffer lets you use your Osborne while simultaneously printing
+files. Once installed, Print Buffer operation is automatic.
+
+Your printer normally ties up your Osborne until it has completed printing a file.
+The Print Buffer stores the print output from your Osborne at high speed and quickly
+returns control of your Osborne to you. You may continue to run programs while the
+Print Buffer automatically sends the print output to the printer.
+
+THE PRINT BUFFER WORKS WITH BOTH RS-232 SERIAL AND CENTRONICS PARALLEL PRINTERS.
+
+oe Siow
+Print Output
+
+ber
+
+oe >) eum)
+
+Fast
+Print Output
+
+‘osbome 1
+CPU)
+
+Put Outout —
+
+ET 2
+
+The Print Buffer quickly stores the print output.
+
+Panter
+
+Your Osborne can be used for computing
+while the Print Buffer is printing.
+How To Use This Manual
+
+The Drive C unit is partitioned by its software into a RAM~disk space and a Print
+Buffer space.
+You can partition the Drive C for Print Buffer use in two different ways:
+
+The FIXED BUFFER is a space on Drive C that is reserved solely for Print Buffer use.
+Eight Fixed Buffer sizes are available, from 16K to 128K.
+
+The DYNAMIC BUFFER uses any space on the Drive C which is not being used as RAM-disk
+space. As you add or delete files from the RAM-disk, the Dynamic Buffer
+automatically increases or decreases in size. Up to the full capacity of the Drive
+C can be used as the Print Buffer using the Dynamic Buffer option.
+
+Drive
+
+er ia
+a
+
+Simultaneous use
+
+=
+at
+
+wy
+FIXED BUFFER DYNAMIC BUFFER
+ay see
+CPU ‘Printer
+‘SS
+J __A
+aa ae
+
+You can queue any number of files to be printed from both floppy disks and the RAM-
+disk. Files to be printed are stacked in the Print Buffer and will be printed in
+
+first-come, first-served order.
+ete
+A How To Use This Manual
+
+The Drive C Utility program (DCU.COM) gives you a number of helpful tools to use
+with the Print Buffer. With DCU you can determine and optimize the space available
+for the Dynamic Buffer. You can also pause, restart and clear the Print Buffer.
+
+QUICKPAC
+
+QuickPac makes using Drive C even easier. A single keystroke starts QuickPac.
+QuickPac installs Drive C, renames Drive C and installs your choice of Print
+Buffers. It can also copy the contents of one or both of your floppy disks to Drive
+C and automatically run a program.
+
+The QuickPac Installation program is an easy-to-use, menu~selection program that
+lets you choose from the various QuickPac options.
+TURBOPAC
+
+TurboPac is the powerful Drive C/Trantor hard disk system. TurboPac software turns
+your Drive € into a hi-speed Cache Buffer for the Trantor hard disk.
+
+TurboPac automatically keeps your most frequently used programs and data in the
+Drive C Cache Buffer, increasing the hard disk throughput by as much as five times.
+
+The 192K TurboPac system uses all of Drive C as a Cache Buffer. The 384K TurboPac
+system partitions Drive € into a 256K Cache Buffer and a 128K Fixed Print Buffer.
+
+The hard disk attaches to the Drive C PRINTER/HARD DISK/8088 port and no mechanical
+modifications are necessary.
+
+Drive C can still be used for portable operation by detaching the hard disk and
+using the normal Drive C RAM-disk/Print Buffer software.
+
+VERY [Deve C:
+‘Osborne 1\ i mK ASTo q| — > Tantor Hard Disk
+ao — =p, )
+eg
+‘Osborne 1
+CPU VERY
+rast
+
+4 = eqynrr=
+
+FAST =—
+PRINT OUTPUT % pe
+Aninipe=—__)
+
+10
+i”
+Getting Started
+F
+
+CONTENTS
+
+2-1 MECHANICAL INSTALLATION OF Drive ¢
+
+2-2 REMOVING THE Drive € UNIT
+
+2-3 USING DISPLAY SCREENS WITH Drive C
+
+2-4 MAKING YOUR COPY OF THE Drive C SOFTWARE
+2-5 FOR USERS OF REV 1.2 Ols
+
+2-6 TESTING YOUR Drive C INSTALLATION
+
+2-7 TROUBLESHOOTING THE Drive C INSTALLATION
+2-8 INSTALLING Drive C WITH YOUR PRINTER
+
+2-9 TROUBLESHOOTING THE PARALLEL PRINTER INSTALLATION
+2-10 COPYING YOUR CP/M ONTO THE DC USER DISK
+2-11 TESTING YOUR PRINTER OPERATION
+
+2-12 TROUBLE-SHOOTING YOUR PRINTER, PART 2
+2-13 QUICK CHECKLIST OF Drive C INSTALLATION
+
+2-1 MECHANICAL INSTALLATION
+
+** DO NOT INSTALL YOUR Drive C UNIT YET **
+
+Housed in a stainless steel case, Drive C is a rugged, solid state device which fits
+snugly into the right-hand floppy diskette storage pocket of the Osborne 1.
+
+Drive C has been designed specifically for your Osborne 1. It generates very little
+heat and needs no maintenance. Installation does not require any electrical or
+mechanical modifications to your Osborne nor are any special tools required.
+
+Two cables attach Drive C to the Osborne. One cable plugs into the Ext. Video edge
+connector. The other cable plugs into the IEEE-488 edge connector. You can think
+of these cables as “extension cords”.
+
+The Drive C edge connectors located at the end of the “extension cord” cables
+
+duplicate the Osborne Ext. Video and IEEE-488 edge connectors. You don't lose the
+use of your Osborne connectors by adding Drive C.
+
+11
+7. Y
+d J Getting Started
+ys)
+
+For instance, if your parallel printer was normally connected to the Osborne IEEE-
+488 connector, you would instead connect it to the new edge connector at the end of
+the “extension cord” cable on the Drive C, labeled PRINTER/HARD DISK/8088.
+
+CABLE ADJUSTMENT
+
+Drive C works with both brown and blue case Osborne 1's. There are minor mechanical
+differences between these machines, but Drive C's design compensates for these
+differences.
+
+The Drive C “Extension Cord" cables reach down from the right-hand floppy diskette
+pocket to the IEEE-488 and Ext. Video edge connectors on the Osborne 1. The
+distance from the right diskette pocket to the edge connectors is different on Brow
+and Blue case Osborne is.
+
+Drive ©
+SF hig distance
+fol the brown case
+
+96 Joe
+y€ is Yel" greater
+VY ¥ lt on the
+bide case.
+
+(EEE 488 Ext. Video
+
+12
+Ye
+Getting Started d
+’
+
+Y ADJUST YOUR CABLE LENGTHS, VIEW YOUR Drive C FROM ITS FOAM COVERED
+SIDE AND FOLD THE CABLES AS SHOWN.
+
+BROWN CASE
+
+Base of Drive C
+Foam
+
+BLUE CASE
+
+Base of Drive C “SS
+Foam
+
+13
+,
+
+ry
+/ : J Getting Started
+be
+
+BROWN CASE POCKET BEIGHT ADJUSTMENT
+For owners of BROWN CASE Ols only (NOT for BLUE CASE OWNERS)
+
+The height of the floppy diskette storage pocket varies widely among brown case
+Osborne ls.
+
+Two self-adhesive bumpers are enclosed with your Drive C unit. Attached to the top
+surface of your Drive C, they provide a snug fit regardless of the height of your
+Osborne's pocket.
+
+Please peel the protective covering from each bumper and attach as follows:
+
+ONE BUMPER SHOULD BE PLACED ALONG EACH UPPER EDGE OF YOUR Drive C UNIT
+
+Locate the bumpers toward the rear
+for deeper pockets.
+
+Locate the bumpers forward
+14 for narrower pockets.
+.
+Getting Started
+
+yd
+
+Drive C UNIT INSTALLATION
+** MAKE SURE YOUR OSBORNE IS TURNED OFF **
+
+Slide the Drive C unit into the right-hand floppy diskette storage pocket until the
+Drive C front panel is seated flush with the Osborne 1 front panel.
+
+Connect the short 20-conductor VIDEO "Extension Cord” cable from the Drive C to the
+Osborne 1 Ext. Video edge connector.
+
+Connect the long 26-conductor IEEE~488 “Extension Cord” cable from the Drive C to
+the Osborne 1 IEEE-488 edge connector. The IEEE-488 cable should fit between the
+RESET button and the BATTERY connector.
+
+Enclosed with your Drive C is a self-adhesive plastic cable clamp for the IEEE-488
+cable. Remove the protective covering and install the cable clamp between the 01
+front panel Keyboard connector and the Brightness control knob. This clamp will
+conveniently keep the Drive C signal cable in its proper position.
+
+Se re EN
+Ls oO =a
+
+a ci Sa)
+
+;
+
+15
+ee
+
+ra
+if ) Getting Started
+
+2-2 REMOVING THE Drive C UNIT
+
+To remove your Drive C unit, please follow these steps:
+REMOVE the black cable clamp from the Osborne front panel and store for future use.
+
+DETACH the long cable from the Osborne IEEK-488 edge connector. Use pliers (channel
+lock pliers work best) to gently pull the black connector body at the Osborne end of
+the cable. DO NOT PULL ON THE CABLE ITSELF.
+
+DETACH the short cable from the Osborne Ext. Video edge connector. Use pliers to
+gently pull the black connector body at the Osborne end of the cable. DO NOT PULL
+ON THE CABLE ITSELF.
+
+GENTLY, so you won't mar either Drive C or your Osborne, pry the front pwel of the
+Drive C unit out from the floppy diskette storage pocket. Use a small screwdriver
+as a lever until the Drive C unit is about 1/4 inch out of the pocket. Continue
+pulling out the Drive C unit by hand, grasping the front panel between the two
+“extension cord” cables.
+
+16
+Getting Started
+
+IETS nrnEnEE ESI nEIEErEneeeesecmeee ==
+
+2-3 USING DISPLAY SCREENS WITH Drive C
+
+EXT. VIDEO/BATTERY PORT
+
+The Drive C EXT. VIDEO/BATTERY edge connector above the short “extension cord” cable
+is an exact duplicate of the Osborne Ext. Video edge connector.
+
+TO USE YOUR OSBORNE INTERNAL MONITOR
+
+Your 5" internal monitor is enabled by attaching the black VIDEO SHORTING PLUG
+supplied with your Osborne. This plug has a label which says, "DO NOT REMOVE WHILE
+POWER IS ON”.
+
+When the Video Shorting Plug is plugged onto the Drive @ EXT. VIDEO/BATTERY edge
+connector, video signals are directed to your internal monitor. With the Video
+Shorting Plug installed on your Drive C, your Osborne keyboard can be attached and
+the case closed without interference.
+
+Please, DO NOT INSERT OR REMOVE the Video Shorting Plug with power ON.
+
+TO USE THE OSBORNE EXTERNAL MONITOR WITH 52-COLUMN DISPLAY
+
+Attach the cable from the Brown Osborne external monitor to the Drive C EXT.
+VIDEO/BATTERY edge connector.
+
+TO USE EXTERNAL VIDEQ MONITORS WITH 52-COLUMN DISPLAY.
+
+Commercial external video monitors require composite video signals. If you have a
+composite video monitor then you've been using an adapter connected to your Osborne
+Ext. Video edge connector. Drive C has its own built-in video adapter and your
+adapter IS NO LONGER NECESSARY.
+
+The VIDEO jack on the front panel of the Drive C unit provides composite video
+signals for your external monitor. These signals are always available regardless of
+whether the Video Shorting Plug is installed or not.
+
+Attach the cable from your external composite video monitor to the RCA VIDEO jack.
+Turn the CONTRAST control on your Osborne 1 all the way UP, and re-adjust the
+BRIGHTNESS control on your Ol (if you are using the internal display) to your taste.
+
+You may have to readjust the BRIGHTNESS, CONTRAST and HORIZONTAL SYNC controls on
+your external display to get @ clear picture centered in the screen.
+
+If you use an external monitor and DO NOT want your internal monitor on, DO NOT
+install the Video Shorting Plug on Drive C.
+
+If you use an external monitor and want BOTH the external and internal monitors on,
+DO install the Video Shorting Plug on Drive C.
+
+7
+f,
+Getting Started
+Fy)
+
+TO USE 80-COLUMN DISPLAYS
+
+If you have an 80-column display Adapter (such as Osborne's ScreenPac) installed, DO
+NOT attach your external monitor cable to the Drive C VIDEO jack. Continue to use
+the 80-column composite video RCA jack supplied with your 80-column upgrade.
+
+Osborne 80-column upgrades require the Video Shorting Plug to be installed on the
+Drive C EXT. VIDEO/BATTERY edge connector.
+
+Drive C works with all 80-column upgrades made by independent manufacturers that DO
+NOT use the IEEE-488 port. Follow the manufacturers instructions and use the new
+
+80-column RCA jack provided with the upgrade. If any connections to the Osborne
+Ext. Video connection were required, use the Drive C EXT. VIDEO/BATTERY connector
+
+instead.
+TO USE THE OSBORNE EXTERNAL MONITOR WITH 80-COLUMN DISPLAY
+If you have an-Osborne external monitor with the special 80-column adapter, attach
+
+the adapter to the Drive C EXT. VIDEO/BATTERY edge connector and the cable to the
+80-column RCA jack.
+
+External Monitor - 52 Column
+
+Video Shorting Plug
+(Optional)
+
+External Monitor - 80 Column Osborne External Monitor -
+es Sind Ea 52 Column
+
+i ~
+Getting Started
+
+LL
+
+2-4 MAKING YOUR USKR COPY OF THE Drive C SOFTWARE
+
+First we'll cover how to check your
+
+sure it contains the correct files.
+
+Turn ON power to your computer.
+
+If either your internal or external
+previous Section, 2-3, to make sure
+
+correctly.
+
+#** IMPORTANT *#*
+
+NOTE the Rev Number displayed in the rectangular box after turning on power but
+
+before loading CP/M.
+
+1.44.
+
+Drive C LOADER & ARCHIVE DISK using XDIR to make
+
+display is not just right, please return to the
+you have connected and adjusted your display(s)
+
+This number is two or three digits ranging from Rev 1.2 to Rev
+
+You will need a blank diskette and a copy of your Osborne CP/M System and Utilities
+diskette for the this Section.
+
+Please label the blank diskette DC USER DISK.
+
+Single density 01's sometimes have two CP/M System disks, one labeled
+DISK and the other labeled CP/M UTILITY DISK.
+
+Use the one called the
+
+CP/M SYSTEM
+SYSTEM DISK.
+
+DO NOT REMOVE THE WRITE PROTECT TAB FROM YOUR ORIGINAL Drive C LOADER & ARCHIVE
+
+Insert your CP/M system disk in drive A: and the Drive C LOADER & ARCHIVE DISK in
+
+DISK!
+
+drive B:.
+ce/M SYS DISK
+ASM +COM
+AUTOST -COM
+COPY -COM
+DDT -COM
+DUMP -COM
+ED -COM
+HELP COM
+LOAD -COM
+MOVCPM -COM
+PIP -COM
+SETUP COM
+STAT -COM
+SUBMIT «COM
+SYSCEN -COM
+XDIR -COM
+XSUB -COM
+
+Drive C NOT INSTALLED
+
+LOADER & ARCHIVE
+
+AUTOST
+DCA
+DCL
+peq
+beq
+DCQaUT
+DCQINS
+peu
+DED
+PIP
+PRN
+XDIR
+
++COM
+COM
++COM
+COM
+«DAT
+-COM
+-COM
+-COM
+«SPR
+COM
+«TST
+-COM
+
+19
+
+f,
+Getting Started
+F’
+
+Press <CR> to load CP/M. The A> should appear on your screen.
+
+If you have AutoStart on your CP/M Systems and Utilities diskette, a menu will
+appear on your screen. Press <ESC> to get the A>.
+
+Run XDIR from A: to check B:
+
+You should see the following screen:
+
+If your LOADER & ARCHIVE DISK is DIFFERENT from this display (except for the version
+number of XDIR, which will vary) please write or call Drive C for assistance.
+
+Next, we'll explain how to copy the Drive C LOADER & ARCHIVE diskette using
+COPY.COM. Type the Copy command as shown:
+
+CNN ton cove son a:
+
+Remove the CP/M SYSTEM DISK from drive A:.
+
+CP/M SYS DISK A: B: LOADER & ARCHIVE
+
+20
+i” Y
+Getting Started
+F
+
+Insert the DC USER DISK in drive A:.
+
+DC USER DISK Az B: LOADER & ARCHIVE
+
+Blank
+
+Drive C NOT INSTALLED
+
+Select the COPY option which copies All of the diskette (including the System
+Tracks) FROM drive B: TO drive A:,
+
+<CR> |
+BE CAREFUL NOT to press <CR> when COPY asks if you want to copy another disk or to
+return to CP/M. If you do press <CR> at that point you will probably get a boot
+error later with this DC USER DISK.
+DO NOT SYSGEN OR WRITE PROTECT YOUR DC USER DISK!
+
+Remove your LOADER & ARCHIVE DISK and save it in a safe place for future reference.
+
+DC USER DISK A B: LOADER & ARCHIVE
+AUTOST COM
+DCA -COM
+DCL -COM
+Deg + COM
+DeQ DAT
+DegaUT =. CON
+DCQINS COM
+Deu COM
+DFD +SPR
+PIP =COM
+PRN -TST
+XDIR +COM
+
+Press the [RESET] button.
+
+= 21
+
+T.
+Getting Started
+F)
+
+2-5 FOR USERS OF REV 1.2 Ols ONLY
+
+If you have a single density computer AND the Rev Number (the number in the
+rectangular box after power up or Reset) of your 01 is 1.2, then you MUST put CP/M
+onto your DC USER DISK next.
+
+If your Ol's Rev Number is any other number (such as 1.3 or 1.44) please skip this
+step and proceed to Section 2-6.
+
+Remove the DC USER DISK from drive A:.
+
+DC USER DISK A: B: NO Diskette
+
+Drive C NOT INSTALLED
+Tarn OFF power to your computer, then turn it back ON.
+
+Put your CP/M System Disk in drive A: and your DC USER DISK in drive B:
+
+ce/M SYS DISK A: B: DC USER DISK
+
+Drive C NOT INSTALLED
+Getting Started
+
+"|
+<)
+
+SECTION 2.5 ONLY FOR USERS OF REV 1.2 Ols (continued)
+
+Press <CR> and, if necessary, <ESC> to boot up to the A>.
+
+S YSGEN: Run SYSGEN from drive A:
+
+You will need to check the set up of your CP/M system so make sure the printer port
+is assigned correctly.
+
+| sm Run SETUP from A: to check B:
+
+You should check to make sure your system is setup as follows:
+
+A PRINTER CENTRONICS (Unless you have an RS-232 Serial printer)
+
+B BAUD RATE 1200 (assuming your Serial printer is set to 1200 baud.
+Baud rate has no effect on Centronics printer)
+
+C SCREEN 128 (or whatever size you usually use)
+
+D AUTO SCROLL ON
+
+E FUNCTION KEYS: have no effect on this test procedure, don't use them.
+F ARROW KEYS CP/M
+
+Save the correct setup configuration onto the DC USER DISK in drive B:.
+
+23
+
+Re ee
+
+wr
+d ) Getting Started
+t y
+
+2-6 TESTING YOUR Drive C INSTALLATION
+
+** DO NOT INSTALL YOUR PARALLEL PRINTER CABLE YRT **
+Just as you cannot use a program like WordStar until you have loaded it into your
+Osborne, you cannot use Drive C until you have installed (loaded) the Drive C
+software.
+
+With our set of programs called QuickPac installing Drive ¢ as a RAM-disk is very
+simple and requires only a single key stroke.
+
+The DC USER DISK should be in drive A:.
+
+DC USER DISK Az B: NO Diskette
+
+Drive C NOT INSTALLED
+
+Press the [RESET] button.
+
+Press <CR> to start QuickPac.
+
+QuickPac will:
+
+1. install the Drive C RAM-disk software
+
+2. rename the Drive C unit to drive A: and the left-hand floppy to drive C:.
+3. copy the contents of the DC USER DISK to the Drive C unit using PIP.
+
+4. run XDIR on the Drive C unit, now renamed to drive A:
+
+QuickPac displays messages as it is running. When the QuickPac operation is
+completed it will alert you with a beep and a message. The entire operation should
+take about one minute.
+Sa
+é
+Getting Started d
+F)
+
+DC USER DISK c: B NO Diskette
+
+DCA ~COM DCU +COM
+DCLOADED .-SYS Drive C: .SYS
+DCN -COM PIP -COM
+DCQAUT -COM PRN TST
+DCQINS -COM XDIR COM
+
+The Drive C RAM-disk should now be installed as a third logical drive, drive A:.
+You should see the following display:
+
+IF YOU HAVE A 192K Drive C UNIT:
+
+25
+
+a ser
+’,
+Getting Started
+>]
+
+IF YOU HAVE A 384K Drive C UNIT:
+
+If your screen shows the correct information, your Drive C is now successfully
+installed. Please continue to Section 2-8 to install and test your printer.
+
+If your screen does NOT show the CORRECT information, please continue to the next
+Section, Trouble-shooting the Drive C Installation.
+
+26
+
+v.
+Getting Started d
+F)
+
+2-1 ‘TROUBLE-SHOOTING THE Drive C INSTALLATION
+Before trouble-shooting the RAM-disk installation, REMOVE the DC USER DISK from the
+floppy disk drive and turn the Osborne's power OFF.
+
+1. Check that Drive C's EXT VIDEO and IEEE-488 cables are securely connected to
+the Osborne edge connector contacts.
+
+2. If the contacts on your Osborne edge connectors are not clean, there may not be
+a reliable electrical connection between Drive C and your Osborne.
+
+Gently wipe the contacts clean, using a cotton swab slightly wetted with rubbing
+alcohol.
+
+3. Osbornes with silver colored (solder coated) edge contacts can become
+contaminated with time. This can be a source of continuing electrical problems with
+both Drive C and printer cables. Gold-plated replacement contacts are commercially
+available to remedy this problem.
+
+4. YOUR CENTRONICS-STYLE PRINTER CABLE SHOULD NOT BE CONNECTED DURING INITIAL RAM-
+disk INSTALLATION AND TEST. Disconnect it if it was connected and run the
+installation tests again.
+
+5. Make sure that the test was run with the DC USER DISK.
+
+6. If you have a single density 01 with Rev Number 1.2, make sure that you put
+CP/M on your DC USER DISK using SYSGEN as detailed in Section 2-5.
+
+7. Make sure your DC USER DISK is NOT write protected with a tab.
+
+8. If you are re-running the DC USER DISK QuickPac test:
+
+First: ALWAYS REMOVE the DC USER DISK and turn OFF the 01 power,
+Second: Wait five seconds,
+
+Third: ‘Turn power back ON,
+
+Fourth: Put the DC USER DISK in drive A:
+
+THEN: Press <CR> to restart QuickPac.
+
+If re-running the test still doesn’t work, you should start over by recopying the
+Drive C LOADER & ARCHIVE Diek onto your DC USER DISK step by step.
+
+27
+eS
+i ‘#
+d Getting Started
+|
+
+SS
+
+2-8 ‘INSTALLING Drive C WITH YOUR PRINTER
+
+IF YOU HAVE A SERIAL PRINTER
+
+Skip this Section and Section 2-9 which cover installing and trouble-shooting
+Centronics printers and go to Section 2-10, Putting your CP/M on the DC USER DISK.
+
+IF YOU HAVE A CENTRONICS PARALLEL PRINTER
+** DO NOT ATTACH YOUR PRINTER CABLE YET **
+
+Installing your parallel printer with Drive C requires no special software or
+hardware. Printers and printer cables, however, are very individualized producte,
+often eccentric in their design and even cantankerous in their performance. This
+Section will guide you through the installation of your printer with Drive C to make
+sure that it is working properly. The Print Buffer will not be installed yet.
+
+Your parallel printer is normally attached to the IEEE-488 edge connector on your
+Osborne. The PRINTER/HARD DISK/8088 edge connector on the Drive C duplicates the
+parallel port function of the Osborne IEEE-488 port. To use your parallel printer
+with Drive C, your printer cable will be connected to the Drive C PRINTER/HARD
+DISK/8088 connector instead of the Osborne IEEE-488 connector.
+
+‘** =~ TEEE-488 COMMUNICATIONS PROTOCOL IS NOT SUPPORTED **
+ON THE Drive C PRINTER/HARD DISK/8088 EDGE CONNECTOR
+
+Incorrectly wired cables may interfere with Drive C operation. This Section will
+test your cable and explain how to easily fix it if is incorrectly wired.
+
+Most Centronics parallel printers change the electrical conditions of the cable when
+they are turned OFF, causing problems for the Drive C unit similar to those caused
+by incorrectly wired cables.
+
+YOUR CENTRONICS-SYLE PRINTER SHOULD ALWAYS BE ON FOR PROPER Drive C OPERATION IF ITS
+CABLE IS PLUGGED INTO THE Drive C. Neither your printer nor Drive C will be harmed
+by keeping your printer turned ON during Drive C use.
+
+Also, the printer cable should be attached to or removed from the PRINTER/HARD
+DISK/8088 port on the Drive C unit ONLY when your 01 computer's power is OFF.
+Getting Started
+
+INSTALLING YOUR CENTRONICS PARALLEL PRINTER CABLE
+
+Remove the DC USER DISK and turn the 01 power OFF.
+
+DC USER DISK A: B: NO DISK
+
+Drive C NOT INSTALLED
+
+Attach the parallel printer cable to the PRINTER/HARD DISK/8088 edge connector.
+Connect it in the same way it was connected to the Osborne IEEE~488 port, i.e. with
+the pin 1 of the cable to the right.
+
+Turn ON the power to your printer.
+
+Turn ON the power to your Osborne 1 and put the DC USER DISK back in drive A;.
+
+DC USER DISK AD B: NO DISK
+
+Drive C NOT INSTALLED
+
+Press <CR> to run QuickPac again, You should see the same sequence of events as
+before when you loaded QuickPac without the printer.
+
+T£ QuickPac completed its operation exactly as before, then skip the next Section
+and proceed to Section 2-10, Putting your CP/M on the DC USER DISK. Actual printer
+operation will be tested in Section 2-11.
+
+If your QuickPac test did not function exactly as before, or the QuickPac XDIR
+
+display gave different information about the files on the Drive ¢ unit, please
+proceed to the next Section, Trouble shooting the Parallel Printer Installation.
+
+29
+-
+ly J Getting Started
+
+ys
+
+2-9 TROUBLESHOOTING THE PARALLEL PRINTER INSTALLATION
+
+1. Remove the DC USER DISK and turn the Osborne power OFF. This will clear the
+results of the previous test.
+
+DC USER DISK A: B: WO Diskette
+
+Drive C NOT INSTALLED
+
+2. If you tested your parallel printer installation with the printer OFF, please
+try it again with the printer power ON.
+
+3. Make sure your printer cable is firmly plugged into the Drive C PRINTER/HARD
+DISK/8088 port edge connector, AND into the printer.
+
+4. Make sure your printer is ON-LINE (selected).
+
+5. If you have SYSGEN'd the DC USER DISK for Rev Number 1.2 computers as we
+instructed in Section 2-5, please check the disk's setup by using your copy of
+SETUP.COM (as explained in Section 2-5). Make sure the disk is set up for
+Centronics printer, NOT serial or IEEE-488.
+
+6. Drive C works correctly with all Osborne-standard parallel printer cables.
+Some parallel printer cables do not conform to standard Osborne specifications and
+have an extra unnecessary wire. If you have such a cable, both your printer AND
+Drive € will not work correctly.
+
+An incorrectly wired cable is a VERY COMMON problem. To check your parallel printer
+cable, open the housing at the PRINTER END of the cable. The housing can usually be
+opened with a screwdriver or popped open with your fingernails.
+
+There should NOT be a connection to pin 12 on the 36-pin connector at the printer
+end of the cable. If there is a wire attached to pin 12, it must be disconnected.
+
+Disconnecting this wire has no effect on your printer when used either with OR
+without Drive C.
+
+DO NOT MAKE ANY MODIFICATIONS TO THE OSBORNE END OF YOUR PRINTER CABLE.
+
+30
+7.
+Getting Started "Le
+
+7. Replace the cable housing and turn the Osborne power ON.
+8. GO BACK TO SECTION 2-8 AND RERUN THE QuickPac TEST.
+
+9. If you stili do not get the proper results, call Drive C for assistance.
+
+31
+Getting Started
+
+2-10 COPYING YOUR CP/M ONTO THE DC USER DISK
+
+IF YOU HAVE A REV NUMBER 1.2 OSBORNE 1
+
+If you have a Rev Number 1.2 Osborne 1 you should have already copied CP/M onto your
+DC USER DISK back in Section 2-5. If you have not, go back to 2-5. 00 NOT USE THIS
+SECTION. If you copied CP/M in Section 2-5, PLEASE SKIP THIS SECTION and go to
+
+Section 2-11, Testing Your Printer Operation.
+I YOU HAVE A REV NUMBER 1.3 - 1.44 OSBORNE 1
+
+Before trying the next test you will need to copy CP/M from one of the disks you
+
+normally use to boot up onto the DC USER DISK. For this operation you'll use the
+
+SYSGEN and SETUP utilities. Your versions of these two programs may give a slightly
+
+different display from that shown below, but the procedure to follow is the same.
+
+Remove the DC USER DISK and turn the 01 power OFF.
+
+Dc USER DISK A: B: NO Diskette
+
+Drive C NOT INSTALLED
+
+Turn ON the power to your Osborne 1. Put the CP/M SYS DISK in drive A: and the DC
+USER DISK back in drive
+
+DC USEB DISK
+
+CP/M SYS DISK =
+
+Drive C NOT INSTALLED
+
+32
+7 Y
+Getting Started
+
+r
+Press the [RESET] button.
+Press <CR> (and, if necessary, <ESC>) to boot up CP/M and get the A>.
+Run SYSGEN from A: (get system from B:)
+
+33
+
+v.
+d Getting Started
+s
+
+You now need to check the setup of your CP/M system on the DC USER DISK to make sure
+the printer port is assigned correctly.
+
+Run SETUP from A: to check B:
+
+You should check to make sure your system is set up as follows:
+
+A PRINTER CENTRONICS (or SERIAL if you have an RS-232 Serial printer)
+
+B BAUD RATE 1200 (assuming your Serial printer is set to 1200 baud.
+Baud rate has no effect on Centronics printer)
+
+C SCREEN 128 (or whatever size you usually use)
+D AUTO SCROLL ON (or OFF if you are using OCC's ScreenPac)
+E FUNCTION KEYS: have no effect on this test procedure, don't use them
+
+F ARROW KEYS CP/M (or WORDSTAR if you prefer)
+
+If you have changed the setup please BE SURE TO SAVE THE NEW SETUP ONTO drive B:.
+
+When you have finished checking and saving your setup press CR> to exit to CP/M.
+
+Remove the CP/M SYSTEM DISK from drive A: and insert the DC USER DISK in drive A:.
+
+‘ prompt
+
+DC USER DISK Az B: NO Diskette
+
+Drive C NOT INSTALLED
+7. Y
+Getting Started
+F’
+
+2-11 TESTING YOUR PRINTER OPERATION
+
+Now let's make sure your printer (whether Centronics parallel or RS-232 Serial)
+works properly with Drive C.
+
+Make sure:
+
+1. that your printer is ON
+
+2. its cable is connected properly
+
+3. the printer has at least SIX continuous pages of paper
+4. it's ready to print (on-line)
+
+DC USER DISK A: B: NO Diskette
+
+— —- oe
+
+Drive € NOT INSTALLED
+Press the [RESET] button.
+
+Press <CR> to start QuickPac.
+
+After QuickPac runs XDIR (as before in Sections 2-6 and/or 2-8) and gives you the
+cP/M A> prompt, proceed as follows:
+
+To see exactly what the print output should look like, display the file PRN.TST on
+your screen by typing this command:
+
+PRN. TST<CR> Display file PRN.TST on screen.
+
+You should see a pattern repeating over and over. The beginning seven lines of this
+pattern are shown below:
+
+35
+Sane
+(A
+d Getting Started
+t)
+
+To actually print the test file, type this command:
+
+Print PRN.TST using PIP
+
+Your printer should now be printing the same pattern you previously saw onscreen
+with the TYPE command.
+
+The PRN.TST file contains approximately three pages of this test pattern.
+
+If you can print even a few lines your installation is working just fine and you can
+stop the test if you want to.
+
+To STOP the print test: Type “C to clear PIP back to the CP/M A>.
+NOTE: we are not using the Drive C Print Buffer feature for this test, so you will
+not see the next A> prompt until the file is completely printed or until you stop
+the test with “C. If your printer has an internal buffer or if you are using an
+external print buffer box, the printer may keep printing for a while after the
+computer has finished sending characters to the buffer.
+
+IF YOUR SYSTEM HAD PROBLEMS PRINTING PRN.TST
+I€ you had problems printing PRN.TST go on to Section 2-12, Trouble-shooting your
+printer, Part 2.
+
+IF YOUR SYSTEM PASSED THE TESTS
+
+If your system successfully passed all the tests so far, you're ALMOST done with
+installation!
+
+DC USER DISK c: B: HO Diskette
+
+Please remove the DC USER DISK and turn OFF the 01 power.
+f.
+Getting Started d
+y
+
+2-12 TROUBLE-SHOOTING PRINTER OPERATION, PART 2
+
+1. Please check that the DC USER DISK is properly configured for your printer
+(CENTRONICS or RS-232 Serial) using SETUP.COM, Check your DG USER DISK's setup
+against the list at the end of Section 2-10.
+
+2. Check that your printer is on-line and has paper.
+
+3. If you are re-running the DC USER DISK printer operation test:
+
+Firs
+
+ALWAYS REMOVE the DC USER DISK and turn OFF the 01 power,
+Second: Wait five seconds,
+Third: Turn power back ON,
+Fourth: Insert the DC USER DISK in drive A: and press <CR> to rerun QuickPac.
+THEN: § Retype the PIP LST:=PRN.TST command to retry the test.
+4, I£ you are still experiencing difficulties, please contact the Drive C Service
+Department for assistance. We will need to know the following if you call or write
+us to get help fixing your problem.
+a. Is your 01 in a brown or blue case?
+b. Is your 01 eingle- or double~density?
+c. What is your Ol's Rev Number (from the rectangular box on the screen)?
+d. What is your Drive C serial number?
+e. What size is your Drive C (192K or 384K)?
+IF YOUR SYSTEM PASSED THE TESTS
+
+If your system successfully passed all the teats so far, you're ALMOST done with
+installation!
+
+ERA UTOST.COM<CR> Erase AUTOST.COM from C: (DC USER DISK)
+
+DC USER DISK B: NO Diskette
+
+Please remove the DC USER DISK and turn OFF the 01 power.
+
+37
++
+
+Getting Started
+
+2-13 QUICK CHECKLIST OF Drive C INSTALLATION
+
+This list is for your convenience if you ate already thoroughly familiar with your
+computer and CP/M. Please don't use this checklist in place of the step-by-step
+installation guide.
+
+The procedures in Section 2 were developed to GUARANTEE a satisfactory Drive C
+installation EVERY TIME. To make trouble-shooting easier, this checklist refers to
+specific detailed parts of Section 2.
+
+Step 1. Adjust Drive C cable lengths to fit your computer [Section 2-1]
+Step 2. Mechanically install your Drive C unit [Section 2-1]
+Step 3. Reconnect cables and Video Shorting Plug to your display [Section 2-3]
+
+Step 4. Check files on Drive C ARCHIVE & LOADER Disk supplied with your unit
+[Section 2-4]
+
+Step 5. Copy LOADER & ARCHIVE Disk to DC USER Disk [Section 2-4]
+
+Step 6. [Only for ROM Number 1.2 single-density machines] SYSGEN your CP/M system
+onto DC USER Disk [Section 2-5]
+
+Step 7. Run QuickPac, i.e. Drive C's AUTOST.COM program which calls DCQ.COM,
+DCQ.DAT, PIP.COM and XDIR.COM, to test Drive C installation. [Section 2-6]
+If you have problems here, trouble-shoot with (Section 2-7]
+
+Step 8. If you have a Centronics parallel printer, turn off power, reconnect your
+printer cable, rerun QuickPac [Section 2-8]
+If you have problems here, trouble-shoot with [Section 2-9]
+
+Step 9. Put your version of CP/M onto DC USER Disk using SYSGEN [Section 2-10
+Step 10. Check the setup of your DC USER DISK using SETUP.COM [Section 2-10]
+Step 11. Test your entire installation by printing PRN.TST from the Drive C unit
+using PIP.COM and your version of CP/M [Section 2-11]
+If you have problems here, trouble-shoot with [Section 2-12]
+
+The Trouble-shooting Sections (2-7, 2-9 and 2-12) were written to give you the
+ability to easily correct the most common installation problems.
+
+If you run into trouble, make sure you go through the detailed installation
+procedure step-by-step. 99 times out of 100 you can fix just about any problem you
+might encounter very quickly without calling Drive C for help.
+Fitting Drive C To Your Needs
+
+CORTERTS
+
+3-1 THE AUTOMATIC APPROACH
+3-2 THE MANUAL APPROACH
+3-3. USING IT BOTH WAYS
+
+Your Drive C software is very comprehensive. It has been designed for Osborne
+owners of all levels of experience, from the first time enthusiast to the
+professional programmer. If you are a beginner, you'll find it easy to understand
+and simple to use. If you're an old pro, you'll find it versatile and powerful.
+
+Similarly, your Drive C can enhance any application. This section is a brief
+overview of how the different Drive C software features can be used. As you learn
+about your Drive C in the rest of the manual, you might keep in mind which features
+best fit your needs.
+
+3-1 «THE AUTOMATIC APPROACH
+
+QuickPac is the easiest way to use your Drive C. The QuickPac program can install
+ALL of the Drive C features, copy files from one or both of the floppy diskettes in
+your disk drives onto Drive C and run a program simply by pressing the <RETURN> key.
+
+If you are a relatively new user we suggest you use QuickPac. The QuickPac
+Installation program is menu-driven and requires no technical knowledge. It lets
+you configure QuickPac to automatically install Drive C with the features you need
+each time you start your Osborne.
+
+QuickPac has the unique feature of remembering if it has copied files onto your
+Drive C so that if you press the RESET button, QuickPac will re-install the Drive C
+features you've chosen (like a new drive name or the Print Buffer) without recopying
+files.
+
+If you're a more experienced user who does the same procedures on a regular basis
+(like loading your accounting or data base program each day), you'll find it very
+convenient to setup and use QuickPac to automatically configure your system. The
+QuickPac Installation program creates a data file which QuickPac uses to find out
+which Drive C options you want to install (for instance, what program to run).
+
+If you routinely use several programs, you can create a different QuickPac setup for
+each diskette set. As an example, one QuickPac setup might rename Drive C to drive
+3, copy WordStar and your document files onto your Drive C unit and run WordStar
+automatically. A different QuickPac setup might copy your accounting data files
+onto Drive C and run your General Ledger program from your floppy disk.
+
+Finally, if you're an experienced Osborne owner working with an inexperienced user
+
+(for instance, a new employee), you might want to setup QuickPac to automatically
+configure your system for frequently required jobs.
+
+39
+
+| Ni ae
+>.
+
+de Fitting Drive C To Your Needs
+¥)
+
+3-2 ‘THE MANUAL APPROACH
+
+The Drive C commands have a very simple structure. ALL the Drive C features can be
+installed manually with a one-line statement (maximum length - 9 characters plus
+<RETURN>). If you do many different operations with your Osborne or if you are a
+programmer, you'll probably find it more convenient to use Drive C manually.
+
+Because the Drive C commands are simple and short, you can put many alternate
+Drive C commands on your function keys. For instance, one function key might
+install Drive C as drive A: with the Dynamic Print Buffer. A second function key
+might install Drive C as drive C: with a 16K Fixed Print Buffer.
+
+THE DCA program (ARCHIVE and RETRIEVE) can store and reconstruct the contents of
+Drive C, including files larger than the capacity of a floppy disk. DCA is also
+much faster than the standard QuickPac file copy function, which uses PIP.
+
+Storing commonly used sets of files onto an Archive diskette set can be a very
+efficient way to use Drive C. The RETRIEVE portion of DCA can be used automatically
+so that a single function key will load an Archive set onto Drive C quickly. You
+could, for example, make one function key give the command: DCA R B<CR> which
+retrieves the contents of the Archive set in drive B: onto the Drive C unit.
+
+40
+Sa ae
+
+» |
+Fitting Drive C To Your Needs és
+4
+
+3-3 USING IT BOTH WAYS
+
+Finally, the most powerful way to use your Drive C is with a combination of
+techniques. QuickPac can be started manually by using the DCQAUT command rather
+than Autostart. By creating different QuickPac data files for different diskette
+sets, you can use QuickPac with your function keys to easily perform complex
+routines when you need them.
+
+The remote RETRIEVE command, DCA R B, can be run automatically as part of QuickPac
+so that a single function key can start QuickPac and rapidly load new files onto
+Drive C using RETRIEVE and Archive sete.
+
+QuickPac can also be custom configured much like a complex Submit file.
+Instructions for creating custom QuickPac setups are included in the appendices,
+
+If you are an experienced user, the combination of function keys, QuickPac and DCA
+
+(ARCHIVE and RETRIEVE) will offer you almost unlimited flexibility for using Drive C
+with your Osborne 1.
+
+4l
+
+a
+
+, CP/M Tutorial
+
+4-1 OPERATING SYSTEMS
+
+4-2 FORMATTING DISKS
+
+4-3 PUTTING CP/M ON DISKS USING SYSGEN
+4-4 FILES AND DIR
+
+4-5 XDIR
+
+4-6 RENAMING FILES
+
+4-7 COPYING FILES WITH PIP
+
+4-8 ERASING FILES
+
+4-9 CP/M ERROR MESSAGES
+
+Many Osborne owners have successfully used their Osborne 1 without learning about
+CP/M, the Osborne 1's operating system
+
+If you've never learned to use PIP or DIR or ERA, the following is an easy-to-use
+tutorial for using CP/M.
+
+It is essential that you become familiar with a few basic CP/M commands if you are
+to use your Drive Cg efficiently and productively. This tutorial will guide you
+step-by-step through a number of these commands.
+
+If you have a single-density Osborne, you will need a COPY of your CP/M System
+diskette. If you have a double-density Osborne, you will need a COPY of your CP/M
+
+System and Utility diskette.
+
+This diskette will be referred to as the CP/M SYS DISK. The CP/M SYS DISK must NOT
+be Write Protected (it should NOT have a tab on it).
+
+You will also need a new, UNformatted diskette. Please label the UNformatted
+diskette TEST DISK.
+
+Your Drive Cg, although mechanically installed, will not be used yet.
+
+42
+CP/M Tutorial
+
+4
+
+4-1 OPERATING SYSTEMS
+
+Your computer is a combination of HARDWARE and SOFTWARE.
+
+Osborne 1 itself. Software are the programs that run oa the hardware.
+
+you use like WordStar are called APPLICATION programs.
+
+tasks you originally bought your Osborne for, like word processing.
+
+The hardware is the
+
+The programs
+
+They perform the specific
+
+Different computer manufacturers do not design their hardware exactly alike. The
+authors of software want their programs to run on as many kinds of computers without
+rewriting their programs for each specific machine.
+
+A method was needed that allowed one version of a program to run on many different
+
+kinds of hardware.
+
+Similarly, the manufacturers of peripheral equipment, like printers and monitors,
+want their products to work on many different kinds of computers.
+
+A special kind of software has been developed to solve these problems.
+software is called the OPERATING SYSTEM.
+
+This special
+
+Picture the operating system software as a buffer between the hardware on one side
+and the peripherals and application programs on the other.
+
+Operating
+‘System
+
+Butter
+
+Sottware & Peripherals
+
+The side of the buffer that the peripherals and the application programs see always
+looks the same, regardless of the type of hardware.
+
+The side of the buffer that talks to the hardware is adjusted by each manufacturer
+
+to work with his specific hardware.
+
+The result 4s that many different brands of hardware using this operating system
+look EXACTLY alike to the people who write application programs and build peripheral
+
+equipment.
+
+43
+Re eee
+Sc CP/M Tutorial
+
+This buffer, the operating system, is obviously very useful. The operating system
+you have on your Osborne 1 is called CP/M and is used on many different machines.
+Because CP/M is so popular, a great number of application programs are available
+that will work on any CP/M equipped computer. Such a wide selection of software is
+a major advantage for the Osborne owner.
+
+CP/M must be available so that your application program (like WordStar or SuperCalc)
+can work with your hardware, the 01. CP/M, however, is not permanently stored on
+your Osborne. Each time you turn power on or press the RESET button, CP/M must be
+
+reloaded into your Osborne.
+
+After turning on your Osborne or pressing the RESET button, a message appears on
+your screen asking you to insert a diskette in drive A: and press <CR>. This
+message 1s permanently stored in the computer.
+
+When you press <CR>, CP/M is loaded into your Osborne from the diskette in drive A:.
+The A> on the screen telle you that CP/M has been successfully loaded.
+
+Your CP/M System and Utilities diskette is NOT the source of CP/M. It simply
+contains useful CP/M utility programs.
+
+The CP/M operating system is stored in a reserved area on your diskettes called the
+SYSTEM TRACKS. Each of the application program diskettes (like WordStar) that came
+with your Osborne has CP/M already stored on its system tracks.
+
+CPIM is stored on
+
+a reserved area on
+your diskette called
+the system tracks.
+
+When CP/M is placed on a diskette, it is automatically located on the system tracks.
+Nothing else but CP/M can be put on the system tracks, so putting CP/M on a diskette
+does not waste precious disk data space.
+
+ANY diskette can have CP/M on it and it is wise to put it on every diskette you use
+just after you have formatted it.
+
+44
+CP/M Tutorial
+
+al
+
+4-2 FORMATTING DISKS
+
+A new, blank diskette must be formatted before your Osborne 1 can use it.
+Formatting prepares the diskette ao that data can be written on it and read from it.
+
+Press the [RESET] button.
+
+cP/M SYS DISK A: B: TEST DISK
+ASM COM UNformatted
+AUTOST COM
+
+COPY +COM
+
+DDT +COM
+
+DUMP +COM
+
+ED «COM
+
+HELP -COM
+
+LOAD -COM
+
+MOVCPM -COM
+
+PIP -COM
+
+SETUP -COM
+
+STAT -COoM
+
+SUBMIT +COM
+SYSGEN COM
+XDIR -COM
+XSUB +COM
+
+Press <CR> to load CP/M. The A> should appear on your screen.
+
+If you have AutoStart on your CP/M Systems and Utilities diskette, the flying "0"
+
+will appear on your screen followed by a Help menu. Presa <ESC> and the A> will
+appear on your screen.
+
+The A> is called the 'A' prompt. A> means that your 01 will look for data and
+programs on drive A:. You are LOGGED onto Drive A:. Later, when you log onto drive
+
+B;, you’il see a B> on the screen to let you know that you're looking at drive B:
+instead of drive A:.
+
+45
+
+a >
+( Bs CP/M Tutorial
+
+IF YOU HAVE A SINGLE-DENSITY O1:
+
+Run FORMAT from A:
+
+Follow the menus to format the diskette in B: Single-density.
+
+IF YOU HAVE A DOUBLE-DENSITY 01:
+
+Follow the menus to format the diskette in B: Double-density.
+
+This completes formatting. Any new diskette must be formatted before you use it.
+You're now ready to use your formatted diskette for learning about CP/M.
+NOTE: The “Copy Diskettes” option of COPY will automatically format a diskette but
+
+it will also transfer all of the files from one diskette to another whether you want
+them or not.
+
+46
+eee
+CP/M Tutorial ps
+
+4-3 PUTTING CP/M ON DISKS USING SYSCEN
+
+CP/M SYS DISK A: B: TEST DISK
+
+SYSGEN +COM
+
+Formatted, blank
+without CP/M
+
+The SYSGEN program is used to place CP/M onto each diskette's system tracks. Sysgen
+makes a copy of CP/M from a diskette that already has CP/M on its system tracks.
+This copy of CP/M is stored in the Osborne memory and can then be put on the system
+tracks of a different diskette.
+
+Osborne 1
+MEMORY
+Sysgen copies CP/M Sysgen copies CP/M
+from the system tracks trom the 01 memory
+of the source diskette onto the system tracks
+into the 01 memory. N CPIM of the destination diskette.
+Source Destination
+
+al
+= P
+o— CP/M Tutorial
+
+The A> ('A' prompt) is still on the screen so you can access any program on the CP/M
+System and Utilities diskette in drive A:.
+
+Run SYSGEN from A:
+
+This step loads CP/M into the Osborne memory from the system tracks on the diskette
+in drive A:.
+
+<CR>
+
+This step copies CP/M from the Osborne memory onto the system tracks on the diskette
+in drive B:.
+
+If you wanted to SYSGEN (it's also a verb) another diskette, you could now replace
+one of your diskettes and again direct CP/M from the Osborne memory to the new
+diskette by typing 'A' or 'B'.
+
+Instead, press <CR> to terminate SYSGEN and the A> will appear, ready for your next
+instruction.
+
+cP/M SYS DISK AS B: TEST DISK
+
+Formatted, blank
+with CP/M
+
+48
+a
+CP/M Tutorial |
+
+Press the [RESET] button,
+
+Press “ (QUOTATION MARKS) to load CP/M. The A> should appear on your screen.
+Pressing the " (QUOTATION MARKS) instead of <CR> to load CP/M is an optional feature
+of your Osborne. It lets you load CP/M from the RIGHT-HAND floppy drive which is
+then named A: instead of the usual B:. This is useful if your LEFT-HAND drive is
+not working properly.
+
+ce/M SYS DISK B: A: TEST DISK
+
+Formatted, blank
+
+=p Pl with CP/M
+(PS = are)
+7° FS
+
+ANY diskette that you prepared using SYSGEN will allow you to load CP/M into your
+Osborne. You don't have to (and SHOULDN'T) use the master diskettes that Osborne
+Corp. supplied.
+
+Press the [RESET] button.
+
+Press <CR> to load CP/M. The A> should appear on your screen.
+
+If you have AutoStart on your CP/M Systems and Utilities diskette, the flying “O"
+will appear on your screen followed by a Help menu. Press <ESC> and the A> will
+appear on your screen,
+
+CP/M SYS DISK A: B: TEST DISK
+
+Formatted, blank
+with CP/M
+
+49
+
+Ny CP/M Tutorial
+
+4-4 FILES AND DIR
+
+DIR<CR> Run DIR from A: onto A:
+
+A list of the files on the CP/M System and Utilities diskette in drive A: will
+appear on the screen. FILES are the different pieces of software on a diskette.
+Programs and data and WordStar documents are all files.
+
+The files are listed in columns, with a file name (the FILE NAME) followed by
+(usually) another three letters (the FILE EXTENSION). DIR does NOT list the files
+alphabetically.
+
+DIR is the built-in DIRECTORY command, a straightforward listing of the files on the
+diskette. Much can be learned by studying the DIR screen display.
+
+The first thing to note is that there is no file in the listing called DIR. How did
+the Osborne know to respond to the command DIR?
+
+DIR is automatically loaded and available when you load CP/M. Several other built-
+in commands like DIR will be explained in this tutorial.
+
+There are a few simple CP/M rules regarding the file names on the DIR screen
+display. The necessary way to name a file is FILENAME.FILEEXTENSION. DIR doesn't
+show a period (.) between the FILE NAME and the FILE EXTENSION but any time you
+explicitly call a file (for instance, in WordStar) you must type it exactly
+(FILENAME . FILEEXTENSION) «
+
+The FILE NAME can be no more than eight letters long. The FILE EXTENSION that
+follows the name can be up to three letters in length.
+
+The FILE EXTENSION tells the computer what kind of file it is. You can use these
+three letters to usefully organize different kinds of files on your diskette.
+
+This tutorial is being drafted with WordStar and has the name CPMTUTOR.DOC (for
+DOCument). When WordStar saves this file, it automatically creates a copy of the
+file as it was previously, before editing. If a mistake exists in the current
+version, the previous version is still available for reference.
+
+WordStar BACKS UP (makes a copy of the old version) and automatically names the
+original file CPMTUTOR-BAK (for BAcKup). Although there are now two files on the
+diskette named CPMTUTOR the Osborne has no diffficulty telling them apart because
+one is a .DOC type file while the other is a .BAK type file.
+
+Finally, you'll notice an A: before each file name. This means that the file is on
+the diskette in drive A:. CP/M always refers to the disk drive by the letter (in
+this case A) followed by a colon (:). When you want to tell your Osborne 1 to use a
+drive (LOG ON) or look for data on a drive, you name the drive with its letter
+followed by a colon.
+
+CP/M Tutorial
+
+tal
+
+When you typed DIR you did not refer to a drive name. CP/M assumes the drive name
+of the drive you are logged onto UNLESS you name a different drive. Right now
+you're logged onto drive A:. The A> below the directory tells you explicitly the
+name of the drive on which you're working.
+
+Log onto drive B:
+
+The light will flash on the B: drive and the B> appears on the screen. You're now
+logged onto drive B:.
+
+: cP/M SYS DISK A B: TEST DISK
+
+Formatted, blank
+with CP/M
+
+Run DIR on B: from B:
+
+The B: prompt
+
+DIR was run from drive B:. It listed the files on the blank diskette in drive B:
+since you were logged onto drive B: (the B>). Please note that DIR does NOT tell
+you whether CP/M is on the blank diskette's system tracks.
+
+2<CR> Log onto drive A:
+
+Again, by logging onto drive A: and running DIR, the directory of the logged on
+drive, At, appears on the screen.
+
+ing the drive designators A: and B: can dramatically improve your efficiency.
+Run DIR on B: from A:
+No files are listed
+The A: prompt
+DIR was run from A: but directed to look at B:. This is a standard CP/M convention.
+
+51
+
+—
+Ns CP/M Tutorial
+
+The general rule is:
+
+THE PROGRAM NAME followed by a SPACE followed by the DRIVE NAME.
+
+DIR A:<CR> Run DIR on A: from B:
+
+The directory of drive A: will appear on the screen even though you're logged onto
+Bs.
+
+Let's take a closer look at using the names of the files.
+
+Run DIR on A: from A: only on files
+starting with 'S'
+
+The directory displays only those files that start with the letter S.
+
+The '*' (WILDCARD) is a simple but very powerful tool. You can use it to say "I
+don't care". In this case, you told your Osborne "Tell me about all the files on
+drive A: that start with the letter S. I don't care about any other letters in the
+FILE NAME and I don't care what kind of file it is (the FILE EXTENSION).” CP/M
+looks at the FILE NAMES and the FILE EXTENSIONS separately so you need two asterisks
+("*"), one for each side of the period (.).
+
+The '*" can help you organize your diskettes. You could name all your text files
+with a special FILE EXTENSION like .DOC for DOCument. To find the text files
+without searching through all the file names on the diskette, you would type the
+command: DIR *.DOC<CR>. The directory would show all the files with the FILE
+EXTENSION .DOC (the DOCument files) regardless of the FILE NAME.
+
+52
+CP/M Tutorial | >
+
+ty
+
+4-5 XDIR
+
+DIR is very useful and is 'free' since it doesn't occupy any diskette space.
+However, it lacks some features that would make it even more useful, A special
+directory program which has these extra features was supplied with your Osborne.
+This program is XDIR.COM, the EXtended Directory.
+
+The FILE EXTENSION '.COM' in XDIR.COM means command. A command file is an
+application program. To use a .COM file, just type the FILE NAME and <CR> but do
+not type the FILE EXTENSION '.CoM'.
+
+CP/M SYS DISK A: Br TEST DISK
+
+XDIR COM
+
+Formatted, blank
+with CP/M
+
+| Run XDIR from A:
+
+XDIR lists the files alphabetically, a real help. It also provides information
+about the use of file space on the diskette. This feature is most important and is
+not provided by DIR.
+
+DIR provides the following information:
+
+SIZE OF EACH FILE ~ Next to each file is a number followed by a 'K'. One 'K' equals
+1024 bytes. This number tells you how auch space each file occupies.
+
+XDIR therefore tells you how large each file is. Since there is a limited amount of
+space on a diskette, the size is really telling you how much space the file
+occupies.
+
+SIZE - At the bottom of your XDIR screen, the SIZE indicates how large your diskette
+is in K bytes.
+
+Double-density diskettes are about twice as large as single-density diskettes. A
+384K Drive (@ is exactly twice as large as a 192K Drive Ce.
+
+USED - The total amount of space which is occupied by files plus the space occupied
+by the file directory itself is how much is already USED.
+
+SPACE - The SPACE is how much usable space is left for additional files. SPACE
+always equals the SIZE of your diskette MINUS how much has already been USED.
+
+53
+Se CP/M Tutorial
+
+The SPACE message is very important because it tells you how close you are to
+filling up your diskette.
+
+Instead of the 'NO FILE’ message that DIR gave, XDIR gives you general information
+even about a blank diskette.
+
+Please note that XDIR, like DIR, can be directed to look at drive B: while you're
+logged onto drive A:.
+
+starting with the letter S$
+
+The '*' (WILDCARD) works with XDIR to list just the files on drive A: that start
+with 'S'. XDIR always gives COMPLETE information about the diskette no matter what
+files you asked it to display.
+
+CP/M files can be either DIRECTORY files or SYSTEM files. Drive C uses a special
+file, Drive C:.SY¥S, which is a SYSTEM file. DIR will not show SYSTEM files. XDIR,
+however, will.
+
+Finally, let's use XDIR as an example of another useful CP/M feature.
+
+Log onto B;
+
+run XDIR on B: from A:
+
+While logged onto drive B:, you ran a program (XDIR) on a different drive (A:) by
+first typing the name of the other drive (A:XDIR). This is a general CP/M rule and
+gives you even more flexibility.
+
+Log onto A:
+CP/M Tutorial Ne
+
+4-6 RENAMING FILES
+
+You can rename your files using the built-in CP/M command, REN (RENAME).
+
+;OM<CR> Run DIR from A: on all .COM files
+that start with the letter C
+
+cP/M S¥s DISK A: Br TEST DISK
+
+Formatted, blank
+with CP/M
+
+The file COPY.COM is on the CP/M SYS DISK in A:.
+
+NAMETEST . FIL=COPY . COM<CR> Change the name COPY.COM to NAMETEST.FIL
+DIR<CR>| Run DIR on A:
+
+P/M SYS DISK A: B: TEST DISK
+
+NAMETEST .FIL Formatted, blank
+
+with CP/M
+
+The file COPY.COM has been renamed NAMETEST.FIL.
+
+IN COPY .COM=NAMETEST . FIL<CR>| Change the name NAMETEST.FIL to COPY.COM
+
+R<CR> Run DIR on A:
+
+When using REN, the name on the LEFT becomes the new name of the file on the RIGHT.
+You cannot, however, use the '*' (WILDCARD) with REN.
+
+55
+ae
+[ ‘Bs CP/M Tutorial
+
+4-7 COPYING FILES WITH PIP
+
+You've probably used COPY to copy files from one diskette to another. COPY can only
+copy ALL files rather than individual files and both the original and copy diskettes
+must be the same size (density).
+
+Run XDIR from A:
+
+cP/M SYS DISK A: B: TEST DISK
+
+Formatted, blank
+with CP/M
+
+PIP +COM
+
+On your CP/M SYSTEMS DISK is a utility program called PIP.COM.
+
+PIP can copy individual files and groups of files from one diskette to another.
+Since your disk space is limited, it's very helpful to be able to copy only those
+files that you need.
+
+‘P_B:=A:XDIR.COM[V<CR> Copy XDIR.COM onto B: from A:
+
+‘A' prompt
+
+Your Drive Select lights will go on and your disk drives will whirr, just like when
+you COPY.
+
+MIDIR B:<CR> Run XDIR on B: from A:
+
+The diskette in drive B: is no longer blank. Somehow PIP placed a copy of the file
+XDIR.COM on the B: diskette.
+
+cP/M SYS DISK A: B: TEST DISK
+XDIR COM
+sue [ss | rere)
+
+56
+SEER
+CP/M Tutorial Ne
+
+The PIP command at first glance appears very complicated.
+
+up into small parts.
+THE PIP COMMAND: A>PIP B:=A:XDIR.COM[V<CR>
+
+PIP
+
+XDIR.COM
+
+Iv
+
+It isn't if you break it
+
+Since PIP.COM is a '.COM’ file,
+it is used by typing ite name, ‘PIP’
+
+The drive where you want to
+‘put’ the copy is always typed
+FIRST, on the LEFT.
+
+The drive you 'get' the copy is
+always typed SECOND, to the RIGHT
+
+The '=' ALWAYS separates the
+SOURCE of the copy on the RIGHT
+and the DESTINATION for the copy
+on the LEFT
+
+The name of the file to be
+copied. This must be EXACT.
+
+A phrase that should be added to
+the end of a PIP command to
+"verify' that the copy is
+without mistakes
+
+Copy the files starting with 'S'
+onto B: from A:
+
+Run XDIR on B: from A:
+
+ce/M SYS DISK A: B: TEST DISK
+
+ASM -COM SETUP +COM
+AUTOST -COM STAT COM
+COPY «COM SUBMIT -COM
+DDT +COM SYSGEN -COM
+DUMP «COM XDIR +COM
+ED COM
+
+HELP COM
+
+LOAD +COM
+
+MOVCPM COM
+
+PIP +COM
+
+SETUP «COM
+
+STAT -COM
+
+SUBMIT -COM
+
+SYSGEN -COM
+
+XDIR «COM
+
+XSUB COM
+
+57
+Reg ta ieee
+Ny CP/M Tutorial
+
+PIP can use the same ‘*' (WILDCARD) convention as XDIR. This command copied ALL
+files on A: that started with the letter 'S' onto B:.
+
+PPIP<CR>: Run PIP from A:
+The PIP symbol
+
+When just the name PIP is typed, the PIP prompt '*' appears on the next line. This
+‘*' is not the same as the '*' (WILDCARD) which indicates "I don't care”. Both '*'s
+can be used in the same line without confusion.
+
+The PIP '*' is used so that you do not have to constantly load PIP to copy a series
+of files. As long as the PIP '*' is displayed, PIP is loaded and ready to use.
+
+“As COPY . COM{ V<CR> Copy COPY.COM onto B: from A:
+HELP . COM[V<CR>. Copy HELP.COM onto B: from A:
+
+When you are finished with the PIP '*', type “C to clear PIP and return to CP/M.
+You can also clear PIP and return to CP/M by typing <CR>.
+
+*¢ to clear PIP
+"A' prompt
+
+Run XDIR on B: from A:
+
+B: TEST DISK
+COPY +COM
+HELP -COM
+SETUP -COM
+STAT COM
+SUBMIT COM
+
+SYSGEN -COM
+XDIR «COM
+
+The '*.*' includes ALL files and is the duplicate of the COPY command. This command
+copies ALL the files from A: onto B:.
+
+58
+Se
+CP/M Tutorial | Be
+
+IR_B:<CR> Run XDIR on B: from A:
+
+cP/M SYS DISK
+
+ASM
+AUTOST
+COPY
+DDT
+DUMP
+ED
+HELP
+LOAD
+MOVCPM
+PIP
+SETUP
+STAT
+SUBMIT
+SYSGEN
+xDIR
+XSUB
+
+PIP replaced the files on B: that had the same name.
+
+-COM
+COM
++COM
++COM
+-COM
+«COM
++COM
++COM
+«COM
+-COM
+-COM
+«COM
++COM
+COM
+-COM
++COM
+
+TEST DISK
+
+ASM
+
+AUTOST
+
+COPY
+
+DDT
+
+DUMP
+ED
+HELP
+LOAD
+MOVCPM
+PIP
+SETUP
+STAT
+SUBMIT
+SYSGEN
+XDIR
+XSUB
+
+the destination disk that have different names.
+
+Therefore, you must have enough space available on the destination disk to
+XDIR can always tell you how much space is
+left on the destination disk and how much space the files you are copying will
+
+accomodate the files you are copying.
+
+require.
+
+«COM
+«COM
+COM
+COM
+«COM
+«COM
+COM
+«COM
++COM
+-COM
+COM
+-COM
++COM
+-COM
+COM
++COM
+
+PIP does NOT replace files on
+
+59
+a ae
+Bx CP/M Tutorial
+
+4-8 ERASING FILES
+
+If there isn't enough room on the destination disk, you may want to make room by
+ERASING a file.
+
+SERA B:HELP.COM<CR> Erase HELP.COM on B:
+The ERA (ERASE) command is a CP/M Utility like DIR. It is always available.
+Erase files starting with 'S' on B:
+The '*' (WILDCARD) can be used with ERA just as it's used with DIR.
+CP/M SYS DISK A: BE TEST DISK
+ASM COM
+AUTOST — .COM
+copy COM
+DDT -COM
+DUMP COM
+ED +COM
+LoaD COM
+MOVCPM = «COM
+PIP COM
+XDIR COM
+XSUB -coM
+
+Erase ALL files on B:
+
+ERA makes sure that you REALLY want to erase ALL the files on a diskette by asking
+explicitly for a Yes or No answer.
+
+The TEST DISK in B: is now blank.
+
+cP/M SYS DISK At B: TEST DISK
+
+Formatted, blank
+with CP/M
+
+CP/M Tutorial
+
+4-9 CP/M ERROR MESSAGES
+
+cP/M will display error messages if the diskette you are trying to use cannot be
+accessed for some reason.
+
+Some common error messages and the reasons for the errors are:
+
+Unformatted diskette on drive _
+Bdos Err Gn _: Select
+
+The diskette is not yet formatted.
+
+The diskette is formatted double-deasity but your CP/M System is
+single-density.
+
+The drive is not ready, i.e. the drive door is not closed completely, no disk
+in the drive.
+
+‘NO SPACE
+
+CP/M message when there is not enough space on a logical drive for the file you
+are trying to copy.
+
+Bdos Err On _: File R/O
+CP/M message when trying to erase or to write over a Read-Only (R/O) file.
+
+Bdos Krr On _: Bad Sector
+
+CP/M message caused by a data error on either floppy disk or Drive C. Can be
+caused by 1) hardware failure of Ol disk controller or drive, 2) bad
+diskette, or 3) hardware data error on Drive C unit.
+DISK WRITE ERROR: =FILENAME .FILEEXTENSION
+PIP message when copying a file and there is not enough space on the disk.
+To EXIT from the Error conditions listed above:
+These errors will usually cause CP/M to “hang up", i.e. CP/M will not return to the
+A>. You must place a formatted disk in the drive and properly close the door of the
+drive specified by the Bdos Error message. Then press “C to return to the A>.
+Bdos Err On _: Select
+If this message is displayed by itself, a non-existent drive was specified.
+You may get this error if you try to access Drive C without running DCL first.
+You will have to press the RESET button to EXIT from this error condition.
+
+This completes the section on CP/M basics.
+
+61
+Learning Drive C Skills
+
+USING THE RAM-disk
+USING THE PRINT BUFFER
+USING THE Drive C UTILITY PROGRAM
+
+This section of the manual teaches you how to use the individual features of the
+RAN-disk and Print Buffer, as well as DCU, the Drive C Utility program.
+
+Your Drive C has many powerful yet easy-to-use features. The exercises in this
+section will familiarize you with how each one works.
+
+Each feature can be run using a simple command. Once you find which features best
+fit your needs, you can use them automatically.
+
+The Drive C RAM-disk is installed on your Osborne as a third logical drive with a
+single command, DCL. Variations of the DCL command will install Drive C with a new
+drive name and also install the Print Buffer. ALL of the Drive C features can be
+installed with a one~line DCL command statement.
+
+Your Drive C and floppy drives can be renamed at any time using the DCN command.
+
+Eight different sizes of Fixed Print Buffer and a variable Dynamic Print Buffer can
+be installed with your RAM-disk. Once installed, the Print Buffer feature works
+
+automatically.
+
+The DCU Utility program can be used to increase the flexibility of your Print
+Buffer.
+
+DCU E is a special feature which allows you to erase the contents of the Drive C
+RAM-disk without affecting the Print Buffer.
+
+62
+r,
+Using The RAM-disk \e
+
+»*
+
+5-1 GETTING READY
+
+5-2 INSTALLING THE RAM-disk
+
+5-3 COPYING FILES ONTO THE RAM-disk
+
+5-4 SAVING FILES FROM THE RAM-disk TO FLOPPY
+
+5-5 INSTALLING THE RAM-disk AS DRIVE A:
+
+5-6 INSTALLING THE RAM-disk WITH DIFFERENT DRIVE NAMES
+5-7 Drive C AND THE RESET BUTTON
+
+5-8 RENAMING THE RAM-disk AFTER INSTALLATION
+
+5-9 RUNNING WORDSTAR ON Drive C - DOING IT MANUALLY
+
+5-1 GETTING READY
+
+Before starting the step-by-step instructions for using your Drive C, you will need
+another blank, formatted diskette.
+
+This diskette should be labeled “DC DEMO DISK” and will be used for your learning
+exercises.
+
+Format the DC DEMO DISK double-density unless you have a single-density Ol.
+
+Turn ON power to your computer.
+
+B: CP/M SYS DISK
+
+DC USER DISK
+
+Drive C NOT INSTALLED
+
+Press <CR> to load CP/M. The A> should appear on your screen.
+
+IP A:=B:SYSGEN. COM[V<CR> Copy SYSGEN.COM onto A:,
+the DC USER DISK, from B:
+
+63
+S|
+[ Using The RAM-disk
+4
+
+Dc USER DISK
+DC USER DISK
+
+DCA COM,
+DCL COM
+Deg -COM
+cq -DAT
+DCQAUT —.COM
+DCQINS «COM
+DCU «COM
+DFD -SPR
+PIP COM
+PRN -TST
+SYSGEN «COM
+XDIR COM
+
+cP/M SYS DISK
+
+DC DEMO DISK
+
+Formatted, blank
+Single- or Double-
+Density
+
+Drive C NOT INSTALLED
+
+“c to clear CP/M
+
+CP/M must be copied onto the DC DEMO DISK.
+
+SYSGENCCR>_ Run SYSGEN from A:
+
+Re
+
+r
+Using The RAM-disk \e
+
+»*
+
+\
+
+Run PIP from A:
+ICL. COM[V<CR> Copy DCL.COM onto B: from A:
+FD. SPR[V<CR> Copy DFD.SPR onto B: from A:
+
+The 'A' prompt
+
+De USER DISK Ar B: DC DEMO DISK
+
+(CP/M on
+SYSTEM TRACKS)
+
+DCL com
+DED -SPR
+
+DC DEMO DISK A: B: DC USER DISK
+
+(CP/M on
+
+SYSTEM TRACKS)
+DCL COM
+DFD «SPR
+
+Drive C NOT INSTALLED
+
+Press the [RESET] button.
+
+Press <CR> to load CP/M. The A> should appear on your screen.
+
+CP/M must always be loaded before loading the Drive C software. The 'A' prompt
+indicates that CP/M has been successfully loaded onto your Osborne 1.
+
+65
+
+Sa
+i
+\e Using The RAM-disk
+4
+
+5-2 INSTALLING THE RAM-disk
+The Drive C LOADER software (DCL.COM) must be loaded (installed) into your Osborne
+before you can use Drive C.
+
+DCL<CR> Install the Drive C RAM-disk as C:
+
+The 'A' prompt
+
+Drive C is now installed as the third logical drive on your Osborne, drive C:. It
+can be used exactly like your floppy disk drives, drive A: and drive Bi.
+
+Two files were necessary to install Drive C, DCL.COM and DFD.SPR. DCL.COM can be on
+either floppy disk drive, but it's simplest to keep it on A:. THE FILE DFD.SPR MUST
+BE ON LOGICAL DRIVE A: DURING THE INITIAL INSTALLATION OF THE Drive C RAM-disk.
+
+DC DEMO DISK A: B: DC USER DISK
+DCL +COM
+DFD «SPR
+
+DCN »COM
+Drive Cz: .S¥S
+
+The files DCN.COM and Drive C:.SYS on the Drive C unit were created automatically
+when the Drive C unit was installed.
+
+Drive C, unlike a floppy disk, does not need to be formatted to be used. Nor does
+CP/M need to be placed on Drive C with SYSGEN. Once installed, Drive C looks
+exactly like a formatted diskette ready to accept files.
+
+Log onto C:, the Drive C unit
+PIR<CRy Run DIR from C:
+
+The CP/M utilities, like DIR, are available on the Drive C RAM-disk. The file
+Drive C:.SYS is a SYSTEM file and will not be displayed by DIR. To check for the
+Drive C:.SYS file, use XDIR or STAT.
+
+66
+er.
+Using The RAM-disk ‘fe
+
+LS
+
+5-3 COPYING FILES ONTO THE RAM-disk
+
+To use the Drive C RAM-disk, files must be copied onto it from the floppy disks.
+
+The simplest way to copy files onto the Drive C RAM-disk is with a copy program like
+PIP. Other programs like SWEEP or WASH can also be used.
+
+Copy PIP.COM onto C: from B:
+
+XDIRCCR™ Run XDIR from C:
+DC DEMO DISK A: B: DC USER DISK
+DCL +COM DCA -CoM
+DFD «SPR DCL -coM
+DeQ COM
+Deg «DAT
+
+DCQAUT +COM
+DCQINS -COM
+
+DCU ~COM
+
+DFD «SPR
+
+PIP «COM
+
+c: PRN «TST
+
+SYSGEN +COM
+
+DCN +COM XDIR «COM
+peu -COM
+Drive C: .SYS
+PIP «COM
+XDIR +COM
+
+The files DCU.COM, PIP.COM and XDIR.COM were copied onto drive C:, the Drive C RAM-
+disk, by using the PIP command from drive B:.
+
+Once you have copied files onto the Drive C RAM-disk, you can use these files just
+as you would on your floppy disks.
+
+By logging onto drive C: (C>), programs on drive C:, like XDIR, can be used.
+
+67
+
+Using The RAM-disk
+
+5-4 SAVING FILES FROM THE RAM-disk TO FLOPPY
+
+When your Osborne is turned OFF, the contents of the Drive C RAM-disk will not be
+retained.
+
+Files on Drive C which you want to save (backup) will need to be stored onto floppy
+disks.
+
+Again, the simplest way to copy files from the Drive C RAM-disk onto your floppy
+disks is with a copy program like PIP or SWEEP.
+
+=C DCU «COM, V<CR?. Copy DCU.COM onto A: from C:
+
+Copy PIP.COM onto A: from C:
+XDIR. COM[V<CR> Copy XDIR.COM onto A: from C:
+PE =< co clear PIP
+
+R_A:<CR> Run XDIR on A: from C:
+
+DC DEMO DISK At B: DC USER DISK
+
+DCL COM
+
+peu «COM
+
+DFD «SPR
+
+PIP COM
+
+XDIR COM
+
+DCN COM
+peu -COM
+Drive C: .SYS
+PIP «COM
+XDIR +COM
+
+The files DCU.COM, PIP.COM and XDIR.COM were first copied onto the Drive C RAM-disk,
+drive C:, from the floppy disk, drive B:, using the PIP cowmand from drive B:.
+
+The same files were then saved onto the floppy disk, drive A:, by using the PIP
+command from drive C;.
+
+Using The RAM-disk \e
+
+aaa
+
+r,
+
+iN
+
+A
+DC Demo Disk
+
+TA
+
+To store files
+onto floppy disk
+
+B:
+DC User Disk
+
+=)
+
+To copy files
+‘onto Drive C
+
+69
+5-5
+
+i a |
+Using The RAM-disk
+
+IMSTALLING THE RAM-disk AS DRIVE A:
+
+The Drive C unit is installed as logical drive A: by adding the drive letter A to
+
+the DCL command.
+longer installed after pressing the RESET button but the files remain.
+
+Press <CR> to load CP/M.
+
+Run XDIR on A:, the Drive C unit
+from left floppy, C:
+
+70
+
+DC DEMO DISK
+
+DCL COM
+DCU -COM
+DFD -SPR
+PIP +COM
+XDIR «COM
+
+EXDIR_A:<CRD)
+Dc DEMO DISK
+DCL -COM
+pcu -COM
+DED «SPR
+PIP CoM
+XDIR -COM
+
+To re-install Drive C, first RESET your Osborne.
+
+Press the [RESET] button.
+
+ee
+
+Drive C NOT INSTALLED
+
+The A> should appear on your screen.
+
+DCN
+
+DCU
+Drive C:
+PIP
+XDIR
+
+-COM
++COM
+»SYS
+COM
+«COM
+
+Drive C is no
+
+DC USER DISK
+
+DC USER DISK
+Using The RAM-disk Ke
+
+F
+
+5-6 INSTALLING THE RAM-disk WITH DIFFERENT DRIVE NAMES
+
+The command DCL A is an example of a general rule:
+
+THE LETTER AFTER THE DCL COMMAND WILL BE THE LOGICAL DRIVE NAME OF THE DRIVE C@#
+UNIT. THERE MUST BE A SPACE BETWEEN DCL AND THE DRIVE LETTER.
+
+DCL A will install the Drive C unit as drive A:.
+DCL B will install the Drive C unit as drive B:.
+
+DCL or DCL C will install the Drive C unit as drive C:,
+
+After installing the Drive C unit as A:, the left-hand floppy is renamed C: and the
+C> appears on the screen.
+
+Another general rule is:
+
+IF THE DRIVE Cg UNIT IS INSTALLED AS A: OR B:, THE FLOPPY DISK DRIVE THAT WAS
+ORIGINALLY A: OR B: WILL BE RENAMED C:.
+
+If the Drive C unit is named A:, the original A: drive
+will be renamed C:.
+
+If the Drive C unit is named B:, the original B: drive
+will be renamed C:.
+
+71
+Le Using The RAM-disk
+
+4
+
+5-7 Drive C AND THE RESET BUTTON
+
+The RESET button was pressed when Drive C was re-installed as A: in the previous
+exercise. The files on the Drive C unit are still present after a RESET.
+
+Log onto the Drive C unit, A:
+XDIR<CR>| Run XDIR from A:
+
+DC DEMO DISK Cz B: De USER DISK
+
+DcL CoM
+
+peu -COM
+
+DFD «SPR
+
+PIP COM
+
+XDIR COM
+
+DCN -COM
+DCU -COM
+Drive C:.SYS
+PIP »COM
+XDIR -COM
+
+Drive C:.SYS, a zero K (OK), R/O (READ ONLY) file keeps the files on the Drive C:
+unit when the RESET button is pressed.
+
+In order to access the files on the Drive C: unit after pressing the RESET button,
+you only need to reload Drive C using the DCL command.
+
+Re-installing the Drive C unit with a new drive name does not affect files already
+on Drive C.
+
+72
+Using The RAM-disk ‘fe.
+
+INSTALL
+Drive ¢
+
+~ A
+
+COPY FILES
+‘ONTO Drive C
+
+a:
+
+PRESS
+[RESET]
+BUTTON
+
+—
+
+REINSTALL
+Drive C
+
+4
+
+Drive C:.SYS file
+is placed on Drive C.
+
+Copy files onto Drive C
+using PIP, SWEEP, QuickPac
+Retrieve.
+
+Files on Drive C are
+kept by Drive C:.SYS.
+
+Re-install Drive C as a
+third drive to access the
+Drive C files,
+
+73
+
+r Fm
+[ Using The RAM-disk
+y)
+
+5-8 RENAMING THE RAM-disk AFTER INSTALLATION
+
+The Drive C RAM-disk and the floppy disk drives can be renamed at any time using the
+DC NAME (DCN.COM) program.
+
+DCN.COM, like the Drive C:.SYS file, is created and placed on the actual Drive C
+unit regardless of its logical drive name.
+
+DC DEMO DISK
+
+B: DC USER DISK
+
+drive At, to Cr
+
+he 1c" proape
+
+The Drive C unit, drive A:, is now renamed drive C:.
+
+Since you did not move to a different drive, DUN returned you to the drive you were
+logged onto, the Drive C unit, with the NEW name, drive C:.
+
+The C> prompt therefore appeared after changing the drive names.
+
+14
+=
+
+=
+Using The RAM-disk ‘fe.
+
+the Drive € unit
+
+DC DEMO DISK A: B: DC USER DISK
+DCL COM
+pDcU -COM
+DFD «SPR
+PIP -COM
+XDIR «COM
+
+DCN -COM
+DCU «COM
+Drive C: .SYS
+PIP +COM
+xDIR »COM
+
+This is an example of a general rule:
+
+THE LETTER AFTER THE DCN COMMAND WILL BE THE LOGICAL DRIVE NAME OF THE DRIVE Cg
+
+UNIT.
+
+DCN A will rename the Drive C unit as drive A:.
+DCN B will rename the Drive C unit as drive B:.
+
+DCN C will rename the Drive C unit as drive C:-
+
+715
+| a
+Za
+IF Using The RAM-disk
+
+5-9 RUNNING WORDSTAR ON Drive C - DOING IT MANUALLY
+
+You now have all the tools necessary to run WordStar on the Drive C unit renamed
+
+drive A:.
+
+This exercise will copy and run WordStar MANUALLY.
+
+DC DEMO DISK A:
+
+DC DEMO DISK
+
+DCL -COM
+DCU + COM
+DFD »SPR
+PIP -COM
+XDIR COM
+
+| ofc" =e aS Rae
+[Bee
+(UaSere “as=B:ws* #1 vce
+
+76
+
+c:
+DCN COM
+DCU -COM
+Drive C: +SYS
+PIP -COM
+SDIR +COM
+
+“C to clear CP/M
+
+DISK
+
+WordStar DISK
+
+AUTOST -COM
+INSTALL .COM
+MERGPRIN .OVR
+SAMPLE -TXT
+ws -COM
+WSMSGS -OVR
+WSOVLYL -OVR:
+XDIR +COM
+
+Rename the Drive C umit to A:
+
+Copy the WordStar files onto A:,
+the Drive C unit, from B:
+
+Using The RAM-disk
+
+a
+
+F
+
+Le,
+
+»*
+
+The three WordStar files are copied from the floppy diskette in drive B: onto drive
+At, the Drive C unit, using PIP.
+
+DC DEMO DISK
+
+DCL »COM
+DCU +COM
+DFD «SPR
+PIP +COM
+XDIR +COM
+
+Bisco, worastar trom a:
+
+Bz
+
+AS
+DCN -COM = WS COM
+peu -COM  WSMSGS = .OVR
+Drive C: .SYS WSOVLY1 .COM
+PIP -COM - XDIR «COM
+
+WordStar DISK
+
+AUTOST -.COM
+INSTALL .COM
+MERGPRIN.OVR
+SAMPLE .TXT
+ws +COM
+WSMSGS .OVR
+WSOVLY1 -OVR
+XDIR +COM
+
+WordStar is now loaded and ready to use on drive A:, the Drive C unit.
+
+DCL A
+
+ws
+
+Install Drive C
+as drive A:.
+
+Copy the WordStar files
+from floppy disk
+conto the Drive C
+
+RAM-disk, drive A:
+
+Run WordStar on Drive C
+
+Using The RAM-disk
+
+Press 'X' to EXIT WordStar.
+
+The 'A' prompt
+
+Run DCU EB (Erase) from A:
+
+Run XDIR on A: from C:
+
+The files on Drive G (with the exception of Drive C:.S¥S) have been erased for the
+next exercise.
+
+DC DEMO DISK c: Bz WordStar DISK
+
+Press the [RESET] button.
+
+This completes the section on installing the Drive C RAM-disk.
+
+78
+Using The Print Buffer
+
+CONTENTS
+
+5-10 PRINT BUFFER OPERATION
+
+5-11 INSTALLING THE PRINT BUFFER
+5-12 THE FIXED PRINT BUFFER
+
+5-13 THE DYNAMIC PRINT BUFFER
+
+5-14 USING THE DYNAMIC PRINT BUFFER
+
+5-10 PRINT BUFFER OPERATION
+
+The Print Buffer feature of your Drive C lets you compute and print at the same
+time.
+
+When you print a file, you can not run a program because your printer has control of
+your Osborne until the printing operation is completed. Printers are slow and your
+O01 can be tied up for considerable lengths of time.
+
+The Print Buffer LOOKS like your printer to your Osborne. The print output is sent
+
+to the Print Buffer just as it would be sent to your printer. But the Print Buffer
+
+temporarily stores the print output at high speed while simultaneously sending it to
+the printer at the printer's slow speed.
+
+Your Osborne THINKS it has finished printing a file when all of the print output has
+been transferred to the Print Buffer. The CP/M prompt or your program is available
+while the Print Buffer continues to print the file.
+
+After the contents of the Print Buffer has been printed, the Print Buffer is
+automatically cleared and the space is again available for more print output from
+your Osborne.
+
+When the Print Buffer is installed, your Drive C is partitioned into two parts, the
+RAM~disk and the Print Buffer.
+
+The Fixed Print Buffer is a space solely dedicated to print buffer operation. Bight
+different Fixed Buffer sizes are available:
+
+16K, 32K, 48K, 64K, 80K, 96K, 112K, 128K
+
+The RAM-disk will be decreased in size by the amount of space you choose to allocate
+to the Fixed Buffer.
+
+The Dynamic Print Buffer, P, does NOT allocate a specific amount of space for print
+buffer operation. Instead, any space not used by the RAN-disk for files can be used
+for the Print Buffer.
+
+The Print Buffet is installed at the same time that you install the RAM-disk.
+
+Once installed, print buffer operation is transparent. This means you can send your
+print output to your printer using your regular commands and the Print Buffer will
+be automatically engaged. No special commands are necessary.
+
+719
+SS
+
+JM
+\e Using The Print Buffer
+
+4
+
+‘
+If the amount of information to be printed is larger than the space available in the
+
+Print Buffer, the computer will print the excess amount at the same speed as if
+there were no Print Buffer present, i.e. that is, it will only be able to transfer
+additional data to the buffer as quickly as the printer empties the buffer.
+
+‘Osborne 1
+CPU
+
+When the Print Buffer isn’t full, itaccepts
+data much faster than the printer can print it.
+
+‘sLOW
+cewo )UUINCGDI
+
+my
+
+When the Print Buffer is full, it accepts data at
+the SAME speed that it prints it.
+5-11 INSTALLING THE PRINT BUFFER
+
+The Print Buffer must be installed at the same time that the Drive C RAM~disk is
+
+installed by using the DCL command.
+
+The general rules are:
+
+To INSTALL THE FIXED PRINT BUFFER, THE PRINT BUFFER SIZE FOLLOWS THE DCL COMMAND
+
+WHEN LOADING Drive C.
+
+TO INSTALL THE DYNAMIC PRINT BUFFER, THE LETTER P FOLLOWS THE DCL COMMAND WHEN
+
+LOADING Drive C.
+
+IF YOU USE THE RENAME OPTION WITH THE DCL COMMAND, THE PRINT BUFFER OPTION FOLLOWS
+
+THE NEW DRIVE LETTER.
+
+THERE MUST BE A SPACE BETWEEN THE DCL COMMAND AND THE PRINT BUFFER OPTION.
+
+BUFFER BUFFER RAM-disk NAME |
+SIZE TYPE A: Br a) |
+16K FIXED | DCL A16 | DCL B16 | DCL 16 |
+32K FIXED | DCL A 32 | DCL B 32 | DCL 32
+48K FIXED | DCL A 48 | DCL B48 | DCL 48 |
+64K FIXED | DCL A 64 | DCL B64 | DCL 64
+80K FIXED | DCL A 80 | DCL B 80 | DCL 80 ]
+96K FIXED | DCL A 96 | DCL B96 | DCL 96
+112K FIXED | DCL A112} DCL B 112| DcL 112 |
+128K FIXED | DCL A 128] DCL B 128| Dez 128
+VARIABLE | DYNAMIC | DCL A P | DCL BP DCL P |
+
+The Print Buffer is automatically removed when the RESET button is pressed. To
+eliminate the Print Buffer or to change the Print Buffer, press the RESET button and
+re-install Drive C with a new Print Buffer option.
+
+81
+[ Using The Print Buffer
+a
+
+5-12 THE FIXED PRINT BUFFER
+
+The Fixed Print Buffer is installed as part of the DCL command.
+
+DC DEMO DISK A: Br DC USER DISK
+DCL COM DCA +COM
+DCU -COM DCL +COM
+DFD +SPR DcQ COM
+PIP «COM DCcQ -DAT
+XDIR «COM DCQAUT «COM
+DCQINS «COM
+pcu «COM
+DFD «SPR
+PIP «COM
+Drive C NOT INSTALLED PRN .TST
+SYSGEN COM
+XDIR + COM
+
+Press <CR> to load CP/M. The A> should appear on your screen.
+CL A<CR> Install Drive C as A:
+WITHOUT the Fixed Print Buffer
+
+from C:
+The SIZE of the Drive C RAM-disk is the SIZE displayed by XDIR. Since the Fixed
+Print Buffer is not yet installed, the SIZE will be either 192K or 384K, the total
+capacity of the Drive C unit. Next, your Drive C will be re-installed with the 16K
+Fixed Print Buffer.
+
+Press the [RESET] button.
+
+Press <CR> to load CP/M. The A> should appear on your screen.
+
+DCL A 16<CR> _ Install Drive C as A: with 16K
+Fixed Print Buffer
+XDIR A: <CR> Run XDIR on A: from Cs
+
+The 16K Fixed Print Buffer is now installed. This time, XDIR shows the SIZE of the
+Drive C RAM-disk to be reduced by 16K (176K or 368K).
+
+82
+DC DEMO DISK Cc: B: DC USER DISK
+
+DCL -COM
+pcu +COM
+DFD +SPR
+PIP -COM
+XDIR -COM
+
+DCN COM
+DCU COM
+Drive C: .SYS
+
+The DC Utilities program (DCU.COM) is automatically copied onto the Drive ¢ unit
+from drive A: when the Print Buffer is installed.
+
+DCU.COM contains several powerful utilities to use with your Print Buffer. If
+DCU.COM is not present on drive A: when you load the Print Buffer, the following
+
+helpful message will appear on the screen:
+
+Note: print buffer utility (DCU.COM) not available
+
+83
+Using The Print Buffer
+
+Drive S
+
+Simultaneous use
+
+If you type an incorrect size for the Fixed Buffer, DCL 28 for instance, the Drive
+C@ RAM-disk will be installed but no Print Buffer will be installed. The following
+message will appear on the screen:
+
+Bad print buffer parameter, not loaded
+If you have files on the RAM-disk and re-install a Fixed Buffer which is larger than
+the available space on Drive C, the Dynamic Buffer will automatically be installed
+instead. The following message will appear on the screen:
+
+Not enough space for fixed print buffer
+
+rr, Fon!
+Using The Print Buffer We
+
+5-13 THE DYHAMIC PRINT BUFFER
+The Dynamic Print Buffer is installed with the DCL command using the ‘P' option.
+Press the [RESET] button
+
+Press <CR> to load CP/M. The A> should appear on your screen.
+
+DCL A P<CR> Install Drive C as A: with
+the Dynamic Print Buffer P
+
+PIP _A:=C:XDIR.COM[V<CR> Copy XDIR-COM onto A: from C:
+
+PIP A:=C:PIP.COM[V<CR> Copy PIP.COM onto A: from ¢:
+PIP A:=B:DCA.COM[V Copy DCA.COM onto A: from B:
+
+XDIR<CR> Run XDIR from A:
+
+The Dynamic Print Buffer, the 'P' option, is now installed. The Extended Directory
+of drive A:, the Drive C unit, does NOT show the size of the RAM-disk to be
+decreased (192K or 384K).
+
+The Dynamic Print Buffer constantly changes size as more or less file space is used
+in the RAM~disk. The Extended Directory will automatically show the RAM-disk
+reduced in size ONLY when the Dynamic Buffer actually contains output for the
+printer.
+
+Dave C
+SIMULTANEOUS USE
+
+( Using The Print Buffer
+4
+
+5-14 USING THE DYNAMIC PRINT BUFFER
+
+This exercise is a demonstration of the Dynamic Print Buffer.
+
+PIP A:=B:PRN.TST(V<CR Copy PRN.TST from B: to A:
+
+Make sure your printer is ON, has paper and is ready co print.
+
+IP LST:=PRN.TST<CR> Print PRN.TST using PIP
+
+Your printer should now be printing the Drive C Print Test. When the entire PRN.TST
+file is in the Dynamic Print Buffer, the A> will reappear on your screen. You can
+now continue using your Osborne just as if you weren't printing at all.
+
+TYPE THE FOLLOWING COMMAND WHILE YOUR PRINTER IS PRINTING:
+
+xD Run XDIR from A: while
+PRN.TST is being printed
+
+The Extended Directory shows that the size of the RAM-disk has been decreased by the
+size of the PRN.TST file which is being printed by the Dynamic Buffer (if you have
+an internal buffer in your printer, the PRN.TST file may have been transferred from
+the Dynamic Buffer to your printer's buffer so quickly that the space was already
+returned to the RAM-disk).
+
+The Dynamic Buffer space will be available for use again as RAM-disk only when the
+Dynamic Buffer has finished printing the PRN.TST file.
+
+Please wait for your printer to stop printing before continuing with the next step.
+
+K>XDIR<CR> Run XDIR from A: after
+PRN.TST has been printed
+
+The Dynamic Buffer is now empty and the Extended Directory will show that ALL of the
+Drive C unit is again available as RAM-disk.
+
+Again, as with the Fixed Print Buffer, the DC Utilities program (DCU.COM) is
+automatically copied onto the Drive C unit from drive A: when the Print Buffer is
+installed.
+
+DCU.COM contains several powerful utilities to use with your Print Buffer. If
+DCU.COM is not present on drive A: when you load the Print Buffer, the following
+helpful message will appear on the screen:
+
+Note: print buffer utility (DCU.COM) not available
+Using The Print Buffer \e
+
+1G
+
+J
+
+Drive C
+
+PRINT
+
+Dynamic Sr PER
+
+or
+RAM-disk
+
+Dynamic Print Buffer
+is installed.
+
+Drive C
+
+PRINT
+
+Dynamic BUFFER
+
+or
+RAM-disk
+
+oe
+UOT
+
+Dynamic Print Butter
+in use.
+
+Drive ©
+
+PRINT
+
+Oynamic BUFFER
+
+or
+RAM-disk
+
+Dynamic Print Buffer has
+finished printing.
+
+The Print Buffer space
+that was used for printing
+can again be used for either
+the Dynamic Print Buffer
+or the RAM-disk.
+
+87
+F, Ke
+Using The Drive C Utility Program
+
+CONTENTS
+
+5-15 DCU - THE Drive C UTILITY PROGRAM
+
+5-16 USING DCU S - THE SPACE OPTION
+
+5-17 USING DCU 0 - THE OPTIMIZE OPTION
+
+5-18 USING DCU TO CONTROL THE Drive C PRINT BUFFER
+5-19 USING DCU WITHOUT THE MENU
+
+5-20 DCU E - ERASING THE RAM-disk
+
+5-15 DCU - THE Drive C UTILITY PROGRAM
+
+DCU.COM, the Drive C Utility program, provides a number of powerful features to use
+with your Print Buffer.
+
+(<C> NNN es vc rom a:
+
+Typing the command DCU will display the DCU menu on the screen.
+
+The type and current status of the Print Buffer will always be displayed at the top
+of the screen.
+
+The TYPE indicates whether the Print Buffer is Fixed or Dynamic. If the Print
+Buffer is Fixed, TYPE will show the size of the Fixed Print Buffer.
+
+If you do not install the Print Buffer, the TYPE line will be blank.
+TYPE Messages
+K fixed buffer - Size of Fixed Print Buffer
+
+dynamic - Dynamic Print Buffer P
+(BLANK) - Print Buffer NOT installed
+7
+
+Using The Drive C Utility Program \e
+i v)
+
+The STATUS indicates the current condition of the Print Buffer.
+STATUS Messages
+normal - installed
+
+NOT INSTALLED - Print Buffer NOT installed
+**eWAITING** - Print Buffer has been interrupted
+
+89
+7m
+\e Using The Drive C Utility Program
+
+4
+
+5-16 USING DCU S - THE SPACE OPTION
+
+The SPACE option 'S' shows how much space is available for use as the Dynamic
+Print Buffer.
+
+Please note the amount of SPACE available before returning to CP/M.
+
+The 'X' option returns you to CP/M.
+
+The 'A' prompt
+
+The Extended Directory shows that more space is left on the Drive C unit than the
+DCU SPACE option indicated.
+
+There is a good reason for the difference between the amount of space left on Drive
+C as shown by XDIR and how much space is left for the Dynamic Print Buffer as shown
+
+by the DCU SPACE option.
+
+The boundary between the Dynamic Print Buffer and the RAM-disk is defined by the
+‘last’ file in the RAM-disk. CP/M, however, does not keep the files in the RAN-disk
+tightly ‘stacked’ together.
+
+Gaps may exist in the ‘stack' of files in the RAM-disk. These extra spaces cannot
+be used by the Dynamic Print Buffer but are included in the space available shown by
+XDIR.
+
+The DCU SPACE command will accurately tell you how much space is available for the
+Dynamic Print Buffer.
+Using The Drive C Utility Program
+
+RAM-disk
+
+Drive ©
+
+AVAILABLE SPACE
+FOR THE DYNAMIC
+PRINT BUFFER
+
+DCU S tells you how much
+SPACE is available for
+the Dynamic Print Buffer.
+
+The boundary between the
+
+bg RAM-disk and the available
+
+SPACE for the Dynamic
+Print Buffer is determined
+by the last file in the RAM-disk.
+
+XDIR includes the GAPS
+in the stack of files which
+cannot be used
+as space for the
+Dynamic Print Buffer.
+
+The DCU SPACE option will tell you how much space the Dynamic Print Buffer has (IF
+IT IS INSTALLED) or would have (IF YOU RESET AND INSTALLED IT).
+
+PLEASE NOTE THAT THE DCU SPACE OPTION WORKS EVEN IF THE FIXED BUFFER IS INSTALLED OR
+IF NO PRINT BUFFER IS INSTALLED.
+
+2
+i
+\a.
+
+Using The Drive C Utility Program
+
+5-17 USING DCU O - THE OPTIMIZE OPTION
+
+The DCU O (OPTIMIZE) option packs (compresses) the RAM-disk files to eliminate the
+
+excess spaces between files. This optimizes (maximizes) the space in the Dynamic
+Print Buffer.
+
+Drive C
+ORIGINAL SPACE TOTAL
+FOR THE DYNAMIC AVAILABLE
+PRINT BUFFER ‘SPACE
+FOR THE
+= DYNAMIC
+ADDITIONAL SPACE PRINT BUFFER.
+
+‘CREATED BY
+COMPRESSING FILES
+
+RAM-disk
+
+Run DCU from A:
+
+The DCU O command added available SPACE for the Dynamic Print Buffer. Optimizing
+the size of the Dynamic Print Buffer may still not provide enough room for the files
+you wish to print.
+
+If you need additional space, you can delete files from the RAM-disk.
+
+A directory of the files on the RAM-disk will appear on the screen showing the size
+of each file.
+
+92
+Se
+
+7 Aa
+Using The Drive C Utility Program \e
+
+4
+
+Files must be deleted individually and must be named exactly. The CP/M '*'
+(WILDCARD) convention cannot be used.
+
+After a file is deleted, DCU 0 will automatically re-pack the RAM-disk to optimize
+the Dynamic Print Buffer SPACE. The new SPACE amount will be automatically
+displayed.
+
+Type ’X' to return to CP/M:
+
+22 4" prompt
+ae
+
+ff Fn
+Using The Drive C Utility Program
+
+y)
+
+5-18 USING DCU TO CONTROL THE Drive C PRINT BUFFER
+
+The DCU options R, W and Z are used to control the Print Buffer.
+
+Please make sure your printer is ON, has paper and is ready to print for the
+following exercises.
+
+Print PRN.TST using PIP
+
+Your printer should now be printing the Drive C Print Test. When the entire PRN.TST
+file is in the Dynamic Print Buffer, the A> will reappear on your screen, returning
+control of your Osborne back to you.
+
+PLEASE DO THE FOLLOWING WHILE YOUR PRINTER IS PRINTING PRN.TST:
+Run DGU from A:
+
+DCU W (WAIT) interrupts the output to the printer.
+
+DCU W will interrupt the output from the Drive C Print Buffer to the printer but
+cannot affect the internal operation of your printer's buffer.
+
+PLEASE NOTE: IF YOUR PRINTER HAS AN INTERNAL PRINT BUFFER, IT WILL CONTINUE TO PRINT
+PRINT.
+
+‘THE CONTENTS OF ITS OWN BUFFER UNTIL ITS EMPTY.
+Drive C patie
+
+PRINT OUTPUT
+
+Print output from the Drive C Print Buffer
+
+first goes to the printer's Internal Butter before
+being printed. / ZaN
+Drive C Wf
+
+PRINT OUTPUT
+
+DCU W interrupts The printer's Internal
+the output from the Butter continues to
+Drive C Print Butter print until all the
+
+to the printer's internal data has been printed,
+Buffer. even though DCU W has
+
+halted the Drive C
+94 Print Buffer.
+F
+Using The Drive C Utility Program \e
+
+»*
+
+iN
+
+DCU R (RESTART) will cause the Drive C Print Buffer to resume printing after being
+interrupted by DCU W.
+
+Your printer should again be printing PRN-TST.
+
+DCU Z (ZAP) immediately clears the contents of either the Fixed Print Buffer or the
+Dynamic Print Buffer.
+
+AGAIN, PLEASE NOTE THAT DATA IN YOUR PRINTER'S OWN PRINT BUFFER WILL CONTINUE TO BE
+PRINTED EVEN IF THE Drive C PRINT BUFFER HAS BEEN CLEARED BY DCU Z.
+
+Once your print file is in the Drive C Print Buffer, it cannot be accessed by its
+name nor can multiple files in the print buffer be separated and manipulated
+individually. If several files are in the Print Buffer, they will ALL be cleared by
+DCU Z.
+
+PROGRAM PRINT
+ourPur
+
+=
+eves
+
+DCU W, R and Z work with both the Fixed Buffer and the Dynamic Buffer.
+
+Drive C
+
+Printer
+
+95
+
+SS
+r,
+
+eo Using The Drive C Utility Program
+
+5-19 USING DCU WITHOUT THE MENU
+
+The SPACE option can be used without the full menu by typing DCU and the option
+letter 's'.
+
+Type 'X' to return to CP/M:
+
+The 'A' prompt
+
+ALL the DCU commands can be used without displaying the DCU menu.
+
+The general rule is:
+
+DCU FOLLOWED BY THE OPTION LETTER (S,0,W,R,Z) LETS YOU USE DCU DIRECTLY WITHOUT
+DISPLAYING THE MENU.
+
+DCU Ss SPACE
+
+DCU O OPTIMIZE
+
+DCU W WAIT
+
+DCU R RESTART
+Zz ZAP
+
+ae
+
+7 Ae
+Using The Drive C Utility Program \e
+
+4
+
+5-20 DCU E - ERASING THE RAM-disk
+
+There are many times when you will want to erase ALL the files on the Drive C RAN-
+disk (for instance, if you wanted to reload a new set of files using QuickPac).
+
+DC DEMO DISK Cc: Bz DC USER DISK
+DCL «COM
+DCU »COM
+DFD «SPR
+PIP COM
+XDIR -COM
+
+DCN -COM
+DCU -COM
+Drive C: .SYS
+PIP -COM
+PRN -TST
+
+Erase ALL files on drive A,
+the Drive C unit
+
+YES, Erase ALL
+
+Cannot erase ALL because of a
+R/O (Read Only) file on drive A:
+
+*€ to return to CP/M
+
+The 'A’ prompt
+The ERA *.* command will not work because of the R/O file, Drive C:.SYS.
+
+A special command, DCU E (ERASE), will erase ALL of the files on the Drive C RAM-
+disk EXCEPT for Drive C:.SYS, even if any or all of these files are R/O.
+
+DCU E is NOT part of the DCU menu. The ERASE option is only available in the form,
+DCU E.
+
+IDCU_E<CR>| Run DCU E from A:
+
+7
+es
+
+Ve Using The Drive C Utility Program
+4
+
+?XDIR_A:<CR> Run XDIR on A:,
+the Drive C unit, from C:
+
+Drive A: is now blank with the exception of the Drive C:-SYS file.
+DCU E will NOT erase the contents of the Print Buffer if you are printing.
+
+DC DEMO DISK A Cc: B: De USER DISK
+DCL «COM
+DCU COM
+DFD «SPR
+PIP +COM
+XDIR + COM
+
+Drive C: «SYS
+
+Press the [RESET] button.
+
+This completes the section on Learning the Drive C Skills.
+Using Your New Drive C Skills
+
+CONTENTS
+
+USING QUICKPAC
+SAVING Drive C FILES
+MAKING IT EVEN MORE AUTOMATIC
+
+This last section of the manual shows you how to use the Drive C features easily and
+automatically.
+
+In this section you will learn how to use QuickPac to set up Drive C.
+
+Several methods for saving Drive C files are deuonstrated. The most powerful,
+ARCHIVE (DCA), can save files much larger than the storage capacity of a floppy
+diskette.
+
+The RETRIEVE program (DCA R) reconstructs your Archived files onto Drive C.
+
+Finally, powerful methods of combining QuickPac and RETRIEVE which make using
+Drive C even easier are discussed.
+
+When you've finished this section, don't forget to check the APPENDICES for
+additional helpful hints.
+> |
+K & Using QuickPac
+
+CONTENTS
+
+6-1 MAKING Drive C AUTOMATIC
+6-2 DCQINS - INSTALLING THE QUICKPAC OPTIONS
+6-3 USING QUICKPAC
+
+6-1 MAKING Drive C AUTOMATIC
+
+QuickPac (DCQ.COM) automatically installs any of the Drive C features, copies files
+onto the Drive C RAM-disk and even runs a program. QuickPac runs automatically each
+time you start your 01.
+
+QuickPac Install (DCQINS.COM) is a menu-driven program that asks you which options
+you wish QuickPac to do. Your choices are stored in a special data file, DCQ.DAT,
+which is accessed later by QuickPac.
+
+You can create a custom DCQ.DAT file for each set of application programs. For
+instance, you might create one DCQ.DAT file that copies WordStar and your WordStar
+
+document files onto Drive C, and another DCQ.DAT file that copies SuperCalc and
+your .CAL files
+
+QuickPac will allow you to install the following options:
+
+1. COPY THE CONTENTS OF ONE OR BOTH OF THE DISKETTES IN YOUR FLOPPY DRIVES ONTO
+Drive C
+
+2. RENAME Drive C AS DRIVE A: OR DRIVE B:
+
+3. INSTALL ANY OF THE NINE PRINT BUFFER SIZES
+
+4, AUTOMATICALLY RUN A PROGRAM ON Drive € OR ON YOUR FLOPPY DRIVES
+
+CP/M is set up to run any program named AUTOST.COM when you press <CR> after either
+initially turning on your Osborne or pressing the RESET button. To use QuickPac,
+DCQAUT.COM, the Drive C Autoloader, must be renamed AUTOST.COM.
+
+PLEASE NOTE: You have many different AUTOST.COM files on your Osborne diskettes. Be
+sure not to mix up your AUTOST.COM files. They are not the same even though they
+have the same name.
+
+In this section, you will use the QuickPac Install program to setup QuickPac to
+
+install Drive C as A: with the Dynamic Print Buffer, to copy your WordStar disk onto
+the Drive C RAM-disk and to run WordStar.
+
+100
+SS
+roa
+Using QuickPac (
+L @
+
+DC DEMO DISK
+
+DCL +COM
+Deu +COM
+DFD «SPR
+PIP +COM
+XDIR -COM
+
+Drive C NOT INSTALLED
+
+Preas the [RESET] button
+
+Press <CR> to load CP/M. The A> should appear on your screen.
+
+Dc DEMO DISK
+DCL +COM
+Dcq «COM
+Dc -DAT
+DCQAUT «COM
+DCQINS —.COM
+Deu COM
+DFD +SPR
+PIP -COM
+XDIR COM
+
+onto A: from Bz
+
+Drive C NOT INSTALLED
+
+DC USER DISK
+
+DCA -COM
+pD¢eL COM
+pcg COM
+peg DAT
+DCQAUT —.COM
+DCQINS COM
+peu «COM
+DFD SPR
+PIP -COoM
+PRN TST
+SYSGEN «COM
+XDIR COM
+
+Copy the DCQ (QuickPac) files
+
+DC USER DISK
+
+101A
+oO
+
+y Using QuickPac
+
+You'll find that QuickPac Install (DCQINS.COM) is easy to use and that with a little
+practice, you'll be creating a DCQ.DAT file tailored for each of your applications.
+
+DCQINS is a program designed specifically to create your DCQ.DAT files. It can be
+run from your floppy drives or from Drive C.
+
+The question of which drive(s) will be used arises three times during the QuickPac
+Install process: Where to store the DCQ.DAT file; which disks to copy onto Drive C;
+and which disk to run a program from.
+
+STORAGE OF DCQ.DAT
+ALWAYS NOTE the names of your drives at the time that you run DCQINS. The final
+step in using the QuickPac Install program is to store the DCQ.DAT file (which
+contains your QuickPac options) onto the diskette that you'll use for autoloading.
+
+Yor instance, suppose your drives were renamed and your system looked like this
+before running DCQINS (NOTE: EXAMPLE ONLY, DO NOT DO) ~
+
+YOUR BOOT DISK c: B: SuperCale Disk
+AUTOST — .COM AUTOST —.COM
+DCL COM BRIAN +CAL
+peg -COM DCQINS  .COM
+peu «COM IAN -CAL
+DED «SPR INSTALLS .COM
+PIP COM JAMES -CAL
+XDIR +COM sc COM
+sc -HLP
+sc -OVL
+A:
+DCN -COM WS. -COM
+peu -COM WSMSGS = .OVR
+
+Drive C: «SYS WSOVL1 -OVR
+
+DCQINS is run from the right-hand floppy, B: ( B>DCQINS<CR> ).
+
+DCQINS will ask, " Do you want to store DCQ.DAT on drive A:, B: or C:? ". DCQ.DAT
+should be stored on the disk you will later use for autoloading QuickPac. In this
+example, it is the left-hand floppy, C:, 80 you would answer 'C'.
+
+Qnce you've started DCQINS, you CANNOT leave the program to check the CURRENT names
+of your drives without quitting DCQINS and starting over.
+
+REMEMBER, THE NAME OF THE DRIVE WHERE YOU STORE DCQ.DAT IS DETERMINED BY HOW YOUR
+DRIVES ARE NAMED WHEN YOU BUN DCQINS.
+
+A useful way to avold confusion is to rename your system to its most “obvious” state
+before running DCQINS (using DCN).
+
+A: Left-hand floppy B: Right-hand floppy C: Drive ¢
+
+101B
+Using QuickPac N ite
+
+COPYING FILES
+
+DCQINS will ask you, “ Which disks do you want copied to Drive ¢? (A:, B: or both) *.
+Your answer will be recorded in the DCQ-DAT file which QuickPac will use.
+
+When you run QuickPac (after power up or a RESET), QuickPac will copy the contents
+of the disk(s) you chose onto Drive C. At the time QuickPac does its copy
+operation, your floppy drives WILL ALWAYS HAVE THEIR ORIGINAL NAMES, just as if
+Drive C was not installed.
+
+Therefore, when DCQINS is asking (for the copy operation) which drive name(s) to put
+in the DCQ.DAT file you are creating, ALWAYS refer to your drives as if Drive C was
+not installed. REMEMBER, you are instructing QuickPac what to do in the future
+using the DCQ.DAT file.
+
+RUNNING A PROGRAM
+
+Finally, QuickPac will let you run a program as an option to be specified in
+DCQ.DAT. DCQINS will not only ask you WHAT program to run but also on WHAT drive
+the program will be found. QuickPac will run the program as the last part of its
+autoloading sequence, after it has copied files AND after it has renamed your drives
+(4f you have specified these options).
+
+Again, you are instructing QuickPac what to do in the future using the DCQ.DAT file
+that you are creating with DCQINS. The name of the drive where your program will be
+
+is determined by how your DCQ.DAT renames your drives during the QuickPac
+autoloading procedure.
+
+The rules are:
+
+STORING DCQ.DAT THE DRIVE NAMES AS THEY ARE WHEN RUNNING DCQINS
+COPYING FILES THE FLOPPY DRIVE NAMES AS IF Drive C WAS NOT INSTALLED |
+RUNNING A PROGRAM THE DRIVE NAMES AS THEY WILL BE AFTER QuickPac RENAMES THE
+
+DRIVES
+
+In the following section you will create a DCQ.DAT file using DCQINS. Please note
+how the different drive names are used.
+
+** IF YOU HAVE DIFFICULTY LATER STORING DCQ.DAT **
+After running DCQINS and storing DCQ.DAT, use DIR or XDIR to check that DCQ.DAT has
+
+been stored on the diskette you'll be using for autoloading QuickPac. You can check
+the contents of the DCQ.DAT file with @ “TYPE DCQ.DAT<CR>” command.
+
+101¢
+(am
+Using QuickPac
+K eo,
+
+6-2 DCQINS - INSTALLING THE QUICKPAC OPTIONS
+
+DCQINS, the QuickPac Install program, is menu-driven. It lets you custom tailor
+QuickPac to fit your needs.
+
+DCQINS<CR> | Run DCQINS (QuickPac Install)
+from A:
+
+The QuickPac Installation title screen will appear. Press any key to start DCQINS.
+
+Pressing <ESC> will let you restart the QuickPac Install program or exit to CP/M.
+You can press <ESC> at any time.
+
+QUICKPAC INSTALL - COPY DISKS
+
+This question asks whether you want QuickPac to copy the complete contents of either
+one or both of the floppy disks in your drives onto the Drive C unit.
+
+Please indicate the size of your Drive C unit, L for 384K, S for 192K.
+
+If you have a 192K Drive C, the following question will appear:
+
+You will be using your WordStar diskette in this exercise, so please indicate the
+density of your WordStar diskette, $ for single, D for double.
+
+QuickPac asks this question to check that you don't try to copy two 185K Double-
+density diskettes onto a 192K Drive C.
+
+When QuickPac first copies onto the Drive C unit, Drive C is always named C:.
+QuickPac will rename Drive C (if you've so specified) only AFTER copying the disk
+files. THEREFORE, WHEN SPECIFYING WHICH DISKS TO COPY FROM, USE THE USUAL OSBORNE
+FLOPPY DISK DRIVE NAMES.
+
+When you program your own QuickPac choices, you should answer A to copy the files
+from drive A:, B for drive B: or 2 to copy the contents of BOTH floppy diskettes.
+I£ you have a 192K Drive C and a double-density 01, you can answer only 'A' or 'B'.
+
+If you've made an error in the copying instructions, QuickPac will let you start
+over if you answer 'N'.
+
+102
+Gq
+Using QuickPac \ eo,
+
+QUICKPAC INSTALL - RENAMING THE Drive C RAM-disk
+
+Answer A to name the Drive C unit drive A: for this exercise.
+
+QUICKPAC INSTALL - INSTALLING THE PRINT BUFFER
+
+Any of the Fixed Buffers can be installed by typing the appropriate letter or the
+Dynamic Buffer can be installed by typing P. For this exercise, please type P.
+
+QUICKPAC INSTALL - RUNNING A PROGRAM AUTOMATICALLY
+Al
+
+This part of QuickPac allows you to specify a program to be run automatically. You
+must specify on which logical drive the program file is located. If you've renamed
+the drives, you must specify the FINAL, NEW name of the Drive C unit or the floppy
+drive where the program file is located.
+
+:
+
+The drive name you previously chose for the program is automatically inserted in the
+program command line. You've now told QuickPac to run WordStar from drive A:, the
+Drive C unit.
+
+When you select your own program to run, you can enter any CP/M command line
+
+including Submit files. For example, SUBMIT TEST, MBASIC LEDGER or B:DBASE
+A:MAILIST.
+
+QUICKPAC INSTALL - CREATING DCQ.DAT
+
+This screen shows you the choices you've made for QuickPac. If you've made a
+mistake, press the <ESC> key and try again. If your choices are correct, press
+<cR>.
+
+103
+
+G Using QuickPac
+
+The file, DCQ.DAT, contains the choices you made in DCQINS. DCQ.DAT is used by
+QuickPac to install Drive C with the options you've chosen.
+
+DCQ.DAT must be stored on the diskette you will use for autoloading, i.e. the same
+diskette with AUTOST.COM (DCQAUT.COM) and DCQ.COM.
+
+In this exercise, DCQ.DAT will be stored on the DC DEMO DISK in drive A:. Please
+note that creating the NEW DCQ.DAT file will overwrite the OLD DCQ.DAT file that is
+on the DC DEMO DISK.
+Since you are storing DCQDAT now, you should use the name of the drive as it is
+named RIGHT NOW. In this case, it is the left-hand floppy, drive A:
+
+RUNNING QUICKPAC WITH YOUR NEW DCQ.DAT FILE
+
+Before you can use QuickPac, DCQAUT.COM must be renamed AUTOST.COM.
+
+REN AUTOST.COM=DCQAUT.COM<CR> Change the name DCQAUT.COM
+
+to AUTOST.COM
+ERA NS.COM<CR> Erase QuickPac Install
+Bun XDIR from A:
+DC DEMO DISK A: B: DC USER DISK
+AUTOST COM
+DCL -coM
+Deg COM
+Deg -DAT
+cu CoM
+DFD +SPR
+PIP -COM
+XDIR -COM
+
+You are now ready to run QuickPac.
+
+104
+6-3 USING QUICKPAC
+
+DC DEMO DISK
+
+Drive C NOT INSTALLED
+
+Press the [RESET] button.
+
+WordStar Disk
+
+When you press <CR>, your Osborne will automatically run the both AUTOST.COM program
+(originally DCQAUT.COM) and QuickPac (DCQ.COM) using the options you stored in the
+DCQ.DAT file.
+
+You will find that QuickPac usually takes about one minute to load, copy one floppy
+disk to Drive C and run a program from Drive C.
+
+Press <CR> to start QuickPac.
+
+DC DEMO DISK
+
+AUTOST COM
+DCL = COM
+peg COM
+peg DAT
+Deu COM
+DED -SPR
+PIP COM
+XDIR -COM
+
+WordStar should now be running on drive A:, the Drive C unit.
+
+Press
+
+AUTOST +COM
+DCLOADED .SYS
+DCN -COM
+DcU -COM
+Drive C: .SYS
+INSTALL +COM
+
+'X' to EXIT WordStar,
+
+MERGPRIN
+SAMPLE
+WS
+WSMSGS
+WSOVL1L
+XDIR
+
+-OVR
+-TXT
++ COM
+-OVR
+-OVR
++COM
+
+WordStar Disk
+
+AUTOST
+INSTALL
+MERGPRIN
+SAMPLE
+ws
+WSMSGS
+WSOVLY1
+XDIR
+
++COM
++COM
+.OVR
++TXT
+«COM
+-OVR
+.OVR
+COM
+
+105
+ae ese
+
+Y a
+
+<RETURN?
+
+T
+
+=
+
+AUTOST.cOM
+
+PRINT BUFFER
+=
+‘COPY FILES
+
+ib
+——= >
+
+RENAME
+RAM-disk
+
+—
+
+RUN
+PROGRAM
+
+106
+
+B=
+F) Using QuickPac
+
+Pressing the RETURN key
+starts QuickPac.
+
+The Drive C AUTOST program
+(originally named DCQAUT.COM)
+Js automatically started.
+
+AUTOST begins running DCQ,
+the QuickPac program.
+
+QuickPac installs the choices
+you stored in DCQ.DAT, the
+QuickPac data file.
+
+The RAM-disk is instailed as
+drive C: with the Dynamic
+Print Buffer P.
+
+The WordStar disk is copied
+onto the RAM-disk, drive C:,
+
+The RAM-disk is renamed
+drive A:.
+
+WordStar, WS, is run on
+drive A:, the Drive C
+RAM-disk,
+
+i Peas
+Using QuickPac N es)
+£
+
+Boa a EG ++ vrompe
+
+Press the [RESET] button.
+
+QuickPac has copied the WordStar diskette onto A:, the Drive C unit.
+
+There is a new file on the Drive C unit, DCLOADED.SYS. Whenever QuickPac
+automatically copies files onto Drive C, it also generates DCLOADED.SYS. If you
+specifically want to reload another set of programs and files onto your Drive C unit
+using QuickPac, you must first erase the DCLOADED.SYS file. You can use the ERA
+command or the DCU £ command.
+
+Press <CR> to start QuickPac a second time,
+
+QuickPac now reinstalls ALL the same parameters as before but DOES NOT COPY the
+files from the diskette in B:.
+
+The DCLOADED.SYS file alerts QuickPac that it had already copied the files and
+didn't need to do so again.
+
+Press 'X' to EXIT WordStar.
+
+erase ALL files on Drive C
+
+Log onto C:
+
+REN DCQAUT.COM=AUTOST. COM<CR> | Change the name AUTOST.COM back
+
+to DCQAUT.COM
+
+DC DEMO DISK c: B: WordStar disk
+
+A:
+
+This completes the section on QuickPac.
+
+107
+Saving Drive C Files
+
+CONTENTS:
+
+6-4 GETTING READY
+
+6-5 PROGRAMS WHICH COPY FILES
+
+6-6 USING PIP
+
+6-7 = ARCHIVE
+
+6-8 ARCHIVE ~ CHOOSING WHICH FILES TO STORE
+6-9 ARCHIVE - STORING FILES ON FLOPPY DISK
+6-10 THE ARCHIVE DISKETTE
+
+6-11 USING AN ARCHIVE DISKETTE SET
+
+6-12 ARCHIVE ~ SAVING ALL OF Drive C
+
+6-13 RETRIEVE
+
+When you've completed working with your Drive C files, they must be saved (backed
+up) onto floppy disks unless you are using BackPac. There are several ways to do
+this, depending on your application.
+
+This section will demonstrate different ways to backup your Drive C, the most
+powerful being the Drive C ARCHIVE and RETRIEVE program (DCA.COM).
+
+108
+Saving Drive C Files
+
+6-4 GETTING READY
+
+You will need two blank, formatted diskettes.
+
+FOR THIS EXERCISE, PLEASE FORMAT THESE DISKETTES SINGLE-DENSITY, EVEN IF YOU HAVE A
+DOUBLE-DENSITY OSBORNE.
+
+Please label one of these diskettes BACKUP 1 and the other diskette BACKUP 2.
+
+DC USER DISK A: B: WordStar DISK
+DCA -COM
+
+DCL. CoM
+
+peg -COM
+
+DCQAUT COM
+
+peg -DAT
+
+DCQINS —.COM
+
+Deu COM
+
+DFD «SPR
+
+PIP -coM
+
+PRN + TST Drive ¢ NOT INSTALLED
+SYSGEN —.COM
+
+XDIR -COM
+
+Press the [RESET] button.
+
+Press <CR> to load CP/M. The A> should appear on your screen.
+
+TELE 1 pre:
+
+Dynamic Print Buffer
+
+PIP<CRD Run PIP from C:
+
+2=C 3 PIP .COM[V<CR> Copy PIP.COM onto A:,
+
+the Drive C unit, from C:
+
+XDIR. COM[V<CR> Copy XDIR.COM onto A: from C:
+
+Log onto A:, the Drive C unit
+
+[ee asms.use*[v<c> coy tne worasear Ft1es
+
+onto A: from B:
+‘A' prompt, the Drive C unit
+
+109
+7
+Saving Drive C Files
+Le& 2
+
+DC USER DISK
+DCA «COM
+DcL com
+DEQ =COM
+DcQ DAT
+DCQAUT «COM
+DCQINS —.COM
+peu CoM
+DED «SPR
+PIP COM
+PRN -TST
+SYSGEN  .COM
+XDIR COM
+DC USER DISK
+
+DC USER DISK
+
+110
+
+A:
+DCN -COM ws +COM
+DCU COM WSMSGS -OVR
+Drive C: .SYS WSOVLY1L COM
+PIP «COM XDIR «COM
+Cc: Bz
+
+to clear CP/M
+
+WordStar DISK
+
+AUTOST +COM
+INSTALL COM
+MERGPRIN -.OVR
+SAMPLE +TXT
+WS: -COM
+WSMSGS -OVR
+WSOVLY1 -OVR
+XDIR -COM
+
+WordStar disk
+
+BACKUP 1 DISK
+Vom
+Saving Drive C Files L @
+
+4
+
+6-5 PROGRAMS WHICH COPY FILES
+
+Many application programs, like WordStar, have COPY options which will copy Drive C
+files onto your floppy disks.
+
+Pressing the '0' option in the main WordStar menu starts the COPY procedure. Many
+application programs have options which let you copy files between your logical
+drives without leaving the application program.
+
+WordStar should now be running on drive A:, the Drive C unit. The main menu will be
+displayed.
+
+Type '0' for the COPY option.
+
+B:XDIRTEST.COM<CR>
+
+DC USER DISK Cc: B: BACKUP 1 DISK
+
+XDIRTEST .COM
+
+WordStar copied the XDIR.COM file from the Drive C unit onto the BACKUP 1 DISK in
+drive B:. You also used the WordStar COPY option to change the name of the saved
+file to XDIRTEST.COM.
+
+Type 'X' to exit WordStar.
+
+It's always prudent to use XDIR to confirm that the COPY operation was successful.
+
+The WordStar COPY option can only copy one file at a time and requires typing each
+file name twice. PIP is much more flexible for copying a few files.
+
+11
+
+Saving Drive C Files
+
+6-6 USING PIP
+
+You've used PIP many times in these exercises to copy files.
+
+PIP (or programs like SWEEP) will let you copy groups of files using a single
+command statement.
+
+ere b:Prprest.Com=A:PIP.COM[V<CR>
+Copy PIP.COM onto B:,
+the BACKUP 1 DISK
+with the new name PIPTEST.COM
+from At, the Drive C unit
+(ere B:=A:ws*-*[v<cR> I Copy the Wordstar files onto the
+= oe BACKUP diskette from A:
+DC USER DISK ce B: BACKUP 1 DISK
+DCA +CoM PIPTEST .COM
+Det. -COM ws COM
+peq -COM WSMSGS «COM
+Dcq -DAT WSOVLY1 «COM
+
+DCQAUT COM XDIRTEST .COM
+
+DCQINS -COM
+
+DCU -COM
+
+DFD -SPR
+
+PIP COM
+
+PRN -TST AD
+
+SYSGEN +COM
+
+XDIR COM DCN +COM ws +COM
+DCU -COM WSMSGS -OVR
+Drive C: .SYS WSOVLY1 +COM
+PIP +COM XxDIR -COM
+
+PIP is a very simple, effective means of backing up files from the Drive ¢ unit onto
+floppy disks, especially if Drive C contains less than the contents of one floppy
+disk.
+
+112
+y
+
+Saving Drive C Files L ®
+
+NA
+
+6-7 ARCHIVE
+One of the major advantages of your Drive C is its ability to accomodate files much
+bigger than your floppy disks.
+
+DCA.COM, the ARCHIVE and RETRIEVE program, lets you backup these big Drive C files
+onto a set of backup diskettes,
+
+DCA is much faster than PIP, and can copy individual files and groups of files (like
+PIP) as well as the entire contents of the Drive C unit.
+
+Log onto C:
+
+Run DCA from C:
+
+ARCHIVE will store Drive C files onto any combination of single- and double-density
+diskettes.
+
+You can Rerun or Exit ARCHIVE at any time by pressing the <ESC> key.
+
+ARCHIVE always knows the current name of your Drive C unit and will only let you
+backup files to one of your floppy drives, in this case drive B: or drive C:.
+
+ARCHIVE uses a unique file format. When you save files onto floppy disk using
+ARCHIVE, you will NOT be able to use the files until they have been reloaded onto
+the Drive C unit using the RETRIEVE portion of DCA.
+
+In order to easily identify your ARCHIVE floppy set, you need to enter up to 50
+characters for the ARCHIVE SET LABEL. You MUST enter a label so that ARCHIVE can
+identify each ARCHIVE SET, but you do not have to use the full 50 characters
+available.
+
+Helpful information can be entered as part of the LABEL, such as the date or even
+the time. It's a good idea to give each ARCHIVE SET a unique label so you won't
+have to worry about mixing different sets.
+
+[TEST SET DC EXERCISES<CR>
+
+113
+
+r=
+Saving Drive C Files
+K e,
+
+6-8 ARCHIVE - CHOOSING WHICH FILES TO STORE
+
+The initial ARCHIVE menu is displayed:
+
+ARCHIVE can display a directory (like XDIR) of all the files on your Drive C unit
+and their sizes. You do not have to leave ARCHIVE in order to check the contents of
+Drive C.
+
+PIP .COM<CR>
+
+You've instructed ARCHIVE to copy PIP.COM and the WordStar files, WS*.* onto the
+backup diskette in B:.
+
+PLEASE NOTE THAT THE CP/M FILENAME CONVENTIONS, LIKE WS*.*, WORK WITH ARCHIVE.
+
+A <CR in response to the FILES TO STORE: query will move you on to the next part of
+ARCHIVE.
+
+After you've completed entering the files that you want to backup, the following
+menu will appear on your screen:
+
+iL
+A list of the files you've selected for backup and their sizes will appear. You can
+
+always check your selection using the L option before starting the actual copying
+process.
+
+114
+Saving Drive C Files \ @
+
+The S option will let you SELECT additional files to backup in this set.
+
+The LIST of selected files now includes XDIR.COM.
+
+PIP «COM<CR>
+<CR>
+
+The U option, UN-STORE, lets you remove files from the list of files to be
+transferred. This can be a very convenient tool.
+
+Suppose you wanted to backup ALL the .DOC files EXCEPT ONE. You would store *.DOC
+and then UN-store the one you didn't want.
+
+The LIST option shows that PIP.COM will no longer be stored.
+
+115
+
+re
+Saving Drive C Files
+Le& 3
+
+6-9 ARCHIVE - STORING FILES ON FLOPPY DISK
+
+Pressing <RETURN> will now start the actual copying of files onto the backup
+diskette in drive B:.
+
+<ce |
+
+ARCHIVE will store Drive C files on single- or double-density diskettes. If your
+diskettes are NOT BLANK, ARCHIVE must erase them before copying onto them.
+
+In this case, a directory of the old files on the backup diskette will appear on the
+screen. |
+
+DC USER DISK c: B: BACKUP 1 DISK
+
+PIPTEST -COM
+WS COM
+WSMSGS -COM
+WSOVLY1L -COM
+XDIRTEST .COM
+
+A:
+
+IF YOU DO NOT WANT TO KEEP THE OLD FILES ON YOUR BACKUP DISKETTE, ARCHIVE WILL ERASE
+ALL OF THEM AND USE THE DISKETTE FOR BACKUP.
+
+IF YOU MADE A MISTAKE AND INSERTED A DISKETTE IN DRIVE B: THAT HAS FILES THAT YOU
+DON'T WANT ERASED, THIS CHECKING FUNCTION IN ARCHIVE ALERTS YOU.
+
+116
+Tm
+Saving Drive C Files N £
+
+To avoid deleting all the files on your backup diskette (and the possibility of a
+catastrophic mistake), all Drive C programs require you to confirm your decision to
+delete TWICE.
+
+<CR>
+
+ARCHIVE has deleted the files on the BACKUP 1 DISK and is now copying the files
+chosen onto drive B:.
+
+The file names will be displayed as they are backed up.
+
+Press <ESC> while ARCHIVE is storing files.
+
+The ARCHIVE process can be interrupted at any time and then resumed, restarted or
+aborted.
+
+Press 'C' to continue.
+
+When the files you have specified have been stored, the following message appears:
+
+"C' prompt
+
+ARCHIVE returns you to CP/M when its finished.
+
+1L
+
+u
+
+Ge
+K & Saving Drive C Files
+
+6-10 THE ARCHIVE DISKETTE
+
+DC USER DISK BACKUP 1 DISK
+
+TESTSETD .ARL
+
+The only file on the BACKUP 1 DISK is TESTSETD-AR1. ARCHIVE will create only ONE
+backup file which may contain many different CP/M files.
+
+The name of the BACKUP file is the first eight characters in the SET LABEL (spaces
+in the SET LABEL are ignored).
+
+In this case, the SET LABEL 'TEST SET DC EXERCISES' has become the name TESTSETD.
+The file extension AR1 shows that this is the FIRST disk of an ARchive set.
+
+If you had used more than one disk for your ARCHIVE SET, subsequent disks would have
+been automatically named TESTSETD.AR2, TESTSETD.AR3, etc.
+
+TYPE B:TESTSETD.AR1<CR> Use the CP/M TYPE command
+
+to look at the ARCHIVE file
+TESTSETD-AR1 on BACKUP 1 DISK
+
+The TYPE command, a CP/M utility that's always available, will display the complete
+SET LABEL. This command lets you check an ARCHIVE disk in case you forgot to put a
+written label on it.
+Saving Drive C Files \/ @
+
+6-11 USING AN ARCHIVE DISKETTE SET
+
+PIP A: RN. TST[V<CR> Copy PRN.TST onto A: from C:
+DC DISK Cc: B: BACKUP 1 DISK
+DCA +COM Fl TESTSETD .AR1
+DCL «COM 1
+pcq -COM
+DCQ -DAT cy
+DCQAUT COM
+DCQINS +COM
+DCU -COM
+DFD »SPR
+PIP «COM
+PRN «TST A:
+SYSGEN «COM
+XDIR «COM DCN +COM ws «COM
+DCU -COM WSMSGS -O0VR
+Drive C: .SYS WSOVLYL -COM
+PIP ~COM XDIR ~COM
+PRN «TST
+
+There are now more files on Drive C than you can backup on one single-density
+diskette. ARCHIVE can automatically store ALL the files on Drive C onto a SET of
+
+backup diskettes.
+
+Log onto C:
+
+'DCA<CR> Run DCA from C:
+
+TEST ALL DC EXERCISES<CR>
+
+119
+7s
+K Saving Drive C Files
+4
+
+6-12 ARCHIVE - SAVING ALL OF Drive C
+
+The initial ARCHIVE menu is displayed:
+
+Pressing <TAB> instructs ARCHIVE to copy ALL the files from Drive C onto as many
+backup diskettes as are necessary.
+
+ARCHIVE will show that ALL the files on Drive C have been selected to be stored.
+
+Pressing <RETURN> will now start the copying of ALL Drive C files onto the backup
+diskette in drive B:.
+
+Keep the BACKUP 1 DISK with the file TESTSETD.ARI on it in drive B: and have your
+other diskette, labeled BACKUP 2 DISK, available.
+
+ARCHIVE has deleted TESTSETD.ARI from the BACKUP 1 DISK and is now copying ALL the
+contents of Drive C onto drive B:.
+
+120
+v. a
+Saving Drive C Files N @,
+
+When the BACKUP 1 DISK is full, che following message will be displayed:
+
+Remove the BACKUP 1 DISK from drive B: and insert the BACKUP 2 DISK into drive B:.
+
+DC USER DISK c: B: BACKUP 1 DISK
+
+TESTALLD .ARL
+
+DC USER DISK Cc: Bz BACKUP 2 DISK
+
+Blank, formatted
+
+DO NOT PRESS “C WHEN CHANGING ARCHIVE DISKETTES.
+
+Pressing <CR> will cause ARCHIVE to continue storing files until ALL the files on
+Drive C have been saved.
+
+When ARCHIVE is finished, you'll see the message:
+
+121
+Tl
+i e@ Saving Drive C Files
+
+DC USER DISK cz B:
+
+It required two single-density diskettes to store ALL the files from Drive C. If
+there had been ONE big file instead of eight small files on Drive C, ARCHIVE would
+have automatically divided the large file and stored it on a series of ARCHIVE
+diskettes: TESTALLD.AR1, TESTALLD.AR2, TESTALLD.AR3 etc.
+
+122
+Saving Drive C Files Ns rg
+
+6-13 RETRIEVE
+
+RETRIEVE reloads your ARCRIVE SET onto Drive C.
+
+First, erase the contents of Drive C using the DCU E command.
+
+erase ALL files on Drive C
+
+DC USER DISK cz B: BACKUP 2 DISK
+DCA +COM TESTALLD -AR2
+pcL +COM
+
+pcq COM
+
+pcq «DAT
+
+DCQAUT +COM
+
+DCQINS +COM
+
+DCU COM
+
+DFD «SPR
+
+PIP COM
+
+PRN -TST A:
+
+SYSGEN +COM
+
+XDIR +COM Drive C: .SYS
+
+123
+v.
+©
+
+DCACCRS | Run DCA from C:
+Ly
+
+The RETRIEVE program, like ARCHIVE, knows the current name of the Drive C unit and
+will only let you RETRIEVE from the floppy drives, in this case B: and C:.
+
+Saving Drive C Files
+
+FOR THIS EXERCISE, PLEASE INITIALLY LEAVE THE BACKUP 2 DISK IN DRIVE B:, EVEN THOUGH
+THE PROGRAM ASKS YOU TO INSERT ARCHIVE DISK #1.
+
+<CR>
+
+RETRIEVE required that your ARCHIVE SET be retrieved in order. The .AR1 diskette
+must be inserted first, then the .AR2 diskette, etc.
+
+RETRIEVE also checked that the diskette you ingerted was an ARCHIVE disk and NOT one
+of your program or data diskettes.
+
+The program identified an incorrect diskette and asked you to insert another
+diskette.
+
+Please now remove the BACKUP 2 DISK and insert the BACKUP 1 DISK.
+
+YOU SHOULD NOT PRESS “C WHEN CHANGING ARCHIVE DISKETTES.
+
+DC USER DISK Cc: B: BACKUP 2 DISK
+
+TESTALLD .AR2
+
+124
+
+7
+
+Saving Drive C Files L a
+
+DC USER DISK Cc: B: BACKUP 1 DISK
+
+TESTALLD .-ARL
+
+Press <CR> and RETRIEVE will begin copying and reconstructing the Drive C files that
+were stored on this specific ARCHIVE SET.
+
+RETRIEVE will query you even if you have inserted the #1 disk of an ARCHIVE SET to
+make sure that you are retrieving the correct ARCHIVE SET.
+
+RETRIEVE will display the files it is reconstructing on Drive C as they are copied
+from the ARCHIVE diskette.
+
+When all the information on the first ARCHIVE diskette has been retrieved, the
+following uessage will be displayed:
+
+Remove the BACKUP 1 DISK from drive B: and insert the BACKUP 2 DISK into drive B:.
+
+REMEMBER, DO NOT PRESS “C WHEN CHANGING ARCHIVE DISKETTES.
+
+125
+ae
+%..
+K 3 Saving Drive C Files
+
+DC USER DISK c: B: BACKUP 1 DISK
+
+TESTALLD .AR1
+
+DC USER DISK
+
+B: BACKUP 2 DISK
+
+TESTALLD -AR2
+
+Press <CR> and RETRIEVE will continue loading the files from the BACKUP 2 DISK, the
+second disk in the ARCHIVE SET.
+
+When ALL of the ARCHIVE SET has been retrieved, this message will appear:
+
+126
+Saving Drive C Files N e
+
+aq
+
+DC USER DISK
+
+DCA -COM
+DcL com
+Deq -COM
+peq -DAT
+DCQAUT COM
+DCQINS —-COM
+Deu -COM
+DED +SPR
+PIP Com
+PRN +TST
+SYSGEN .COM
+XDIR COM
+
+B: BACKUP 2 DISK
+
+TESTALLD .AR2
+
+PRN
+
+«COM
+-COM
+-SYS
++COM
+«TST
+
+WS -COM
+WSMSGS -OVR
+WSOVLYL -COM
+XDIR +COM
+
+You can RETRIEVE onto Drive € even if there are already files on Drive C.
+
+There must, however, be sufficient space on the Drive C RAM-disk for the retrieved
+
+files.
+
+If there is not enough space, you will see the message:
+
+The RETRIEVE program can be run automatically. This is discussed in the next
+
+section, “Making It Even More Automatic".
+
+127
+7
+i ¢ Making It Even More Automatic
+
+6-14 USING YOUR FUNCTION KEYS
+6-15 THE REMOTE RETRIEVE COMMAND
+6-16 REMOTE RETRIEVE WITH QUICKPAC
+
+6-14 USING YOUR FUNCTION KEYS
+Placing several Drive C commands on your function keys can make using Drive C very
+
+simple no matter what your application.
+
+Some suggestions are:
+
+DCL _ _<CR> The Drive C LOAD command with
+your choice of names and Print Buffer
+DCN _<cR> The Drive € NAME command
+DCU E<CR> The Drive ¢ ERASE command
+peu Any of the DCU Utility commands
+
+Another command which is can be used to great benefit as a function key is the
+vemote RETRIEVE command.
+
+| 128
+
+Making It Even More Automatic N aS
+
+6-15 THE REMOTE RETRIEVE COMMAND
+
+Typing DCA R<CR> will automatically load the RETRIEVE function.
+RETRIEVE will then ask from which drive to retrieve.
+
+Even more powerful is the DCA RA, B or C command. These commands will immediately
+begin retrieving without any inputs from you.
+
+The general rule is:
+
+RETRIEVE WILL WORK AUTOMATICALLY USING THE COMMAND DCA R FOLLOWED BY THE LETTER OF
+THE DRIVE WHICH HAS THE ARCHIVE DISKETTE.
+
+THE DRIVE MUST CONTAIN DISK #1 OF AN ARCHIVE SET.
+
+{bea R A will retrieve from drive A:
+DCA R B will retrieve from drive B:
+
+DCA R C will retrieve from drive C:
+
+The most powerful combination is the remote RETRIEVE command with QuickPac.
+
+129
+a.
+
+: \' @ ; Making It Even More Automatic
+‘a
+
+6-16 REMOTE RETRIEVE WITH QUICKPAC
+
+RETRIEVE is a much faster means of loading Drive C than PIP.
+
+To use the remote retrieve command with QuickPac, setup your DCQ.DAT file using
+QuickPac Instail as follows;
+
+1. DO NOT PROGRAM QUICKPAC TO COPY FILES FROM EITHER FLOPPY DISK.
+
+2. SPECIFY THE PROGRAM TO RUN AUTOMATICALLY AT THE END OF QUICKPAC AS: DCA R_.
+
+DC USER DISK BACKUP 1 DISK
+DCA -COM TESTALLD .AR1
+DCL -COM
+
+DcQ COM
+
+DcQ -DAT
+
+DCQAUT COM
+
+DCQINS +COM
+
+DCU +COM
+
+DFD «SPR
+
+PIP +COM
+
+PRN «TST A:
+
+SYSGEN +COM
+
+XDIR +COM
+
+In the above illustration, QuickPac was instructed to install Drive C as A:
+The DCA.COM file is on C:, so the program to be run by QuickPac is C:DCA R B<CR>.
+QuickPac would automatically load Disk #1 of the ARCHIVE SET, TESTALLD.AR1.
+
+If you use the same group of programs and data files over and over, you will find it
+
+beneficial to create an ARCHIVE SET of these files and quickly load them onto your
+Drive C using the QuickPac remote retrieve feature.
+
+130
+Appendices | 4
+
+7-1 Using Drive C with Ol System Utilities
+7-2 Drive C hardware specifications
+
+7-3 Drive C software specifications
+
+1-4 Disk and RAM space usage with Drive C
+
+7-5 Centronics parallel printer cable specifications
+7-6 Patching WordStar for improved printing
+
+7-7 Modifying QuickPac data files
+
+7-8 Using ZCPR with Drive C
+
+7-1 USING Drive C WITH 01 SYSTEM UTILITIES
+There are four programs supplied with your Osborne 1 which were written specifically
+for your Ol and which assume that your computer has just two floppy disk drives.
+
+You must follow a few special rules when using these programs.
+
+COPY
+COPY assumes that you have just two floppy drives named A: and B:.
+To use COPY with Drive C installed you must NOT rename the drives. The floppy
+drives MUST be named A: and B: and the Drive C unit must be logical drive C: while
+you use copy. You can use the Drive C command “DCN C" to rename the drives at any
+time to be properly configured for COPY.
+
+The RULES are:
+
+TO USE COPY, THE FLOPPY DRIVES MUST BE NAMED A: AND B:. |
+THE DRIVE C UNIT MUST BE NAMED C:.
+
+| COPY CANNOT BE USED TO COPY FILES ONTO THE Drive C UNIT. |
+
+be — _~
+
+SETUP
+
+SETUP, unlike COPY, ALWAYS assumes that drive A: and drive B: are the floppy disk
+drives, whether or not you have installed Drive C.
+
+Typically, the left-hand floppy drive is initially drive A: and the right-hand
+floppy drive is drive B:. In this case, if you “tell” SETUP to get the CP/M System
+from drive A:, it will get it from the left-hand floppy REGARDLESS of the names of
+the logical drives.
+
+131
+4 Appendices
+
+SETUP cannot get the CP/M system from the Drive C unit since the system can only be
+stored on floppy.
+
+The RULES are:
+
+SETUP ASSUMES THE NAMES OF THE FLOPPY DRIVES ARE NEVER
+CHANGED BY THE Drive C SOFTWARE.
+
+SETUP ASSUMES THE LEFT (OR BOOT) FLOPPY IS DRIVE A: AND
+THE RIGHT (OR OTHER) FLOPPY IS DRIVE B:, WITH OR WITHOUT
+Drive C INSTALLED.
+
+SYSGEN
+
+SYSGEN works just like SETUP. It ALWAYS assumes that the floppy disk drive names
+have never been changed.
+
+SYSGEN cannot get the CP/M system from the Drive C unit since the system can only be
+stored on floppy.
+
+The RULES are:
+
+SYSGEN ASSUMES THE NAMES OF THE FLOPPY DRIVES ARE NEVER
+CHANGED BY THE Drive C SOFTWARE.
+
+SYSGEN ASSUMES THE LEFT (OR BOOT) FLOPPY IS DRIVE A: AND
+THE RIGHT (OR OTHER) FLOPPY IS DRIVE 8:, WITH OR WITHOUT
+Drive C INSTALLED.
+
+MOVCPM
+
+MOVCPM must be run BEFORE running the Drive C Loader, DCL.COM. MOVCPM will become
+confused if you run it after installing Drive C because it cannot tell that Drive C
+has altered the System. This confused condition will usually generate a MOVCPM
+
+"Synchronization Error”.
+
+The RULE is:
+
+[ RUN MOVCPM BEFORE RUNNING DCL.COM, THE Drive C LOADER. ]
+
+132
+,
+Appendices ZB
+
+7-2 Drive C HARDWARE SPECIFICATIONS
+
+MECHANICAL SPECIFICATIONS
+
+Dimensions (not including cables): 5.6in x 5.9in x 1.0in (14 cm x 15 cm x 2.5cm)
+
+Weight: 1 1b (.45 kg)
+
+Shipping Weight: 3 lbs. (1.4 kg)
+
+Operating Temperature Range: +5 to + 60 degrees C (+40 to +140 degrees F)
+Storage Temperature Range: -20 to +100 degrees C (-5 to +212 degrees F)
+
+ELECTRICAL SPECIFICATIONS
+Power Requirements: 11 to 14.5 VDC at 0.3A max. (2.5 Watts nominal, 384K unit)
+Source: Draws power from the Ol EXT. VIDEO connector or
+from the optional Drive C BackPac backup power supply.
+PERFORMANCE SPECIFICATIONS
+Latency time: NONE (Drive C is solid state and has no moving parts)
+
+Maximum data throughput rate: 55,000 bytes per second
+(445,000 bits per second)
+
+Access time to random sector: approx. 40 usec. (software access time)
+
+Time reqired to load 32K byte .COM file and run it: 1.1 seconds max.
+
+133
+7-3 Drive C SOFTWARE SPECIFICATIONS
+CP/M PARAMETERS
+192K UNIT 384K UNIT TURBOPAC
+Useful Storage Capacity: 187 KB 376 KB 10, 20 OR 33 MB
+Block Size: 1K 2K 8K (can be modified)
+Number of Directory Entries: 64 128 512 per logical drive
+Directory Space: 2048 bytes 4096 bytes 16384 bytes per drive
+Number of Logical Sectors: 1536 3072 varies with Block
+size & capacity
+Number of Reserved Tracks: 0 612 landing area
+Number of logical sectors/track: 2 32
+Bytes per sector: 128 256
+Amount of TPA RAM used:
+WITHOUT Print Buffer Installed: 1152 Bytes
+WITH Print Buffer Installed: 2176 Bytes
+
+when used with TurboPac hard disk: 3172 Bytes
+
+Installation:
+
+PRINT BUFFER SPECIFICATIONS
+
+Automatically installed with Drive C RAM-disk
+
+loader. User can select NO buffer if desired.
+
+Buffer Modes: Two, user selectab:
+
+Dynamic or Fixed.
+
+le.
+
+TurboPac Spool Buffer: 128K fixed capacity when used with 384K Drive C
+not installed when used with 192K Drive C
+
+Fixed Buffer Capacity: User selectable from 16K to 128K
+
+in increments of 16K.
+
+Dynamic Buffer Capacity: Up to the maximum space available
+
+on the Drive C unit.
+
+Print Buffer Speed: Input from CP/M via control P, limited by display speed
+Input from PIP LST: Command, about 1250 characters per second
+Output speed limited by printer.
+
+134
+|S
+Appendices d
+
+7-4 DISK AND RAM SPACE USAGE WITH Drive C
+
+A certain amount of disk space is required on Drive C for the umit to function
+properly. Space is required for the disk directory and for two or three Drive C
+special files.
+
+DISK SPACE USED
+
+Function Small Drive ¢ (192K) Large Drive C (384K)
+Directory space 2K needed 4K needed
+DFD-SPR file 3K needed 4K needed
+DCN.COM program 1K optional 2K optional
+DCU.COM program 10K optional 10K optional
+totals 35K min. needed 8K min. needed
+16K incl. options 20K incl. options
+
+NOTES: The DFD.SPR file is absolutely necessary to Drive C operation. It's located
+in user area 15. DO NOT ATTEMPT TO ERASE DFD.SPR FROM USER AREA 15. This
+file is loaded each time you type “C and each time a program exits to CP/M.
+The file name has no significance, but DCL always checks for its existence
+each time DCL is run. The Drive C software automatically loads the DFD.SPR
+file to replace the 01 Digital Research CCP which would normally be loaded
+from the drive A: floppy disk after each ~C.
+
+In applications where you need every last bit of disk space you may want to
+erase the “optional” programs DCN.COM and DCU.COM. The functions of these
+programs are explained (again) below.
+
+DCN.COM is needed only if you want to rename the drives after running DCL.
+The DCN.COM program file is created by DCL at the time DCL is run.
+
+The DCU.COM program is a utility copied automatically by DCL to the Drive C
+unit when DCL is run. If you don't need these utility functions, or if you
+are not using the Print Buffer feature, you can erase this file.
+
+RAM SPACE USED
+
+The Drive C software requires 1152 bytes of RAM space out of the 01's total of 64K.
+The Print Buffer feature requires an additional 1024 bytes of RAM. However, the RAM
+needed by the Print Buffer is not used unless you install the Buffer at the time you
+run DCL.COM.
+
+In applications using all of the available Ol TPA RAM (for example, DeskTop
+Accountant by Rocky Mountain Software) you may find you will need to eliminate the
+Print Buffer to get the application program to load.
+
+135
+|
+1A | Appendices
+
+7-5 CENTRONICS PARALLEL PRINTER CABLE SPECIFICATIONS:
+
+Cables manufactured exactly as specified in the Osborne 1 User's Manual will always
+work fine with Drive C. Unfortunately, many cable builders include an extra signal
+line which is never used by the 01 computer.
+
+This signal, called ‘PE’ for Paper out Error, will interfere with normal Drive C
+operation if connected and MUST be removed to guarantee compatibility among your 01,
+Drive C unit and printer. If present, this signal wire will be connected FROM pin
+12 (PE) on the 36-pin connector at the Printer end of the cable to pin 13 (NRFD) on
+the 26—-pin edge connector at the Drive C end.
+
+A properly built cable will have these signal connections:
+
+Drive C unit Centronics-style
+PRINTER/HARD DISK/8088 Centronics Printer
+Connector pin numbers Signal name Connector pin no.s
+1 Data bit 0 2
+2 Data bit 4 6
+3 Data bit 1 3
+4 Data bit 5 7
+5 Data bit 2 4
+6 Data bit 6 8
+7 Data bit 3 5
+8 Data bit 7 9
+10 Ground 30 (see Note 1 below
+1L Output Strobe 1
+1s Printer Busy 11
+16 Ground 29
+18 Ground 21
+20 Ground 20
+
+Note 1. There are several signal ground connections on both Drive C and
+Printer ends of the cable. Your cable may have one or two connections less than
+shown here.
+
+In general, more ground connections are better and it doesn't really matter which
+Ground pin on the Centronics printer end is connected to which Ground pin on the
+Drive C end.
+
+Note 2. Some Ol printer cables also have a wire connecting Centronics pin 13 (SLCT
+OUT) to Drive C pin 19 (SRQ). This signal is NOT used by your Ol, BUT it has NO
+effect on Drive C. If this wire is connected in your cable, leave it connected.
+Ground Connection pin numbers:
+
+Drive C 26-pin edge connector: 12,14,16,18,20,22,23,24
+
+Centronics 36-pin connector: 19 through 30 (some printers have even amore)
+
+136
+Appendices
+
+7-6 PATCHING WORDSTAR FOR IMPROVED PRINTING:
+
+Both versions 2.26 and 3.3x for the Osborne 1 and Osborne Executive have NOT been
+set up by MicroPro Int'l or OCC for efficient print while editing. If you have
+tried to edit a file while printing another file you may have noticed (especially
+with Centronics parallel printers) periods when your keyboard seems to be locked up
+and WordStar misses characters you type.
+
+This condition is caused by the CP/M list output function (LST:) which will wait
+until the printer is ready (no matter how long) to output a character. Once
+WordStar outputs a character to the LST: routine CP/M will not return to WordStar
+for any other function until that character has been accepted by the printer.
+
+The Drive C Print Buffer feature can eliminate most, but not ali, of this annoying
+WordStar problem. To eliminate this problem entirely a modification to WS.COM is
+required. We have listed a patch below which you can install in WordStar yourself
+to implement the List Status function.
+
+WordStar has a built-in ability to use the CP/M function called List Status, but
+this function has not been installed in the standard OCC versions of WordStar. When
+using the List Status function WordStar can check the printer to see if it's ready
+before actually sending out a character to be printed. This function virtually
+eliminates the annoying WordStar hang-ups when simultaneously editing and printing.
+
+Please do NOT attempt to install this patch unless you are thoroughly familiar with
+the DDT utility and the SAVE command.
+
+This procedure assumes you have DDT.COM, STAT.COM and WS.COM on the same drive. You
+MUST patch WS.COM AFTER you have installed it using the INSTALL or WINSTALL programs
+supplied with your version of WordStar. Otherwise the installation programs may
+erase these patches. Similarly, each time you re-install WordStar you have to re-do
+these patches.
+
+1, Use STAT,COM to determine the number of records in your WS.COM file, using the
+command STAT WS.COM. WS version 2.26 is usually 126 records, WS version 3.3 is
+usually 138 records long. You will need this number later on in step 8. WS2.26 has
+an extra NOP instruction at the first patch location, as shown below.
+
+2. Give the command DDT WS.COM<CR> to load DDT and WS.COM into memory.
+
+3. List address 0718(hex):  -L0718,071C<CR>
+
+If the List Status patch has NOT been made yet you should see:
+
+Version 3.3 0718 NOP Version 2.26 0718 NOP
+0719 NOP 0719 NOP
+071A ORA A 071A NOP
+071B RET 0718 OBA A
+
+071C MOV E,A 071C RET
+
+137
+4\ Appendices
+
+If the patch has ALREADY been installed .you should see:
+
+Version 3.3 0718 RST 07 Version 2.26 0718 RST 07
+
+“~~ 0719 JMP 02E0 0719 NOP
+071C MOV E,A 071A JMP 02K0 (or another address)
+O71D MOV E,A
+
+4. Check the WordStar user patch areas to see if they are available:
+~DO2EO<CR> if the 16 bytes after address 02E0 are all 00 it's OK to put the
+patches at this standard address. If not, any area between
+02E0 and 035B will do if available.
+5. Use the in-line assembler of DDT to install the patch as follows:
+
+Version 3.3 -A0718<CR> Version 2.26 -A0718<CR>
+
+0718 RST 07<CR> 0718 RST 07<CR>
+
+0719 JMP 02E0<CR> 0719 NOP<CR>
+
+071C<CR> 071A JMP 02E0<CR>
+071D <CR
+
+~AO2EO<CR> (This part is the same for BOTH versions)
+02E0 CALL 02EB<CR>
+02E3 INR A<CR>
+O2E4 JNZ 02E9<CR>
+02E7 sTC<cR>
+
+0288 RET<CR>
+
+029 ORA A<CR>
+O2EA RET<CR>
+
+02EB LHLD 0001<cR>
+O2EE MVI L,2D<CR>
+02F0 PCHL<CR>
+
+02F1 <cR>
+
+6. Now check the code you have entered using the LO718 and LO2EO commands to make
+sure the result is exactly what you entered.
+
+7. Exit DDT using the GO command or *C.
+8. After the A> prompt give the command: SAVE nn WS.COM<CR>
+
+mn stands for a decimal number equal to half the number of records you
+determined for WS.COM in step 1. For example:
+
+If your WS.COM file has 126 records, nn= 63
+if it has 138 records, nn= 69
+if it has 131 records, nn= 66 (Note, round up after dividing records by 2)
+
+9. You're done! Go ahead and use your newly patched WordStar. If it works fine be
+sure to save it on floppy.
+
+138
+Appendices
+
+7-7 MODIFYING QUICKPAC DATA FILES
+
+This section is recommended for users who already know how to use SUBMIT. It is not
+intended as a tutorial on SUBMIT. The Drive C QuickPac program set consists of:
+
+1. AUTOST.COM Drive C's own version, not to be confused with OCC versions
+Also called DCQAUT.COM on the DC LOADER & ARCHIVE diskette.
+
+2. DCQ.CoM A program to implement several special Drive C functions
+
+3. DCQ.DAT A data file similar to a .SUB file used by SUBMIT.COM
+
+4. DCQINS.COM A menu-driven program to make setting up QuickPac options easy.
+
+This section discusses how DCQ.COM works and how to modify the DCQ.DAT file in case
+you want to add extra operations to the usual QuickPac startup procedure.
+
+AUTOST is called automatically by CP/M just after you boot-up. It works similarly
+to SUBMIT except that our AUTOST can only use a file called DCQ.DAT for its source.
+
+A typical DCQ.DAT file (in this case, the one provided on your original ARCHIVE &
+LOADER Disk) looks like this, explanations for each line are on the right:
+
+DCL Run the Drive C Loader without Print Buffer
+peqT+1 Transfer files if not already transferred
+
+PIP C:=A:*.*[WVOR] using PIP to move from drive A: to drive C:
+
+DCQ N A + A:XDIR Rename Drive C to drive A:, then run XDIR on new A:
+
+If you want to add command lines to this file you can edit it using the Non-Document
+mode of WordStar. You can add just about any command lines you choose BEFORE the
+DCL line, e.g. you might run the user group program FAST.COM.
+
+Generally, if you want to run a program which modifies the CP/M system in some way,
+you should run these programs BEFORE DCL. Generic CP/M programs which will access
+the Drive C unit should be added AFTER the "DCQ T+ n” line.
+
+Do NOT add any command lines after the last line containing a DCQ statement. Any
+such lines will be ignored, or, in some cases, may cause improper DCQ operation.
+
+The rules for DCQ command syntax are simple:
+1. DCQT+n means: "If there is a file on the Drive C unit named DCLOADED.SYS,
+then skip n lines in this file to the next command line.
+
+If no such file exists execute the next line, and create the
+DCLOADED.SYS file on the Drive C unit.”
+
+This operation prevents QuickPac from copying all your files
+over from floppy to Drive C if you have already done so but
+are forced to reload and reboot CP/M.
+
+Note: T stands for Transfer.
+
+139
+Appendices
+
+2. DCQN d+ A:XDIR “Rename the Drive C unit to logical drive d: ( d MUST be the
+letters A, B or C). Next display a message and beep the 01
+beeper. Then run a program called A:XDIR."
+
+Note: W stands for re-Hame.
+
+3. DOQNd+ “Rename the Drive C unit to drive d:. Then display a message
+and beep the 01 beeper. QuickPac exits to CP/M without
+running another program.”
+
+GENERAL RULES TO FOLLOW:
+
+To add command line(s) BEFORE the first line (the one with DCL in it):
+
+1. You can add any number of lines before the DCL line as long as the commands
+specified are the type which will return to CP/M immediately after execution.
+
+2. Do NOT specify commands before the DCL command line which attempt to access
+the Drive C unit since Drive C is not installed until DCL runs.
+
+To add a command to be executed only if QuickPac is running the first time, i.e. if
+DCLOADED.SYS is NOT already on the Drive C unit:
+
+1. Add your command line(s) in between the “DCQ T + n” line and the “DCQ N" line,
+either before OR after the PIP line.
+
+2. Change the number n to reflect the number of commands lines you added. If
+you added just one line, change n from 1 to 2. If you added two lines, change
+n from 1 to 3.
+To change the program to run at the end of QuickPac:
+1. Use DCQINS.COM to change this option.
+To change the disks to be copied to the Drive C unit:
+1. Use DCQINS.COM to change this option.
+To install the Print Buffer at load time:
+1. Use DCQINS.COM to change this option.
+LOGGED-IN DRIVE:
+Normally, if you run DCL manually, you remain logged-on to the same physical drive
+you ran DCL on. Since DCL can only be run from your initial floppy drive A:, you
+will still be logged-on to that floppy after running DCL.
+
+If QuickPac runs a program, DCQ always logs onto the drive the program is on.
+
+If QuickPac does not run a program but transfers files, DCQ logs onto the Drive C
+unit, regardless of its logical drive name.
+
+140
+Appendices
+
+7-8 USING ZCPR WITH Drive C
+
+This section is recommended reading only for user's familiar with some of the
+mysterious inner workings of CP/M and with assembly language programming.
+
+One of the more popular enhancements available for the 01 from the FOG User Group
+(or CP/M User Group) is the set of CCP replacements known as ZCPR. These CCP's are
+all written in Z-80 code instead of the less efficient 8080 code used by Digital
+Research in order to add several useful commands.
+
+The DCL Loader used with Drive C requires the presence of a file called DFD.SPR on
+your system disk used for initial boot-up of CP/M. This file is actually a
+replacement for the Digital Research CCP you got with your 01 and is derived from
+the ZCPR version known as NEWCCP. To maintain compatibility with Digital Research
+and OCC documentation we have made DFD.SPR as close as possible to the DRI standard.
+
+You may notice that, once you load Drive C with DCL, the ERA command will echo all
+files erased to the console display. This is the only ZCPR feature we have left in
+DFD.SPR.
+
+We have also created an expanded version (called DFDZCPR.SPR) which we have placed
+in the FOG library where it is accessible to all User Group members. We have not
+modified the NEWCCP commands at all in this version.
+
+IMPORTANT NOTE: Drive C cannot support the expanded ZCPR-compatible version with
+phone calle or documentation of any kind.
+
+You can create your own CCP files by:
+1. keeping them exactly within 2048 bytes maximum size.
+
+2. assembling them with Digital Research's RMAC.COM assembler (RMAC.COM is provided
+with all Osborne Executive computers and other CP/M Plus systems.)
+
+3. using Digital Research's LINK.COM to link the output of RMAC to a .SPR file.
+Example command: LINK NEWCCP [0S]
+
+4. renaming whatever .SPR file you have created to DFD-SPR
+5. replacing the original DFD.SPR file provided by Drive C on the LOADER & ARCHIVE
+
+Disk with the newly created ZCPRxxx version. You MUST name whatever version you use
+DFD.SPR in order for it to load properly with DCL.
+
+141
+Item Page
+Archive -
+
+SEE DCA.COM
+AUTOST.COM seeeeeeee e100, 104-105
+BackPac. ween TH8
+Backup -
+
+SEE Saving files
+Backup Disk.
+Block size..
+Cables
+
+Ext. Video/Battery......11-13,15-16,27
+
+Parallel printer
+
++109
++134
+
+Attaching + 28-29
+seen 80°31
+atte.136
+Printer/Hard Disk/8088..11-13,15-16,27
+Video -
+SEE Video
+
+Centronics printer -
+SEE Printer,Parallel
+COPY. . sre eeeveecesseseeees20-21 ,46 5131
+Copy files
+copy.
+DCA ~ Archive
+DCA ~ Retrieve.
+
+20-2146 ,131
+7-8,40,113-122
+7-8 40-41,
+
+5 123-127 129-130
+DCA - Remote Retrieve. ..40-41,129-130
+PIP. 6 ,56-59,61,
+67-69 76-77 ,112
+
+QuickPac 10,39,41,
+100-107 ,130
+++76-77 111
+cp/M
+DIR -50-54 66
+
+60,97-98
+
+61
+
+45-46
+
+132
+
+56-59
+
+2,45
+
+55
+
+23,32,47-48,
+
+ates 64,132
+System files.
+System tracks
+
+‘CP/M SYS DISK..
+
+DCA.COM
+Archive
+
+Applications.
+
++7-8 ,40-41,113,
++122,129-130
+«114-115
+
+Choosing files
+
+142
+
+item Page
+
+DCA.COM (cont'd)
+Diskette@seeseseeeeeeeel lB
+Exiting to CP/M. 114
+Interrupting 117
+LABEL. 113,118
+Redo. 114
+
+7-8,40-41,
+119-122
+Storing Files.... 116-122
+Storing ALL files 120-122
+TAB eos sssseesscceeeesel20
+Un-selecting files..+-115
+Remote Retrieve
+
+Set
+
+Manual 40,129
+
+QuickPac ++41,130
+Retrieve
+
+Applications......+++-40-41,123-127,
+
++++129-130
+
+Diskette order 124-125
+Error message. +127
+DCL.COM
+DFD.SPR. eee + 066,135
+File requirements. 66,135
+
+Loading Drive C.
+Print Buffer...
+
+40,66 ,70-71,81
+81-85
+
+Renaming drives. 6-7,39-40,
+seeeeeee+70-71,100,103
+DCLOADED. S¥S 107
+DON.COM...++ +74-75
+
+DCQ.DAT
+Customizing. .
+Creating....
+
++41,139-140
+41,104-106,
+139-140
+
+Storing 104-106
+Structure. ++ 139-140
+DCQAUT.COM
+
++41,139-140
+-100,104-106,
++139-140
+
+Manual....sseerree
+Renaming AUTOST.COM.
+
+DCQINS.coM
+Copying files..
+Print Buffer. +100,103
+Renaming drives.. +100,103
+Running a program......+100,103
+
+DCU.COM
+
++100, 102
+
+Abbreviated commands....96
+DCU E..ee tee +97-98
+Optimize +92-93
+
+4095
+-90-91
+
+Restart
+Space..
+Index
+
+———_$—$————— -—
+Item Page Item Page
+DCU.COM (cont'd) Loader & Archive. 19-21
+Wait.. +94 Monitors -
+Zap... +95 SEE Video
+
+466 663-65,
++19-23,32-34
++66 4135
+
+141
+
++134
+
+DC DEMO DISK:
+DC USER DISK
+DED.SPR..
+DFDZCPR.SPR
+Directory Entries..
+Displays —
+SEE Video
+Drive C:.SYS..
+Dynamic Buffer -
+SEE Print Buffer
+Erasing files
+DCU E ~ Drive C
+ERA - CP/M..
+Error Messages
+CP/Mevesseee
+Drive C.
+
++54,66,72-73,
+-97-98
+
+EXT. VIDEO port - Ol..-+.+11-12,15-18
+EXT. VIDEO/BATTERY port..-11-12,17-18
+Files
+
+DIR- + eee eeee
+
+File name.....
+
+File extension
+
+Multiple - Buffer
+
+Buffer organization.
+
+XDIR« cece eeceeeeeeee
+Fixed Buffer —
+
+SEE Print Buffer
+Formatting...
+Function keys.
+Hard disks -
+
+SEE TurboPac
+IEEE-488 port - Ol.
+
++50-54 ,66
+
+345-46 66
+
++40-41,128
+
+11-12,15-16,
+
+eee e eee 27-31
+Installation
+Brown case - bumpers....14
+Cable clamp.....+++ 15
+Displays -
+SEE Video
+Drive C unit.....-. 11-16
+
+Drive C signal cable.
+Drive C video cable.....11-13,15-16
+Parallel printer cable. .28-31,136
+Video Shorting Plug.....17-18
+
+LABEL ~
+SEE DCA.COM
+
+11~13,15-16
+
+MOVGEM: ;vesgcncececceataal 32
+Operating systems
+Buffer.
+CP/M...
+Optimize -
+SEE DCU.COM
+Packing Drive ¢ -
+SEE DCU.COM
+
+43-44
++43-61
+
+Print Buffer
+Dynamic Print Buffer
+Manual installation...40,79,81,85,
+++0128,135
+
+Optimize -
+SEE DCU.COM
+QuickPac.
+Remove...
+Specs & TPA
+XDIRe eee eee
+Fixed Print Buffer
+
+Manual Installation...40,79,81-84
+
+QuickPac.
+Remove...
+Sizes.....
+Specs & TPA
+
+Multiple files
+
+Theory of operation
+PRINTER/HARD DISK/8088..
+Printer, Parallel
+
+Cable.
+
+9 , 79-87
+
++136
+11-12,23,
+
+Installation.
+
+28
+23,34
+
+Power ON...
+SETUP. .+seeeee
+Test..
+Troubleshooting.
+
++ +136
+
+Printer, Serial
+
+SETUP. + +2334
+
+Test. 28 35-36
+Trouble-shooting ++ 037-38
+QuickPac
+Data files -
+SEE DCQ.DAT
+
+11-12,28-31,
+
+28-31,34-37
+
+28-31 35-37
+30-31, 37-38,
+
++6 56-59 ,67-69,
+«76-77 112
+
+11-12,15-16,28
+
+143
+Item
+
+QuickPac (cont'd)
+Installation -
+SEE DCQINS.COM
+Running -
+SEE DCQ.COM
+Starting -
+SEE DCQAUT.COM
+Quotation marks. ++e+e0e0 +649
+RAM-disk
+Capacity. ssseeeeeeeeeee+5-6,82, 134-135
+Files —
+SEE Copying files
+Loading. .+eseeeeeeeeee++40,66,70-71,81
+Renaming
+Initial installation..
+
+-7 39-40,
+70-71,100,103
+After installation....74-75
+Specs & Theory..... -9 6266-75,
+wee eee eee eL33-135
+
+Renaming files
+
+PLP ecscccceceseccssseeerll2
+
+REN. 55
+
+WordStar. 111
+Renaming drives -
+
+SEE RAM-disk
+
+RESET button........000046572
+Remote Retrieve —
+
+SEE DCA.COM
+Retrieve -
+
+SEE DCA.COM
+ROM - Rev. 1.2.
+ROM - Rev. 1.3-1.44.
+R/O (Read Only) files
+RS-232 port -
+
+SEE Printer,Serial
+Saving files
+
+DCA
+
+22-23
+32-34
+61,72,97-98
+
++++7-8,40-41,
+113-122
+67-69 112
+LLL
+
++ +134
+
+PIP
+Wordstar..
+Sectors......5
+Serial port -
+SEE Printer,Serial
+
+SETUP. + +23,34,131-132
+Space -—
+
+SEE DCU.COM
+Specifications...ss+eeeeee 133-135
+
+Status messages -
+SEE DCU.COM
+
+146
+
+Item Page
+
+SYSGEN. ++23,32,47-48,
+64,132
+
+System Status. 3-4
+
+System Utilities
+COPY.
+SETUP.
+SYSGEN...
+
+Test Disk....
+
+TPA...--e.eee
+
+TYPE messages -
+
+SEE DCU.COM
+TurboPac...--eeeeeeeeee ee 210,134
+Utility program -
+
+SEE DCU.COM
+Video
+
+Installation
+
+52 col. Ext. Monitor..17-18
+80 col. Ext. Monitor..18
+Osborne 52 col. Mon...17-18
+Osborne 80 col. Mon...18
+
+Internal display........17-18
+
+Video adapters..........17
+
+80 col. upgrades........18
+VIDEO port - Drive C 17-18
+Video Shorting Plug. 17-18
+Wildcard
+
+DCA++
+
+DIR-+-
+
+e eee e20-21,46,13L
+23,34 ,131-132
+23,32,47-48,
+64,132
+4245-48
+
+WordStar
+Copying files.
+Print Patch.....+s
+Running on Drive C
+
+Manually..
+QuickPac..
+ZCPReeese cence
+
+111
+137-138
+
+«76-77
++102-107
+141
+
+a
+
+Drive C 1690 65th Street Emeryville, California 94608 U.S.A.
+
+Part Number 162868
+

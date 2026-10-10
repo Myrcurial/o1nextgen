@@ -10,12 +10,12 @@ no PCB layouts exist yet (Phase 1, issue #11).
 
 | Folder | Device | Issues | Status |
 |---|---|---|---|
-| `interposer/` | Z80 bus interposer (Rev A through-hole → Rev B SMD) — the core board: bus analyzer + peripheral synthesizer host | #11, #12, #13, #15 | Spec stage; level-shifting & power decisions settled |
+| `interposer/` | Z80 bus interposer — the core board. **Rev A engineering sample** (`interposer/reva/`, 2-off, SMD): active interposer w/ SMT Z84C00, /BUSRQ bus mastering (memory R/W + code injection), Pico 2 + ESP32-C3, W25Q library flash. Rev 0 passive probe superseded (kept for record) | #11, #12, #13, #15 | Rev A ES schematic generated, ready for KiCad capture review + routing |
 | `front-panel-ui/` | Front panel faceplate & UI pod — SD/USB storage, VGA/HDMI out, OLED, FlashFloppy-style controls, modem LED bank | #14 | Concept |
 | `usb-keyboard-adapter/` | Standalone RP2040 USB-HID → P4 keyboard adapter ("jam a USB keyboard into an O1"); two power variants: internal +12V (J6) or external powered-hub for no-open-case use | #47 | Reference design defined; spec validation pending |
 | `wifi-modem-module/` | Severable WiFi modem (ESP32 Zimodem fork: telnet + SSH, baud buffering) for the MODEM (P1) TTL port; ships with COMM PAC-look case STLs for the left storage pocket | #56, #21, #57 | Concept; P1/DE-9 pinout + levels documented |
 | `floppy-adapter/` | Switchable Gotek/physical-drive daughter card on the mainboard floppy connector — two physical drives *or* drive A + Gotek, remote switch, Gotek 5 V power; no cable cutting | #50, #20, #30 | Design defined (inspired by, not copied from, the Loxley hand-wired build) |
-| `o1ng/` | O1 Next Generation — modern-parts Osborne 1 reproduction: faithful 1:1 replacement mainboard (socketed DIP-40 Z80, interposer as upgrade path) + fully integrated "lunchbox" portable (8 MHz turbo-capable), shared USB-C PD power architecture | #49, #52, #53, #55 | Research/feasibility; concept render exists |
+| `o1ng/` | O1 Next Generation — modern-parts Osborne 1 reproduction: faithful 1:1 replacement mainboard (socketed DIP-40 Z80, interposer as upgrade path; block-level KiCad skeleton in `o1ng/o1ng-lff/`) + fully integrated "lunchbox" portable (8 MHz turbo-capable, onboard flash library), shared USB-C PD power architecture | #49, #52, #53, #55 | LFF schematic skeleton generated; concept render exists |
 
 ## Cross-cutting decisions (settled)
 
