@@ -248,7 +248,7 @@ photos of the project's own machines (mainboard, double-density upgrade,
 ScreenPac, CoPower-88). Taken in-project for #9; these are primary sources,
 not copies. Further photo sets are tracked in #39.
 
-## Provenance — resolved and outstanding
+## Provenance
 
 The two long-standing **provenance gaps are closed**: the Drive C manual and
 the RT-60A manual/TD0 both come from bitsavers'
