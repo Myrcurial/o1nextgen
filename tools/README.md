@@ -21,6 +21,23 @@ Run everything: `tools/extract_all.sh [path-to-samdisk]`
   40x10x256B FM, boottrk 3, 2K blocks), `kp2x`/`kpiv` (Kaypro DSDD:
   80 logical trk side-per-track x 10 x 512B, boottrk 1, 2K blocks).
 
+## Reading scanned schematics (`schematic_render.sh`)
+
+Renders sheets — or a zoomed region of one sheet — from a scanned schematic
+PDF. The archive schematics are 600 dpi bilevel scans; scaled to a screen the
+pin numbers are unreadable, and the PDF's own text layer is a 1990s OCR pass
+full of garbage, so they have to be read one region at a time.
+
+```
+tools/schematic_render.sh PDF --info                      # sheet size in px, page count
+tools/schematic_render.sh PDF OUTDIR --sheet 12 --dpi 600 # one sheet, native res
+tools/schematic_render.sh PDF OUTDIR --sheet 12 --dpi 600 --crop X Y W H
+```
+
+Requires poppler (`pdftoppm`, `pdfinfo`) — already needed by `ocr_pdf.sh`.
+Output is `OUTDIR/sheet-NN.png`. The sheet index, and the regions read this
+way, are in `docs/o1-mainboard-schematic.md`.
+
 ## Schematic checking (`check_schematics.py`)
 
 Regenerates each board's netlist with `kicad-cli` and asserts the electrical
