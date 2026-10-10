@@ -1,132 +1,215 @@
-# Research gaps — what we still need before detailed planning (#11/#12 on)
+# Research gaps — status review
 
-Status of Phase 0 (#1) and the open questions that block detailed
-hardware/firmware planning. Grouped by "blocks hardware", "blocks
-firmware", "blocks validation".
+**Last reviewed:** 2026-10-10, after the archive drop (#71), the ROM-source
+indexing (#72) and the MAME work (#79).
 
-## A. Blocks hardware design (#11 schematic, #12 interface spec)
+This is the single place that says, for every open research question, **whether
+it is answered, by what evidence, and what is left** — cross-checked against the
+`research`-labelled issues. When the two disagree, one of them is wrong.
 
-1. **Confirm the exact O1 memory & I/O map and the free decode windows.**
-   - The block diagram (docs/virtual-peripherals-block-diagram.md) assumes
-     candidate port bases. We must read the O1 mainboard schematic to
-     confirm which port addresses the onboard decode leaves free, so the
-     virtual peripherals and the CoPower-88 emulation don't collide.
-   - *Source:* O1 technical/service manual mainboard schematic.
-   - **New issue needed.**
+**Status words** (same vocabulary as `docs/README.md`):
 
-2. ~~**NMOS vs CMOS Z80 across all three target machines.**~~ **RESOLVED BY HISTORY
-   (user, 2026-10-09).**
-   - The CMOS Z80 (Z84C00) didn't ship until 1985; Osborne 1 production ended in
-     1983 — so **every O1 is NMOS.** There is no CMOS-variant matrix to build.
-   - **Interposer decision:** standardize on **74AHCT (or 74HCT)** for anything
-     touching the Z80 bus. NMOS outputs are TTL-ish (need TTL-compatible inputs);
-     NMOS inputs have ~2.0–2.4 V high thresholds (AHCT/HCT drive them correctly).
-     No per-machine logic-family testing needed. #39's remaining ask reduces to
-     confirming NMOS + date codes for the record.
-   - **Replica note:** the replica uses the *new-production CMOS* Z84C00 (5 V grade)
-     — fully software-compatible, lower power; see #49. The interposer and the
-     replica thus use *different* CPU silicon, deliberately: AHCT interfaces the
-     NMOS original; the replica gets a modern CMOS CPU.
+| Status | Means |
+|---|---|
+| **Solved** | Answered, and the answer is checkable from a doc |
+| **Partially** | The shape is known; a *named* sub-question is not |
+| **Open** | Not answered |
+| **Superseded** | Stopped mattering — a better route was found, or a decision was taken |
 
-3. ~~**Z80 socket & chargen socket pinout on the O1 mainboard.**~~
-   **Z80 side RESOLVED 2026-10-10 — and now confirmed from the primary source.**
-   The O1 fits an NEC µPD780C (≡ Z80A) in a DIP-40 socket, so the socket's pin
-   numbering is the chip's — the standard Zilog DIP-40 pinout. Both
-   `docs/o1-memory-io-map.md` §6 (which claimed pin 11 = GND; it is +5 V) and
-   the interposer generators (off by one across all 40 pins) were wrong and are
-   now corrected; `tools/check_schematics.py` asserts the datasheet pinout
-   against every connector that mates with that socket. *Sources:* Zilog Z80
-   Microprocessor Family Databook, cross-checked against z80.info/zinout.htm —
-   **and the O1 mainboard schematic itself**: 1A2011-00 Rev E sheet 3 of 9 draws
-   UC11 = Z80-A with +5 V = 11, GND = 29, A0 = 30, D0 = 14, D1 = 15, D2 = 12,
-   D3 = 8, MREQ = 19, IORQ = 20, RD = 21, WR = 22, BUSRQ = 25, M1 = 27,
-   RFSH = 28, NMI = 17, A1 = 31 … A10 = 40 — exactly the datasheet pinout. See
-   `docs/o1-mainboard-schematic.md` §4 (#62).
-   - **Still open: the char-gen socket.** ScreenPac taps the 24-pin char-gen
-     socket (UA15) as well, so a ScreenPac-style video personality (#24) still
-     needs that pinout. *Source:* O1 mainboard schematic + ScreenPac install
-     pages (have PDF).
+A gap is only **Solved** if the evidence is written down. "We know this" is not a
+status.
 
-4. ~~**CoPower-88 monitor ROM dump.**~~ **DEFERRED (user decision, 2026-10-09).**
-   - The SWP-8088 2732A on the CoPower board would fully specify the host
-     mailbox protocol — but the user prefers not to desolder the ROM and is
-     not set up for dumping. We proceed from the Kaypro↔Zorba driver-diff
-     inference (#3/#4/#5), which is sufficient to build the emulation against.
-   - The dump resolves only the residual doorbell/IRQ-semantics question;
-     revisit only if the board is ever desoldered for another reason.
+## Summary
 
-5. ~~**Power budget.**~~ **RESOLVED (user decision, 2026-10-09).**
-   - No measurement needed: the interposer board gets its **own dedicated 5VDC
-     feed** from a convenient rail near the Z80 socket. #12's spec should state
-     this as a requirement, sized for Pico 2 W WiFi bursts (~300 mA+).
+| | Count |
+|---|---|
+| Solved | 6 of the original 15 |
+| Partially | 7 |
+| Open | 1 |
+| Superseded | 2 |
 
-## B. Blocks firmware planning (#16–#24)
+**What actually blocks the next phase** — everything else can wait:
 
-6. **CoPower-88 protocol — finish #3/#4/#5.** (largely done in research,
-   needs consolidation into a single authoritative protocol doc + issue
-   closure). Open: exact doorbell/IRQ semantics and the 611-0003 sheet-4
-   comparator reference value.
+1. **#39** — the identity of the three target machines (user action; blocks gap 12).
+2. **The char-gen (UA15) pinout** — the Z80 table was wrong for a day and is now
+   enforced by `tools/check_schematics.py`; the UA15 table has had no such check
+   (blocks gap 3's remainder, and #24).
+3. **Drive C's command set** — blocks #6/#22, and therefore the standalone Drive C
+   reproduction (#84).
+4. **#79** — the Nuevo system disk does not boot under MAME, which blocks
+   validating the Nuevo video path (#24).
 
-7. **Drive C IEEE-488 ramdisk protocol (#6).** DRIVE_C.IMD disassembly
-   started; needs the command set + handshake nailed down before #22.
-
-8. **RT-60A register map (#7).** Reconstructed from manual; the bad TD0
-   means we trust the PDF. Needs a confirming read against any real unit
-   before #18.
-
-9. **OCC1 hard disk (#8).** Extraction done; controller type (likely a
-   Z80-interposer winchester) and host interface still to characterize
-   before #23-adjacent HD work.
-
-10. **6850 ACIA location for the WiFi modem (#21).** The Hayes/telnet
-    modem snoops the 6850. Need the O1 SIO/ACIA port addresses and wiring
-    from the mainboard schematic (overlaps gap #1).
-
-11. **Floppy controller (#20, #30).** O1 uses a WD179x; need the exact
-    variant + port map + the double-density upgrade's changes (photos in
-    research/) before the floppy interposer personality.
-    - *Partly resolved:* the mainboard sheet draws **UB7 = MB8877** (Fujitsu's
-      WD1793 equivalent), and MAME's driver independently carries the same
-      uncertainty ("Schematics specify a WD1793 floppy controller, but we're
-      using the Fujitsu equivalent MB8877 here") — the symbol is
-      WD1793-compatible, the fitted part may be either. Ports 2100–2103 per
-      `docs/o1-memory-io-map.md` §3, confirmed against the running machine's
-      decode masks. Double-density upgrade changes still open. See
-      `docs/o1-mainboard-schematic.md` §5, §7 (#62).
-
-## C. Blocks validation (#29)
-
-12. **Which three machines, which board revisions.** Need the identity
-    of each target machine (one is 24187A) and their Z80 types to build
-    the NMOS/CMOS matrix. *Depends on:* #39.
-
-13. **A known-good boot disk image** for each machine to validate the
-    interposer doesn't change behavior when passive (all devices off).
-
-## D. Cross-cutting / process
-
-14. **Consolidate research into per-device protocol specs.** We have
-    analysis docs; before detailed planning each device needs a single
-    "protocol spec" doc with the register/port map, timing, and handshake
-    as the contract for both the emulator firmware and the test cases.
-
-15. **Decide memory-resident vs pure I/O-port for virtual devices.**
-    (See block diagram §2.) Leaning pure I/O-port to avoid bank conflicts;
-    confirm against the O1 map from gap #1.
+Everything else is either done, or is research that can proceed in parallel.
 
 ---
 
-## Recommended next actions (before #11 detailed design)
+## A. The original gaps
 
-- [x] ~~**New issue:** extract O1 mainboard memory+I/O map~~ **DONE — #40**
-  (unblocked gaps 1, 10, 11, 15; see docs/o1-memory-io-map.md).
-- [ ] **#39** (user, re-scoped): Z80 chip markings on the other two machines +
-  machine IDs (unblocks 2, 12). The DIP-switch item is dead — the port decode is
-  hard-wired at 0x7E/0x7F per user correction.
-- [ ] Finish device protocol specs: #3/#4/#5, #6, #7, #8 (unblocks 6-9). This is
-  the next software-session work stream.
-- [x] ~~Dump the SWP-8088 ROM~~ **DEFERRED** (gap 4) — proceed from driver-diff
-  inference.
-- [x] ~~Power budget~~ **RESOLVED** (gap 5) — interposer gets its own 5VDC feed.
-- [ ] New: char-gen ROM capture (#44) and USB HID keyboard adapter (#45) — both
-  pre-hardware, opportunistic.
+| # | Gap | Status | Evidence | Issues | What's left |
+|---|---|---|---|---|---|
+| 1 | Exact memory & I/O map, free decode windows | **Solved** | `o1-memory-io-map.md` §2–§7 (schematic), confirmed from the ROM source in `o1-rom-source.md`, measured on the running machine by `tools/check_o1_map.sh` | #40, #62, #64, #72 | Decode *granularity* is still schematic-level. Free gaps between the five device blocks: `2300–28FF`, `2B00–2BFF`, `2D00–2FFF` |
+| 2 | NMOS vs CMOS Z80 across the target machines | **Superseded** | Resolved by history: the CMOS Z84C00 shipped in 1985, O1 production ended in 1983 — every O1 is NMOS. Interposer standardised on 74AHCT/HCT | #39 | #39's remainder: machine IDs and date codes, for the record |
+| 3 | Z80 socket **and** char-gen socket pinout | **Partially** | Z80: **Solved** — datasheet, schematic sheet 3 of 9, and `tools/check_schematics.py` assert it. UA15: a table exists in `o1-memory-io-map.md` §6 | #62, #24 | **The UA15 table has never been cross-checked**, and its pin grouping does not match a standard 2716 pinout — exactly the class of error that produced the Z80 pin-11 bug. Verify against the schematic and add it to `check_schematics.py` |
+| 4 | CoPower-88 monitor ROM dump | **Superseded** | The SWP co-processor ROM is **in the repo**: `research/roms/swp-p88.rom`, 8088 code, from Maslin's archive. The board and interposer are common across hosts; only the driver varies | #3, #4, #5, #70 | Confirm the residual doorbell/IRQ semantics *from that ROM* rather than by inference |
+| 5 | Power budget | **Solved** | Decision taken: the interposer gets its own 5 VDC feed near the Z80 socket, sized for Pico 2 W bursts (~300 mA+) | #12 | — |
+| 6 | CoPower-88 protocol | **Partially** | `copower88-protocol.md` (Kaypro↔Zorba driver diff), `copower88-schematics.md` (SWP 611-0003), plus the 8088 ROM | #3, #4, #5, #23 | Doorbell/IRQ semantics; the 611-0003 sheet-4 comparator reference value; consolidate into one authoritative spec |
+| 7 | Drive C IEEE-488 protocol | **Partially** | `drive-c-protocol.md`; `DRIVE_C.IMD` extracted; **and** the ROM's IEEE-488 implementation now gives the PIA programming, the GPIB command bytes and the "always ready" stub behaviour (`o1-rom-source.md`) | #6, #22, #84 | The Drive C command set, from `DCL`/`DFD.SPR` disassembly |
+| 8 | RT-60A register map | **Partially** | `rt60a-analysis.md`, reconstructed from the manual | #7, #18 | A read against a real unit — or a re-dump; the bitsavers TD0 is a damaged dump (27 no-id sectors) |
+| 9 | OCC1 hard disk | **Partially** | `occ1-harddisk-analysis.md`; **and the archive drop showed there are two distinct products, not one** (see §B1) | #8 | The controller command sets, the default port, and a re-check of the doc's `0x2A00`/`0x2C01` claim — those are the ACIA and video PIA addresses, so something there is misread |
+| 10 | 6850 ACIA location for the WiFi modem | **Solved** | `o1-memory-io-map.md` §3: `2A00`/`2A01`, UC4 — confirmed independently by the ROM source | #21 | — |
+| 11 | Floppy controller, port map, DD changes | **Partially** | Ports `2100–2103` and the full WD179x command set from the ROM source; 1.44 *is* the DD ROM; DD block = 1K; the Nuevo and Osmosis DD boards are documented | #20, #30, #73 | MB8877 vs WD1793 (schematic-level); the DD upgrade's electrical changes |
+| 12 | Which three machines, which board revisions | **Open** | — | #39 | **User action**: machine IDs (one is 24187A) and Z80 markings |
+| 13 | A known-good boot disk per machine | **Solved** | Measured 3×3 matrix in `mame-emulation.md` §4: all three `-blank.imd` system disks boot on all three MAME machines; diagnostics disks also archived | #29, #70 | The *Nuevo system* disk (`OS1NUEVO.IMD`) does not boot — #79 — but the gap as stated is met |
+| 14 | Consolidate into per-device protocol specs | **Partially** | Done: `copower88-protocol.md`, `drive-c-protocol.md`, `rt60a-analysis.md`, `o1-rom-source.md`, `o1-rom-variants.md`, `mame-emulation.md` | #75 | Missing: floppy, hard disk, printer/parallel, keyboard. #75 (the book) is the final consolidation |
+| 15 | Memory-resident vs pure I/O-port for virtual devices | **Solved** | Recommendation stands: pure I/O-port, in the free windows from gap 1 (`o1-memory-io-map.md` §7) | #12, #16 | Same decode-granularity caveat as gap 1 |
+
+---
+
+## B. Questions that appeared since the original review
+
+### B1. There are **two** hard-disk products, not one — three storage routes in total
+
+The original gap 9 assumed a single OCC1 hard disk. The archive drop (#71) turned
+up a second, unrelated one. Confirmed from their own strings:
+
+| | ACT hard disk | Media Distributing / Adaptec |
+|---|---|---|
+| Source | `research/harddisk/OCC1_HARDDISK.IMD` | `research/adaptec/*.img` |
+| Vendor string | `AUSTRALIAN COMPUTER & TELECOMMUNICATIONS  COPYRIGHT (C) 1982` | `Copyright (c) September 1983, Media Distributing` |
+| Versions | `Version 31.05.82`, `Version 9-02-81` | `HARD version 1.93`, `PORTCHNG version 1.92`, `PREP version 1.93` |
+| Controller | its own; `Enter disk controller address (` | Adaptec ACB-4000; `Enter starting port address in hex`, `must be on a 4 port boundary` |
+| Utilities | `BOOTHD`, `LOADBIOS`, `HARDBIOS.HEX`, `MOVCPM10/5/F`, `DISKEDIT`, `DISKTEST`, `RESTORE`, `SAVEFILE` | `MD10.COM`, `MD20.COM`, `HARD.COM`, `HARDBIOS.SPR`, `HARDBDOS.SPR`, `HARDCCP.SPR`, `HD00/HD04BIOS.SPR`, `PREP.COM`, `PORTCHNG.COM`, `DRIVETBL.DAT` |
+
+So the three ways to get more storage than 2 × 182 KB are the **ACT hard disk**,
+the **Media Distributing/Adaptec hard disk**, and **Drive C** (IEEE-488). Both
+hard disks use a *port-relocatable* controller — which matters, because the O1's
+I/O decode is sloppy, so "4 port boundary" is the same two-address-line decode the
+rest of the machine uses.
+
+Drive C is the only one of the three buildable without unobtainable hardware —
+see #84.
+
+### B2. Character-generator ROM variants — closed
+
+#44 asked for the early-font and Nuevo char-gen variants. Both are captured and
+catalogued (`o1-rom-variants.md`): `5297c109` (early, paired with BIOS ≤ 1.4) and
+`6c1eab0d` (late, paired with 1.43/1.44 and used by ScreenPac and Nuevo alike).
+Open sub-question: nobody has rendered the two fonts side by side to confirm they
+actually differ.
+
+### B3. The Nuevo system disk does not boot under MAME — #79
+
+`OS1NUEVO.IMD` carries the Nuevo 80-column CBIOS 1.5, loads, prints its banner,
+and stops. The pristine upstream copy behaves identically, so it is not a bad
+conversion. This blocks validating the Nuevo video path (#24). Meanwhile the three
+plain DD system disks *do* boot the Nuevo machine, at 80 columns
+(`mame-emulation.md` §2, §4).
+
+### B4. OZROM 1E — a third-party ROM usable as tooling — #81
+
+It boots under MAME (via BIOS substitution) and its manual documents a software
+52/80/104-column switch, a chip-level memory tester, a redefinable keyboard, and
+its own ROM jump table and memory map. It also **removes the IEEE-488 routines
+entirely** — the vectors at `013F–0156` now deliberately crash the machine, and
+*"IEEE-488 AS IOBYTE DEVICE 3 NOW NULL DEVICE"* — so **OZROM and Drive C are
+mutually exclusive** without reimplementing the driver. It also shrinks the video
+window to 3 KB (`F000–FBFF`) to make room for its keyboard features, which
+constrains any 2.0 ROM (#83).
+
+### B5. Other open research items
+
+| Item | Issue | State |
+|---|---|---|
+| Nuevo + Osmosis upgrade boards as prior art (two products each; neither matches OCC's implementation) | #73 | Material archived; write-up outstanding |
+| Archive provenance TODOs (2 items) | #74 | Needs the user's memory |
+| `cpmtools` misreads Kaypro DSDD images | #35 | Low priority — `tools/cpmfs.py` replaces it; the upstream fix is a courtesy |
+| G2 multi-format diskette read/write | #30 | Open design work |
+| Case + power research (1:1 replacement board, "lunchbox") | #52 | Ongoing |
+| The complete Osborne 1 reference ("the book") | #75 | Gated on the above |
+
+---
+
+## C. The `research`-labelled issues, and what closes each
+
+| Issue | Title | State | What closes it |
+|---|---|---|---|
+| #1 | Phase 0 umbrella | Open | The list in §E |
+| #3 | Disassemble Kaypro CoPower-88 CP/M loader | **Satisfied** | `copower88-protocol.md` + `research/copower88/kaypro/disasm/` |
+| #4 | Disassemble Zorba `swpdos.td0`, diff vs Kaypro | **Satisfied** | Same doc + `zorba/disasm/pcdos.asm` |
+| #5 | CoPower-88 port map & mailbox from the schematics | **Satisfied** | `copower88-schematics.md` + `copower88-protocol.md` |
+| #6 | Drive C → GPIB protocol spec | Partially | The Drive C command set |
+| #7 | RT-60A → RTC register map | Partially | A real unit, or a re-dump |
+| #8 | Analyse `OCC1_HARDDISK.IMD` | Partially | Two products now identified (§B1); command sets remain |
+| #30 | G2 multi-format diskette support | Open | Design work |
+| #35 | `cpmtools` misreads Kaypro DSDD | Open | Optional upstream fix; superseded locally by `cpmfs.py` |
+| #44 | Char-gen ROM variants | **Satisfied** | Both variants captured and catalogued (§B2) |
+| #52 | Case + power research | Open | Ongoing design research |
+| #64 | Index the Rev E schematic set + machine oracle | **Satisfied** | `o1-mainboard-schematic.md`, `tools/check_o1_map.sh` |
+| #72 | Index the ROM source, re-derive the map | **Satisfied** | `o1-rom-source.md` |
+| #73 | Nuevo + Osmosis prior art | Open | The write-up |
+| #74 | Provenance TODOs | Open | User input on two items |
+| #75 | The book | Gated | Everything above |
+| #79 | Nuevo system disk does not boot | Open | Driver fidelity, or a rebuilt disk |
+| #81 | OZROM as tooling | Partially | The appendices (C-5…C-7) and the column switch |
+| #82 | Contribute OZROM to MAME | Open | A dump with acceptable provenance |
+| #83 | A 2.0 ROM with CP/M resident | Open | Design + build + a no-disk boot test |
+| #84 | Standalone Drive C reproduction | Open | Depends on #6 |
+
+---
+
+## D. Recommended close-outs
+
+These seven issues have their deliverable in the repo and should be closed so the
+list reflects reality — each with a comment pointing at the evidence:
+
+- **#3, #4, #5** — the CoPower-88 research is consolidated in
+  `docs/copower88-protocol.md` and `docs/copower88-schematics.md`. The one
+  residual (doorbell/IRQ semantics) is now answerable from
+  `research/roms/swp-p88.rom` and belongs with #23, not spread across three
+  disassembly issues.
+- **#44** — both character-generator variants are captured and catalogued.
+- **#64** — the schematic set is indexed and the machine-level oracle exists and
+  runs.
+- **#72** — the ROM source is indexed and the memory/I/O map cross-checked
+  against it.
+
+---
+
+## E. What is left before hardware design starts
+
+Ordered by what blocks what:
+
+1. **#39** — machine identities and Z80 markings (user action; unblocks gap 12).
+2. **Verify the UA15 char-gen pinout** against the schematic and add it to
+   `tools/check_schematics.py` (unblocks gap 3 and #24's tap point).
+3. **Finish Drive C's command set** from `DCL`/`DFD.SPR` (unblocks #6, #22, #84).
+4. **Re-check `occ1-harddisk-analysis.md`'s port claim** and characterise the two
+   hard-disk controllers (unblocks #8).
+5. **#79** — decide whether the Nuevo CBIOS hang is a MAME fidelity gap or a
+   hardware dependency (unblocks #24's Nuevo path).
+6. **#73** — write up the Nuevo and Osmosis boards as prior art (unblocks #30).
+7. **#74** — close the two provenance TODOs (needs the user).
+
+After that, #75 (the book) can start and #11/#12 (interposer design) have
+everything they need.
+
+---
+
+## Appendix — decisions already taken
+
+Kept here because they were reached by discussion and are not re-derivable from a
+source:
+
+- **All Osborne 1s are NMOS.** The CMOS Z84C00 shipped in 1985; O1 production
+  ended in 1983. The interposer uses 74AHCT/HCT; the replica uses a modern CMOS
+  Z84C00 deliberately.
+- **The interposer gets its own 5 VDC feed** near the Z80 socket (~300 mA+).
+- **Bank switching cannot be latched.** `ROM MODE*` is re-derived on every
+  instruction fetch; a bank-2 access is only meaningful while the CPU is actually
+  in bank 2 (`o1-memory-io-map.md` §4).
+- **The interposer must never drive I/O addresses `0x00–0x03`** — any `OUT` there
+  toggles the bank latch. The ROM never does it, and there is no software bank
+  switch to model.
+- **The `52-`/`80-`/`104-` floppy prefix is a label, not a bootability gate.** The
+  display width is the machine's; the text layout is the CBIOS's
+  (`mame-emulation.md` §4).

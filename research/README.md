@@ -179,6 +179,12 @@ Files here come from two sources:
 The board and interposer card are common to every host machine (only the driver
 varies), so this is the 8088-side firmware of the CoPower-88 family — #3/#4/#5.
 
+`OZROM-1E/OZROM_1E_Manual.ocr.txt` — OCR text layer for the OZROM manual
+(image-only scan; generated 2026-10-10 at 300 dpi with `tesseract`, per the OCR
+convention above). Good enough to grep for the technical appendices — which is
+how the IEEE-488 removal and the 3 KB video window were found (#81) — but not
+reliable for exact code or pin detail.
+
 ## shipped-software/ — the shipped application library (2026-10)
 
 Fourteen ImageDisk images of the disks that shipped with (or were published
