@@ -24,20 +24,18 @@ status.
 | | Count |
 |---|---|
 | Solved | 6 of the original 15 |
-| Partially | 7 |
+| Partially | 6 |
 | Open | 1 |
 | Superseded | 2 |
 
 **What actually blocks the next phase** — everything else can wait:
 
 1. **#39** — the identity of the three target machines (user action; blocks gap 12).
-2. **The char-gen (UA15) pinout** — the Z80 table was wrong for a day and is now
-   enforced by `tools/check_schematics.py`; the UA15 table has had no such check
-   (blocks gap 3's remainder, and #24).
-3. **Drive C's command set** — blocks #6/#22, and therefore the standalone Drive C
+2. **Drive C's command set** — blocks #6/#22, and therefore the standalone Drive C
    reproduction (#84).
-4. **#79** — the Nuevo system disk does not boot under MAME, which blocks
-   validating the Nuevo video path (#24).
+3. **#79** — the Nuevo system disk does not boot under MAME. *No longer blocking:*
+   the decision taken is not to chase it, and to build the video personality from
+   the ScreenPac design plus OZROM's soft 52/80/104-column switch.
 
 Everything else is either done, or is research that can proceed in parallel.
 
@@ -49,7 +47,7 @@ Everything else is either done, or is research that can proceed in parallel.
 |---|---|---|---|---|---|
 | 1 | Exact memory & I/O map, free decode windows | **Solved** | `o1-memory-io-map.md` §2–§7 (schematic), confirmed from the ROM source in `o1-rom-source.md`, measured on the running machine by `tools/check_o1_map.sh` | #40, #62, #64, #72 | Decode *granularity* is still schematic-level. Free gaps between the five device blocks: `2300–28FF`, `2B00–2BFF`, `2D00–2FFF` |
 | 2 | NMOS vs CMOS Z80 across the target machines | **Superseded** | Resolved by history: the CMOS Z84C00 shipped in 1985, O1 production ended in 1983 — every O1 is NMOS. Interposer standardised on 74AHCT/HCT | #39 | #39's remainder: machine IDs and date codes, for the record |
-| 3 | Z80 socket **and** char-gen socket pinout | **Partially** | Z80: **Solved** — datasheet, schematic sheet 3 of 9, and `tools/check_schematics.py` assert it. UA15: a table exists in `o1-memory-io-map.md` §6 | #62, #24 | **The UA15 table has never been cross-checked**, and its pin grouping does not match a standard 2716 pinout — exactly the class of error that produced the Z80 pin-11 bug. Verify against the schematic and add it to `check_schematics.py` |
+| 3 | Z80 socket **and** char-gen socket pinout | **Solved** | Z80: datasheet, schematic sheet 3 of 9, `tools/check_schematics.py`. UA15: read at 1200 dpi off **sheet 4 of 9** (not the video sheet) — plain Intel 2716 pinout, `/CE`+`/OE` grounded, pin 21 strapped +5 V; address = `(scan<<7) \| char`; outputs serialised by UA14 (74166). `o1-mainboard-schematic.md` §4a, `o1-memory-io-map.md` §6, asserted in `tools/check_schematics.py` | #62, #24, #64 | — |
 | 4 | CoPower-88 monitor ROM dump | **Superseded** | The SWP co-processor ROM is **in the repo**: `research/roms/swp-p88.rom`, 8088 code, from Maslin's archive. The board and interposer are common across hosts; only the driver varies | #3, #4, #5, #70 | Confirm the residual doorbell/IRQ semantics *from that ROM* rather than by inference |
 | 5 | Power budget | **Solved** | Decision taken: the interposer gets its own 5 VDC feed near the Z80 socket, sized for Pico 2 W bursts (~300 mA+) | #12 | — |
 | 6 | CoPower-88 protocol | **Partially** | `copower88-protocol.md` (Kaypro↔Zorba driver diff), `copower88-schematics.md` (SWP 611-0003), plus the 8088 ROM | #3, #4, #5, #23 | Doorbell/IRQ semantics; the 611-0003 sheet-4 comparator reference value; consolidate into one authoritative spec |
@@ -179,16 +177,13 @@ list reflects reality — each with a comment pointing at the evidence:
 
 Ordered by what blocks what:
 
-1. **#39** — machine identities and Z80 markings (user action; unblocks gap 12).
-2. **Verify the UA15 char-gen pinout** against the schematic and add it to
-   `tools/check_schematics.py` (unblocks gap 3 and #24's tap point).
-3. **Finish Drive C's command set** from `DCL`/`DFD.SPR` (unblocks #6, #22, #84).
-4. **Re-check `occ1-harddisk-analysis.md`'s port claim** and characterise the two
-   hard-disk controllers (unblocks #8).
-5. **#79** — decide whether the Nuevo CBIOS hang is a MAME fidelity gap or a
-   hardware dependency (unblocks #24's Nuevo path).
-6. **#73** — write up the Nuevo and Osmosis boards as prior art (unblocks #30).
-7. **#74** — close the two provenance TODOs (needs the user).
+1. **#39** — machine identities, board revisions and ROM markings (user action;
+   unblocks gap 12 — the issue lists the three things actually worth reading).
+2. **Finish Drive C's command set** from `DCL`/`DFD.SPR` (unblocks #6, #22, #84).
+3. **Re-check `occ1-harddisk-analysis.md`'s port claim**, characterise the two
+   hard-disk controllers, then pick the one to emulate (unblocks #8).
+4. **#73** — write up the Nuevo and Osmosis boards as prior art (unblocks #30).
+5. **#74** — close the two provenance TODOs (needs the user).
 
 After that, #75 (the book) can start and #11/#12 (interposer design) have
 everything they need.

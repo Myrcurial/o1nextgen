@@ -47,8 +47,8 @@ has no block title; its function is read off the circuit).
 | 4 | 1A2011 1/9 | CPU clock (4 MHz), reset, data buffers, power entry | UD11, UD13, UE3, UE20, UC7, **UC11 = 74LS161** clock counter, UA6, UA8, J5, P6 (battery) |
 | 5 | 1A2011 2/9 | Address decode, ROM/RAM/I-O select, WAIT generation | UC1, UC2, UD1, UD2, UD3, UD9, UD12, UE3, Q1/Q2 (reset timing) |
 | 6 | 1A2011 3/9 | **CPU**: Z80-A, monitor EPROM, address latches | **UC11 = Z80-A**, **UD11 = 2732**, UD4, UD6–UD10, UE6, UE10, UE11, UA4 |
-| 7 | 1A2011 4/9 | RAM array + address multiplex/buffer | UA17/UA18 and the UA23–UA48 array (2114/2112 static RAMs per sheet 1's parts list), UE13–UE15 (74LS244), UE16–UE18 (74LS153), UD16 (74LS374) |
-| 8 | 1A2011 5/9 | **VIDEO**: PIA, character shifters, video timing, brightness/contrast | **UC15 = 6821**, UC16–UC18 (74166), UC19–UC21 (74165), UA11–UA18, UB14/UB15 (74LS161), UE20–UE24 (7406), R40 (brightness), R44 (contrast) |
+| 7 | 1A2011 4/9 | **RAM** array, address multiplex/buffer, **character generator ROM and its serialiser** | **UA15 = 2716** char-gen ROM and **UA14 = 74166** pixel serialiser (§4a), **UA18 = 74LS273** character latch (drives UA15 `A0–A6`), UA17/UA18 and the UA23–UA48 array (2114/2112 static RAMs per sheet 1's parts list), UE13–UE15 (74LS244), UE16–UE18 (74LS153), UD16 (74LS374) |
+| 8 | 1A2011 5/9 | **VIDEO**: PIA, scan counters, video timing, brightness/contrast | **UC15 = 6821**, **UD17/UD18 = 74LS161** scan-line counters (preset from PIA `PB0–PB3`, outputs `SCAN0–SCAN3` → UA15 on sheet 4/9), UC16–UC21 (74166/74165), UA11–UA13, UB14/UB15 (74LS161), UE20–UE24 (7406), R40 (brightness), R44 (contrast). **UA14, UA15 and UA18 are on sheet 4/9, not here** — §4a. The rest of this row is still the first pass (§3) |
 | 9 | 1A2011 6/9 | IEEE-488 interface (P3): PIA + open-collector bus drivers | **UC7 = 6821**, UD1 (74LS30), UD5 (74LS32), UD6/UD8–UD11 (7406), UE6/UE10 (74LS04), RN7/RN11–RN16 (3.3 K pull-ups) |
 | 10 | 1A2011 7/9 | **SERIAL I/O**: ACIA + RS-232 level shifting, modem and CRT connectors | **UC4 = 6850**, UC14 (6551), UD1, UE1 (555), UE2 (1488), UE3 (1489), P1 (MODEM), P2 (9"/12" RS-232 CRT) |
 | 11 | 1A2011 8/9 | **KEYBOARD**: row/column matrix, column drivers | UE12 (81LS95), UE13/UE14 (74LS05), RN10 (1.5 K), P4 (KEYBOARD) |
@@ -142,9 +142,70 @@ corrected to use (#62). It also corroborates that fix: the generators had the
 pin table off by one across all 40 pins and were corrected to +5 V = 11 /
 GND = 29 / A0 = 30 from the databook — the sheet says exactly that.
 
-The char-gen socket (UA15) half of gap #3 is still open. UA15 is a 74S244 on
-sheet 5 of 9, and the ScreenPac taps it, so that needs reading off sheet 5
-plus the ScreenPac install pages.
+**Correction — both halves of that paragraph were wrong.** It read *"the
+char-gen socket (UA15) half of gap #3 is still open. UA15 is a 74S244 on sheet
+5 of 9."* UA15 is neither a 74S244 nor on sheet 5, and that mis-direction is
+why #24's second tap point sat unresolved. UA15 is the **2716
+character-generator ROM on sheet 4 of 9** (PDF page 7, title block `RAM`).
+Read it at 1200 dpi — §4a.
+
+## 4a. Extracted: the character-generator ROM socket (UA15) — gap #3 closed
+
+Found at 600 dpi on sheet 4 of 9 (PDF page 7), read at 1200 dpi. The socket is
+`UA15`, silkscreened **2716**, drawn with the address pins on the left and the
+data pins on the right. The pinout is the **standard Intel 2716**, pin for pin:
+
+| Pin | Signal | Where it comes from / goes |
+|---|---|---|
+| 1–8 | A7–A0 | `A0–A6` = character code (7 bits, 128 chars) from **UA18 (74LS273)**; `A7` = `SCAN0` |
+| 9, 10, 11, 13–17 | O0–O7 | the pixel row, to the parallel inputs of **UA14 (74166)** |
+| 12 | GND | **bussed with pins 18 and 20, then to ground** |
+| 18 | `/CE` | **grounded** — the ROM is permanently selected |
+| 19 | A10 | `SCAN3` |
+| 20 | `/OE` | **grounded** — the ROM always drives its outputs |
+| 21 | (A11 on a 2732) | **strapped to +5 V** |
+| 22 | A9 | `SCAN2` |
+| 23 | A8 | `SCAN1` |
+| 24 | Vcc | +5 V |
+
+### Address map
+
+`SCAN0–SCAN3` arrive as labelled nets (`5C1 — SCANn`): they are the outputs of
+the scan-line counters **UD17/UD18 (74LS161) on sheet 5 of 9**, which the video
+PIA `UC15` presets from `PB0–PB3`. With `A7 = SCAN0` and the character code on
+`A0–A6`, the address is
+
+```
+address = (scan << 7) | char       scan = {SCAN3,SCAN2,SCAN1,SCAN0}
+        = 128 characters x 16 scan rows = 2048 bytes = exactly one 2716
+```
+
+The displayed cell is 8 wide x 10 high (24 rows x 10 = the 240-line video all
+three MAME drivers produce), so scan rows 10–15 of every character are stored
+but never shown.
+
+### Output path — the assumed one was wrong too
+
+`O0–O7` do **not** leave the sheet as eight parallel `CHAR0–CHAR7` lines. They
+drive the parallel inputs of **UA14 (74166)**, an 8-bit shift register on the
+same sheet, which serialises the pixel row and exports it as the single net
+`VIDEO → 5D4` to the video sheet. UA14 is clocked by `DOT CLK` (from sheet 1/9)
+and its `SI` and `/CE` are wired together — the usual trick that shifts in 1s
+as the inter-character blank. The video sheet's own `4D1 → VIDEO` reference
+(sheet 4, zone D1 — where UA14 sits) corroborates the direction.
+
+This matters to #24: the char-gen socket is a **font source, not a pixel bus**.
+Reading the font through the tap is enough — the pixels are re-rendered from
+shadow VRAM.
+
+### What the strapping means for a tap
+
+`/CE` (18) and `/OE` (20) are **hard-grounded on the mainboard**, so the ROM is
+always selected and always driving `O0–O7`. A socket tap may buffer and *read*
+those pins freely, but it cannot tristate the ROM to inject its own font
+without intercepting pins 18 and 20 between socket and ROM. Any future
+"supply your own font" mode needs that interception, and the pin-21 strap held
+at +5 V (the socket is wired 2732-style, so a 4 KiB part would fit physically).
 
 ## 5. Extracted: the P8 34-pin floppy connector — and a correction
 
@@ -397,7 +458,13 @@ mode this whole exercise exists to avoid.
 
 ## 9. What is not extracted yet
 
-- **Char-gen socket (UA15)** — the other half of gap #3; read sheet 5.
+- **What the `CHAR0–CHAR7` nets carry.** They cross to the video sheet carrying
+  a `4C1` reference (sheet 4, zone C1 — the RAM array), so they are *not* the
+  char-gen ROM's outputs (§4a). Presumably the character-code bus out of video
+  RAM; not yet read.
+- **What UC16–UC21 do on the video sheet.** The pixel row is serialised by UA14
+  on sheet 4 (§4a), so the six shift registers §2 lists on sheet 5 need a
+  second look before #24 relies on the phrase "character shifters".
 - **Sheet 4 (1A2011 1/9) parts list.** That sheet carries the board's
   REF/DESCRIPTION table. It is partly legible in the scan and is the fastest
   route to a full IC inventory.

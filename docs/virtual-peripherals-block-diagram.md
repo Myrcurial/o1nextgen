@@ -149,7 +149,13 @@ that function in firmware and extends it to a modern output:
    dumped once at init through the UA15 tap — or a known-good font image
    is preloaded in firmware — and frames are re-rendered from shadow
    VRAM + font. Tapping UA15 like the ScreenPac did also tracks machines
-   running replacement/upgrade char ROMs.
+   running replacement/upgrade char ROMs. The tap is **read-only by
+   necessity**: on the mainboard `/CE` (18) and `/OE` (20) are bussed with
+   GND and grounded, so the ROM is permanently selected and always driving
+   `O0–O7` (`o1-mainboard-schematic.md` §4a). Reading costs nothing;
+   *replacing* the font would mean intercepting those two pins between
+   socket and ROM, so the design keeps the fitted ROM as the source of
+   truth and preloads a font image for the 80/104-column modes instead.
 3. **Render + output.** The second RP2350 core renders the shadow frame
    and drives DVI/HDMI via the RP2350 **HSTX** peripheral (or
    PicoDVI-style bitbang). O1 timing is gentle: 15.9744 MHz master,
