@@ -37,7 +37,7 @@ The open issues aren't failure. They're the honest inventory of what nobody know
 
 **The bank latch forgets.** We built an oracle: MAME plus a small Lua harness that boots CP/M headless and reads the screen straight out of video RAM. Then a script that interrogates the running machine over its own bus and asserts the documented memory map. The assertion failed — usefully. The bank-select latch does not persist across instruction fetches. That's now written down with the experiment that shows it, which is the only reason I believe it.
 
-**The MODEM port is TTL, not RS-232.** Everyone assumes the DE-9 on the back of an Osborne 1 is a serial port in the ordinary sense. It isn't: it feeds the 6850 ACIA directly, with a bipolar receive input. Which is excellent news, because it makes a very clean attach point for the WiFi modem this project wants to build.
+**The MODEM port is TTL, not RS-232 — and it comes with power.** Everyone assumes the DE-9 on the front of an Osborne 1 is a serial port in the ordinary sense. It isn't: it feeds the 6850 ACIA directly, with a bipolar receive input, and it hands out 12 VDC on pin 7 through a 22 Ω series resistor. Which is excellent news, because a port that gives you TTL serial *and* a supply rail is exactly what an external modem wants — the double-buffered module can hang off the front of the machine and feed itself, with no case opened and no separate supply.
 
 **Two ROMs that were the same ROM.** One file in the archive turned out to be byte-identical to a ROM we already held somewhere else. `cmp` said so, so it got deleted — with both hashes recorded in the archive's README, because removing things from a provenance-tracked archive should leave a mark.
 
