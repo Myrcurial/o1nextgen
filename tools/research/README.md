@@ -19,4 +19,10 @@ scratch programs, "figuring it out" notebooks/scripts.
 
 ## Index
 
-_(empty — add entries as research code accumulates)_
+- **`mame-lua-probe.lua`** — what MAME's Lua API exposes inside a *running*
+  machine, and how the O1's bank latch actually behaves (it does not persist).
+  Written for #64 while working out how to check `docs/o1-memory-io-map.md`
+  against the machine rather than against MAME's driver source; its findings
+  graduated into `tools/o1_mame_probe.lua` and
+  `docs/o1-mainboard-schematic.md` §7a, which is why the probe is the tool and
+  this is the notebook. Still useful for poking at any MAME driver from Lua.

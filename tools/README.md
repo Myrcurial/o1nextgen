@@ -1,4 +1,4 @@
-# tools/ — disk image and CP/M filesystem tooling
+# tools/ — disk images, CP/M filesystems, scanned schematics, machine checks
 
 ## Pipeline
 
