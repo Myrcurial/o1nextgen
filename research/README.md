@@ -77,31 +77,143 @@ for the video-output (HDMI) personality (#24, #9 photos).
 | `zorba/Co-Power-88guide.pdf`, `zorba/Co-Power-88advert.pdf`, `zorba/611-0003-1..4.pdf` | SWP CoPower-88 user guide, advertisement, and SWP technical document scans (Zorba-flavored set) | [zorba.z80.de](http://zorba.z80.de/files/swp/) — the Zorba Portable Computer archive site |
 | `zorba/*.td0`, `kaypro/*.td0` | TeleDisk images of CoPower-88 CP/M-86 / DOS boot disks (Zorba and Kaypro versions) | zorba.z80.de (exact path not recorded in repo history) |
 | `zorba/extracted/`, `kaypro/extracted_cpm/`, `*/disasm/` | CP/M files extracted from those images by the project pipeline (#2), and disassemblies of the CoPower RAM-disk/DOS drivers | Derived in-project — not external sources |
+| `swp/Copower_User_guide.pdf`, `swp/Swp_ad.jpg` | Fuller CoPower-88 user guide (4.7 MB, not the Zorba set) and an SWP advert scan | **TODO — see #74** |
+| `swp/1600px-73356_8088_card.jpg`, `swp/1600px-73356_mem_card.jpg`, `swp/866px-73356_cpu_card.jpg` | Board photographs of the CoPower-88 8088 card, memory card and CPU card. The `1600px-`/`866px-` prefixes are MediaWiki thumbnail syntax, so these likely came from a wiki | **TODO — see #74** |
 
-Basis for #3/#4/#5 (CoPower-88 protocol analysis).
+Basis for #3/#4/#5 (CoPower-88 protocol analysis). The board's own 8088 ROM is
+`roms/swp-p88.rom` — see `roms/` below and #70.
 
 ## drive_c/ — Drive C (IEEE-488 ramdisk, #6)
 
 | Path | What it is | Sourced from |
 |---|---|---|
-| `Drive_C_Users_Manual.pdf` | Drive C user manual (IEEE-488 virtual disk drive) | Osborne archival site (exact URL not recorded in repo history) |
-| `DRIVE_C.IMD` | ImageDisk image of the Drive C utility disk | Imaged in-project from physical media |
-| `Drive_C_disk_label.jpg` | Photo of the physical disk label | Project photo (#9 set) |
+| `Drive_C_Users_Manual.pdf` | Drive C user manual (IEEE-488 virtual disk drive) | [bitsavers `bits/Osborne/Osborne1/Drive_C/`](https://bitsavers.org/bits/Osborne/Osborne1/Drive_C/) (upstream name `Drive_C_-_Users_Manual.pdf`) |
+| `DRIVE_C.IMD` | ImageDisk image of the Drive C utility disk (label comment `Drive C for the Osborne 1 computer`) | same folder — **not** imaged in-project; corrected 2026-10-10 |
+| `Drive_C_disk_label.jpg` | Photo of the physical disk label | same folder (15 044 B, byte-identical) — **not** a project photo; corrected 2026-10-10 |
 | `extracted/` | Files extracted from `DRIVE_C.IMD` by the project pipeline (#2) | Derived in-project |
 
 ## rtc/ — RT-60A real-time clock (#7)
 
 | Path | What it is | Sourced from |
 |---|---|---|
-| `RT-60A_Manual.pdf` | RT-60A RTC manual | Osborne archival site (exact URL not recorded in repo history) |
-| `RT-60A.TD0` | TeleDisk image of the RT-60A utility disk | Osborne archival site (exact URL not recorded) |
+| `RT-60A_Manual.pdf` | RT-60A RTC manual (JG Communications) | [bitsavers `bits/Osborne/Osborne1/Osborne_1_Real_Time_Clock/`](https://bitsavers.org/bits/Osborne/Osborne1/Osborne_1_Real_Time_Clock/) (upstream name `RT-60A_Real_Time_Clock_Manual_-_Osborne_1.pdf`) |
+| `RT-60A.TD0` | TeleDisk image of the RT-60A utility disk — **a damaged dump** (27 no-id sectors); filesystem extraction fails, see `tools/README.md` | same folder |
 
 ## harddisk/ — ACT/OCC1 hard disk (#8)
 
 | Path | What it is | Sourced from |
 |---|---|---|
-| `OCC1_HARDDISK.IMD` | ImageDisk image of the OCC1 hard-disk system disk | Imaged in-project from physical media |
+| `OCC1_HARDDISK.IMD` | ImageDisk image of the OCC1 hard-disk system disk (label comment `act-osborne / hard disk software / rev 2`) | [bitsavers `bits/Osborne/Osborne1/_floppy_images/`](https://bitsavers.org/bits/Osborne/Osborne1/_floppy_images/) — **not** imaged in-project; corrected 2026-10-10 |
 | `extracted/` | Files extracted from the image, incl. `hardbios.hex` | Derived in-project |
+
+## adaptec/ — Adaptec ACB-4000 hard-disk software (2026-10)
+
+Raw Osborne 1 SSSD floppy images (102 400 B = 40 tracks × 10 sectors × 256 B,
+**no IMD header**) each with a photo of the disk's label. Source: Internet
+Archive, [`md-utilities-adaptec-4000-controller-ver.-1.93-osborne`](https://archive.org/details/md-utilities-adaptec-4000-controller-ver.-1.93-osborne).
+
+| File | What it is |
+|---|---|
+| `MD Utilities Adaptec 4000 Controller Ver. 1.93 Osborne.img` | Adaptec ACB-4000 utilities |
+| `MD Utilities Adaptec 4000 Controller Ver. 1.93 Osborne - MD-10 MD-20.img` | Same, for the MD-10/MD-20 drive pair |
+| `Osborne Hard Disk Control Software Version 2.01 (1984).img` | Osborne's own hard-disk control software |
+
+Together with `acb4000a.rom` (Maslin's archive) this identifies the controller
+behind `harddisk/OCC1_HARDDISK.IMD` — issue #8.
+
+## diagnostics/ — Osborne 1 confidence tests (2026-10)
+
+| File | Label comment |
+|---|---|
+| `DIAG_2.04.IMD` | `2.04 / diagnostics` |
+| `OCC1_DIAG_2.1.IMD` | `occ diag / ver 2.1 / 12/31/84` |
+
+Source: [bitsavers `bits/Osborne/Osborne1/_floppy_images/`](https://bitsavers.org/bits/Osborne/Osborne1/_floppy_images/).
+These are the known-good boot images the validation matrix (#29) needs.
+
+## nuevo/ — Nuevo Electronics double-density upgrade (2026-10)
+
+| File | What it is | Sourced from |
+|---|---|---|
+| `Nuevo_Electronics_DD_Upgrade_Manual.pdf` (13 MB) | DD upgrade manual | [bitsavers `bits/Osborne/Osborne1/`](https://bitsavers.org/bits/Osborne/Osborne1/) (13 810 755 B, exact match) |
+| `NUEVO151.BIN` | Nuevo BIOS Rev 1.51 — `COPYRIGHT 1983, OSBORNE COMPUTER CORP. / COPYRIGHT 1984, NUEVO ELECTRONICS CORP.`, CRC32 `298da402` (= MAME `monrom-rev1.51-12.ud11`) | **TODO — see #74** |
+| `OS1NUEVO.IMD` | `Osborne 1 with DD and 80 col mods` boot disk, re-imaged 2026-10-10 with Disk-Utilities | derived in-project |
+
+Nuevo shipped **two** products — a DD upgrade and an 80-column board — and
+neither matches Osborne's own implementation of that function; see #73.
+
+## osmosis/ — Osmosis Computer upgrades (2026-10)
+
+Source: [bitsavers `bits/Osborne/Osborne1/Osmosis_Upgrades/`](https://bitsavers.org/bits/Osborne/Osborne1/Osmosis_Upgrades/) — all seven files byte-for-byte identical.
+
+`Osmosis_CPM_Disk_Emulator.pdf`, `Osmosis_80_Column_Board.pdf`,
+`Osmosis_SSDD_Upgrade.pdf`, `OSMO-EMU.TD0`, `OSMOS-DD.TD0`, plus two disk-label
+photos. Osmosis likewise shipped two products (a CPM disk emulator and an
+80-column board). **The 1983 CPM Disk Emulation System is direct prior art for
+this project** — see #73 and `inspired-by/`.
+
+## gotek/FF/ — working Gotek configuration (2026-10)
+
+`FF.CFG` + `IMG.CFG` — the project's own Gotek configuration for the O1:
+`interface = shugart`, `pin02`/`pin34` = `nc`, and an `IMG.CFG` default of
+40 cylinders × 1 head × 16 × 128 B, FM, 125 kbit/s — i.e. O1 SSSD. Captured
+from the physical Gotek, so these are primary sources, not downloads.
+Used by #62 and #20.
+
+## roms/ — ROM images (2026-10)
+
+Canonical inventory, CRC32s and the third-party ROM survey are tracked in #70.
+Files here come from two sources:
+
+- `os1-143.rom`, `os1-144.rom`, `os1-vid8.rom`, `os1vid80.rom`, `swp-p88.rom` — [Don Maslin's ROM archive](http://www.retroarchive.org/maslin/disks/roms/) on retroarchive.org
+- `OZROM-1E/OZROM_1E.BIN`, `OZROM-1E/OZROM_1E_Manual.pdf`, `OCC1_ScreenPac_RevA.BIN` — [github.com/BrettHallen/Osborne_1](https://github.com/BrettHallen/Osborne_1) `ROM/`
+
+`swp-p88.rom` is **8088 code, not Z80**: the SWP co-processor board's own ROM.
+The board and interposer card are common to every host machine (only the driver
+varies), so this is the 8088-side firmware of the CoPower-88 family — #3/#4/#5.
+
+## shipped-software/ — the shipped application library (2026-10)
+
+Fourteen ImageDisk images of the disks that shipped with (or were published
+for) the Osborne 1. The ImageDisk label comment is quoted because it is the
+disk's own identity. Source: **Dave Dunfield's ImageDisk archive**
+(`dunfield.classiccmp.org`, which rotates its directory to discourage deep
+links) — `d/osborne1.zip` and `d/o1ddsys.zip`, byte-identical to these copies.
+
+| File | Label comment |
+|---|---|
+| `O1CPM.IMD` | `Osborne-1 CP/M System Disk / Double Density` |
+| `O1CBMB.IMD` | `Osborne 1 - CBASIC/MBASIC / Double Density` |
+| `O1SCALC.IMD` | `Osborne 1 - SuperCalc 1.12 / Double Density` |
+| `O1WSMM.IMD` | `Osborne 1 - WordStar/MailMerge 2.26 / Double Density` |
+| `OS1SYSD.IMD` | `CP/M-2.2 system disk for Osborne 1 w/ DD drives / SSDD 1024 byte sector` |
+| `OS1SYSS.IMD` | `CP/M 2.2 System Disk for Osborne 1 / SSSD 256 byte sector` |
+| `OS1BASIC.IMD` | `CP/M 2.2 Basic Disk for Osborne 1` |
+| `OS1DBASE.IMD` | `dBase II for the Osborne 1 on sysgened disk` |
+| `OS1DIAS.IMD` | `CP/M 2.2 Diagnostics Disk for Osborne 1` |
+| `OS1MCAL.IMD` | `CP/M 2.2 Mocro-Call Disk for Osborne 1 (Communications)` |
+| `OS1MDM7.IMD` | `Modem 740 communications for Osborne 1` |
+| `OS1UTLS.IMD` | `CP/M 2.2 Utilities Disk for Osborne 1` |
+| `OS1XUTLS.IMD` | `Extended utilities for Osborne 1 w/ 80 column video card` |
+| `OS1WRDST.IMD` | `CP/M 2.2 WordStar 3.0 Disk for Osborne 1` |
+
+The corpus for the image library (#20), the updated boot disk (#28) and the
+validation matrix (#29). Dunfield also publishes a 2005 single-density set
+(`O1CPMS.IMD`, `O1CPMU.IMD`, …) which is deliberately **not** copied here.
+
+## source-code/ — Osborne's own firmware source (2026-10)
+
+| Path | What it is | Sourced from |
+|---|---|---|
+| `BIOS-144-source/` (18 files) | **The original Osborne ROM source**: `rom144.asm` (DOUBLE DENSITY ROM REV 1.44, Roger W. Chapman, 2/4/1983), `occbio05..95.asm` (OCC CBIOS Rev 1.41), `occram15/25.asm`, `occtxt6.ast` (ACT80 assembler equates), `bios141.gen`, `release.txt`, `tran.txt`. Basis for #72. | [github.com/BrettHallen/Osborne_1](https://github.com/BrettHallen/Osborne_1) `ROM/Source_Code_v144/` (all 18 file sizes match) |
+| `OCCCBIOS.IMD`, `OCCROM.IMD`, `OCCUTIL.IMD`, `OSBIOSSR.IMD`, `OSBROM.IMD`, `OSROM13.IMD`, `OSUTLSRC.IMD` | OCC engineering **source disks** (1981–82): CBIOS, ROM rev B, utility programs, ROM 1.3. The ImageDisk comments carry the OCC part numbers (`4d2007-00 occbi00a.asm`, `rev b 9/12/81`). | bitsavers |
+
+**Licensing:** `release.txt` is Osborne's 1985 letter permitting the First
+Osborne Group to reprint the schematics and the BIOS listing, on condition that
+any money goes to the non-profit FOG and that the trademark/copyright notices
+are retained. FOG is long defunct and this material is already public in
+several places — this copy came from a public GitHub repository. The notice is
+retained verbatim; if the terms ever need re-examination, that is the file.
 
 ## pictures/ — machine photographs
 
@@ -110,9 +222,19 @@ photos of the project's own machines (mainboard, double-density upgrade,
 ScreenPac, CoPower-88). Taken in-project for #9; these are primary sources,
 not copies. Further photo sets are tracked in #39.
 
-## Provenance gaps
+## Provenance — resolved and outstanding
 
-Two items predate the issue-tracked Phase-0 workflow and their exact
-download URLs were not recorded in git history: the Drive C manual and the
-RT-60A manual/TD0. The in-repo copies are the authoritative safety copies;
-if either is re-acquired, update this README with the URL.
+The two long-standing **provenance gaps are closed**: the Drive C manual and
+the RT-60A manual/TD0 both come from bitsavers'
+[`bits/Osborne/Osborne1/`](https://bitsavers.org/bits/Osborne/Osborne1/)
+(`Drive_C/` and `Osborne_1_Real_Time_Clock/`), as does `OCC1_HARDDISK.IMD` and
+the two diagnostic disks (`_floppy_images/`). Four rows that had been recorded
+as in-project work or as unknown URLs were corrected on 2026-10-10.
+
+Still outstanding (#74):
+
+- `copower88/swp/` — `Copower_User_guide.pdf`, `Swp_ad.jpg`, and the three
+  `*-73356_*` board photographs (the filename prefixes are MediaWiki thumbnail
+  syntax, so the source is probably a wiki).
+- `nuevo/NUEVO151.BIN` — origin not recorded (may have come from MAME's
+  `osborne1` ROM set).

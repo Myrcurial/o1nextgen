@@ -163,8 +163,15 @@ Phase 0 research (#1) has largely landed; see `docs/` and `research/`:
 
 ## Sources
 
+Full per-file provenance: `research/README.md`.
+
+- Osborne 1 schematics and technical/service manuals: bitsavers.org (`pdf/osborne`)
+- Drive C, RT-60A, OCC1 hard disk, diagnostics, Osmosis, Nuevo DD manual: bitsavers.org (`bits/Osborne/Osborne1/`)
+- Shipped application library (14 disks): Dave Dunfield's ImageDisk archive, `dunfield.classiccmp.org`
+- ROM images (stock revisions, vid8): Don Maslin's archive, retroarchive.org/maslin
+- ROM 1.44 + CBIOS source, OZROM 1E, ScreenPac Rev A: github.com/BrettHallen/Osborne_1
+- Adaptec ACB-4000 hard-disk software: archive.org/details/md-utilities-adaptec-4000-controller-ver.-1.93-osborne
 - Kaypro CoPower-88 images: retroarchive.org/maslin
 - Zorba SWP docs/schematics: zorba.z80.de/swp.htm (ZEPS)
-- Drive C, RT-60A, OCC1 hard disk: bitsavers.org/bits/Osborne/Osborne1/
 - Osborne 1 Technical Manual (interface pinouts): kev.pulo.com.au
 - GPIB reference implementation: NODISKEMU (nils-eilers) / cbmSD (cbmsteve.ca)
